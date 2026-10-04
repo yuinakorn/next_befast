@@ -1,43 +1,45 @@
 /** Risk-factor pictograms for chapter 2, drawn around (0,0) inside a 30-unit badge. */
-export type RiskKind = "food" | "drugs" | "pm25" | "filler" | "stress";
+export type RiskKind = "bp" | "lifestyle" | "smoke" | "stress" | "drugs";
 
 /** Order matches chapter 2 steps 3–7 and SELF_CHECK option ids. */
-export const RISK_KINDS: readonly RiskKind[] = ["food", "drugs", "pm25", "filler", "stress"];
+export const RISK_KINDS: readonly RiskKind[] = ["bp", "lifestyle", "smoke", "stress", "drugs"];
 
 export function RiskIcon({ kind }: { kind: RiskKind }) {
   switch (kind) {
-    case "food": // burger: sweet, fatty, salty
+    case "bp": // blood-pressure gauge with squeeze bulb
       return (
         <g>
-          <path className="ri-fill" d="M-18,-4 C-18,-16 18,-16 18,-4 Z" />
-          <rect className="ri-accent" x="-19" y="-2" width="38" height="6" rx="3" />
-          <rect className="ri-fill" x="-18" y="6" width="36" height="7" rx="3.5" />
+          <circle className="ri-outline" cx="0" cy="-5" r="14" />
+          <path className="ri-line" d="M-9,-1 H-6 M0,-14 V-11 M9,-1 H6" />
+          <path className="ri-line-accent" d="M0,-5 L6,-11" />
+          <circle className="ri-accent" cx="0" cy="-5" r="2.5" />
+          <path className="ri-line" d="M0,9 V13" />
+          <ellipse className="ri-fill" cx="0" cy="19" rx="5" ry="6" />
         </g>
       );
-    case "drugs": // cigarette with smoke
+    case "lifestyle": // person sitting at a chair, with a burger
       return (
         <g>
-          <rect className="ri-fill" x="-20" y="4" width="32" height="8" rx="2" />
-          <rect className="ri-accent" x="12" y="4" width="8" height="8" rx="2" />
-          <path className="ri-line" d="M16,0 C10,-6 22,-10 16,-18" />
-          <path className="ri-line" d="M8,-2 C4,-8 12,-11 8,-17" />
+          <circle className="ri-fill" cx="-10" cy="-14" r="5" />
+          <rect className="ri-fill" x="-15" y="-8" width="8" height="16" rx="4" />
+          <rect className="ri-fill" x="-14" y="2" width="20" height="7" rx="3.5" />
+          <rect className="ri-fill" x="2" y="2" width="7" height="18" rx="3.5" />
+          <path className="ri-line" d="M-20,-4 V20 M-20,12 H-1" />
+          <g transform="translate(12 -12) scale(.5)">
+            <path className="ri-fill" d="M-18,-4 C-18,-16 18,-16 18,-4 Z" />
+            <rect className="ri-accent" x="-19" y="-2" width="38" height="6" rx="3" />
+            <rect className="ri-fill" x="-18" y="6" width="36" height="7" rx="3.5" />
+          </g>
         </g>
       );
-    case "pm25": // factory and dust
+    case "smoke": // cigarette with smoke, and a wine glass
       return (
         <g>
-          <path className="ri-fill" d="M-20,16 V-2 L-10,4 V-2 L0,4 V-12 H8 V16 Z" />
-          <circle className="ri-accent" cx="14" cy="-14" r="3" />
-          <circle className="ri-accent" cx="20" cy="-5" r="2" />
-          <circle className="ri-accent" cx="8" cy="-20" r="2" />
-        </g>
-      );
-    case "filler": // syringe
-      return (
-        <g transform="rotate(-45)">
-          <rect className="ri-fill" x="-14" y="-5" width="22" height="10" rx="2" />
-          <rect className="ri-accent" x="-10" y="-3" width="10" height="6" />
-          <path className="ri-line" d="M8,0 H20 M-14,-8 V8 M-20,0 H-14" />
+          <rect className="ri-fill" x="-23" y="7" width="20" height="7" rx="2" />
+          <rect className="ri-accent" x="-11" y="7" width="8" height="7" rx="2" />
+          <path className="ri-line" d="M-20,3 C-25,-3 -15,-7 -20,-14 M-13,3 C-17,-3 -9,-6 -13,-12" />
+          <path className="ri-fill" d="M4,-16 H20 C20,-6 16,0 12,0 C8,0 4,-6 4,-16 Z" />
+          <path className="ri-line" d="M12,0 V13 M6,14 H18" />
         </g>
       );
     case "stress": // frowning face and moon
@@ -46,6 +48,18 @@ export function RiskIcon({ kind }: { kind: RiskKind }) {
           <circle className="ri-outline" cx="-4" cy="4" r="14" />
           <path className="ri-line" d="M-11,-1 l5,2 M3,-1 l-5,2 M-10,11 q6,-5 12,0" />
           <path className="ri-accent" d="M18,-20 a9,9 0 1 0 6,14 a7,7 0 1 1 -6,-14 Z" />
+        </g>
+      );
+    case "drugs": // capsule and tablet
+      return (
+        <g>
+          <g transform="rotate(-40 -4 -5)">
+            <rect className="ri-outline" x="-18" y="-11" width="28" height="12" rx="6" />
+            <path className="ri-accent" d="M-18,-5 a6,6 0 0 1 6,-6 H-4 V1 H-12 a6,6 0 0 1 -6,-6 Z" />
+            <path className="ri-line" d="M-4,-11 V1" />
+          </g>
+          <circle className="ri-outline" cx="9" cy="11" r="7" />
+          <path className="ri-line" d="M4,11 H14" />
         </g>
       );
   }

@@ -13,11 +13,11 @@ const PEOPLE_X = [80, 160, 240, 320];
 const ICONS_STEP = 1;
 const FIRST_RISK_STEP = 2;
 const ICON_AT: Record<RiskKind, readonly [number, number]> = {
-  food: [200, 52],
+  bp: [200, 52],
+  lifestyle: [314, 110],
+  smoke: [304, 236],
+  stress: [96, 236],
   drugs: [86, 110],
-  pm25: [314, 110],
-  filler: [96, 236],
-  stress: [304, 236],
 };
 const pulseAt = (i: number) => `translate(${PEOPLE_X[i] - 26} 82)`;
 

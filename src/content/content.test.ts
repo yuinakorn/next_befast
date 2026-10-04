@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { CHAPTER_1 } from "./chapter-1.ts";
-import { CHAPTER_2, SELF_CHECK } from "./chapter-2.ts";
+import { CHAPTER_2, CHAPTER_2_REVIEWS, RISK_NOTES, SELF_CHECK } from "./chapter-2.ts";
 import { CHAPTER_5, MYTHS, OUTCOMES } from "./chapter-5.ts";
 import { CHAPTER_6, DISEASES } from "./chapter-6.ts";
 import { CHAPTER_7, SHIELD_CHECKLIST } from "./chapter-7.ts";
@@ -28,8 +28,22 @@ for (const [chapter, count] of [
   });
 }
 
-test("self check has one option per chapter 2 risk step", () => {
+test("self check has one option per chapter 2 risk step (steps 3–7), in RISK_KINDS order", () => {
   assert.equal(SELF_CHECK.options.length, CHAPTER_2.steps.length - 2);
+  assert.deepEqual(
+    SELF_CHECK.options.map((o) => o.id),
+    ["bp", "lifestyle", "smoke", "stress", "drugs"],
+  );
+});
+
+test("every self check option says where the fix is, and the drug line carries the 1165 hotline", () => {
+  for (const o of SELF_CHECK.options) assert.ok(o.next.length > 0, o.id);
+  assert.ok(SELF_CHECK.options.find((o) => o.id === "drugs")!.next.includes("1165"));
+});
+
+test("chapter 2 notes: PM2.5 and filler, each with a review row", () => {
+  assert.deepEqual(RISK_NOTES.items.map((n) => n.label), ["ฝุ่น PM2.5", "ฟิลเลอร์"]);
+  assert.equal(CHAPTER_2_REVIEWS.length, RISK_NOTES.items.length);
 });
 
 for (const [chapter, filename] of [

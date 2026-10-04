@@ -2,8 +2,6 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { CHAPTERS, allReviewRows, renderReport, reviewRows } from "./review-report.ts";
-import { CHAPTER_1 } from "../src/content/chapter-1.ts";
-import { CHAPTER_2 } from "../src/content/chapter-2.ts";
 import type { ChapterContent } from "../src/content/types.ts";
 
 const fixture: ChapterContent = {
@@ -31,8 +29,11 @@ test("renderReport escapes pipes so the markdown table stays intact", () => {
 });
 
 test("every ★ item from appendix ก for chapters 1–2 is in the report", () => {
-  const rows = reviewRows([CHAPTER_1, CHAPTER_2]);
-  for (const phrase of ["2%", "8 ใน 10", "2 ใน 10", "สแกนสมอง", "TIA", "PM2.5", "ฟิลเลอร์", "หวาน มัน เค็ม", "บุหรี่", "ความเครียด"]) {
+  const rows = allReviewRows().filter((r) => /^บทที่ [12] /.test(r.where));
+  for (const phrase of [
+    "2%", "8 ใน 10", "2 ใน 10", "สแกนสมอง", "TIA",
+    "ความดันโลหิตสูง", "ไม่ขยับ", "บุหรี่ไฟฟ้า", "ยาบ้า", "ความเครียด", "PM2.5", "ฟิลเลอร์", "1165",
+  ]) {
     assert.ok(rows.some((r) => r.text.includes(phrase)), `missing review row for ${phrase}`);
   }
 });

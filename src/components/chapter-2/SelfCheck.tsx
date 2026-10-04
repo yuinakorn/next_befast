@@ -8,6 +8,8 @@ export function SelfCheck() {
   const [picked, setPicked] = useState<readonly string[]>([]);
   const toggle = (id: string) =>
     setPicked((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  // option order, not tap order, so the advice reads the same as the list above it
+  const chosen = SELF_CHECK.options.filter((o) => picked.includes(o.id));
 
   return (
     <section className="self-check" aria-labelledby="self-check-title">
@@ -20,7 +22,18 @@ export function SelfCheck() {
           </button>
         ))}
       </div>
-      <p className="self-check-answer" aria-live="polite">{picked.length > 0 ? SELF_CHECK.answer : ""}</p>
+      <div className="self-check-result" aria-live="polite">
+        {chosen.length > 0 && (
+          <>
+            <p className="self-check-answer">{SELF_CHECK.answer}</p>
+            <ul className="self-check-next">
+              {chosen.map((o) => (
+                <li key={o.id}>{o.next}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
     </section>
   );
 }

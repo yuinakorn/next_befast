@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import type { ChapterContent } from "../src/content/types.ts";
 import { CHAPTER_1 } from "../src/content/chapter-1.ts";
-import { CHAPTER_2, SELF_CHECK } from "../src/content/chapter-2.ts";
+import { CHAPTER_2, CHAPTER_2_REVIEWS, SELF_CHECK } from "../src/content/chapter-2.ts";
 import { CHAPTER_5, CHAPTER_5_REVIEWS } from "../src/content/chapter-5.ts";
 import { CHAPTER_6, CHAPTER_6_REVIEWS } from "../src/content/chapter-6.ts";
 import { CHAPTER_7, CHAPTER_7_REVIEWS } from "../src/content/chapter-7.ts";
@@ -47,13 +47,14 @@ export function renderReport(rows: readonly ReviewRow[]): string {
   ].join("\n");
 }
 
-/** Every row of docs/medical-review.md, in the order the CLI writes them: chapters, chapter 2 self-check, then the extra rows of chapters 5–7. */
+/** Every row of docs/medical-review.md, in the order the CLI writes them: chapters, the extra rows of chapter 2 (notes, self-check), then those of chapters 5–7. */
 export function allReviewRows(): ReviewRow[] {
   return [
     ...reviewRows(CHAPTERS),
+    ...CHAPTER_2_REVIEWS,
     {
       where: "บทที่ 2 แบบสำรวจ",
-      text: SELF_CHECK.options.map((o) => o.label).join(", "),
+      text: SELF_CHECK.options.map((o) => `${o.label} → ${o.next}`).join("; "),
       check: SELF_CHECK.review,
     },
     ...CHAPTER_5_REVIEWS,
