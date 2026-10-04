@@ -55,3 +55,6 @@ Thumbs.db
 # agent worktrees and scratch
 /.claude/worktrees/
 /.superpowers/
+
+# visual check output
+/.shots/
