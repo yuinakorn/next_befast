@@ -1,0 +1,18 @@
+/* Shield (src/components/ui/Shield.tsx): 10 pieces, unlit = outline only, lit = filled with --shield.
+   A piece is lit when it has the class `on`. Flat: no shadows; the "all lit" glow is a lighter ring. */
+.shield-svg { display: block; width: auto; height: 100%; max-width: 100%; overflow: visible; }
+
+.shield-frame { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.shield-piece {
+  fill: none; stroke: var(--ink-2); stroke-width: 2.5; stroke-linejoin: round;
+  transition: fill .4s, stroke .4s;
+}
+.shield-piece.on { fill: var(--shield); stroke: var(--shield); }
+
+/* all 10 pieces lit: a soft ring just outside the frame */
+.shield-halo { fill: none; stroke: var(--shield); stroke-width: 14; stroke-linejoin: round; opacity: 0; transition: opacity .6s; }
+.shield:not(:has(.shield-piece:not(.on))) .shield-halo { opacity: .28; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shield-piece, .shield-halo { transition: none; }
+}

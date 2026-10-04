@@ -8,6 +8,8 @@ import "@/styles/story.css";
 import "@/styles/chapter-1.css";
 import "@/styles/chapter-2.css";
 import "@/styles/chapter-5.css";
+import "@/styles/chapter-6.css";
+import "@/styles/shield.css";
 
 const anuphan = Anuphan({
   variable: "--font-anuphan",

@@ -13,6 +13,8 @@
   --pants: #13235A; --hair: #2E3247; --feature: #1E2440; --red-soft: rgba(211,34,45,.08);
   --glass: rgba(255,255,255,.55); --ghost: rgba(19,35,90,.3);
   --visual-bg: #DDEAF8;
+  /* chapter 6: calm protection (shield) and plaque (yellow fat deposit); see DESIGN.md */
+  --shield: #0F7A89; --plaque: #B07C00;
   /* brand plate (Walk Run Bike 12): identical in light and dark themes, so no dark override */
   --brand-navy: #202D5D; --brand-red: #D72828;
   --on-brand: #FFFFFF; --on-brand-muted: #A8B3D4; --on-brand-alert: #FF5560;
@@ -27,6 +29,7 @@
     --go: #2BC28A; --go-text: #2BC28A; --orange: #F0A050; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
     --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
     --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
+    --shield: #4FC3D0; --plaque: #F2C94C;
     color-scheme: dark;
   }
 }
@@ -36,6 +39,7 @@
   --go: #2BC28A; --go-text: #2BC28A; --orange: #F0A050; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
   --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
   --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
+  --shield: #4FC3D0; --plaque: #F2C94C;
   color-scheme: dark;
 }
 
