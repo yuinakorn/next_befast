@@ -34,9 +34,9 @@ export function LiveCounter() {
   if (!live) return <p className="counter">{OPENING.counterStatic}</p>;
   return (
     <p className="counter">
-      <span aria-hidden="true">{OPENING.counterBefore}</span>
+      <span className="counter-before" aria-hidden="true">{OPENING.counterBefore}</span>
       <span className="counter-num" ref={numRef} aria-hidden="true">0</span>
-      <span aria-hidden="true">{OPENING.counterAfter}</span>
+      <span className="counter-unit" aria-hidden="true">{OPENING.counterAfter}</span>
       <span className="sr-only">{OPENING.counterStatic}</span>
     </p>
   );

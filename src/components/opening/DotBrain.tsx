@@ -69,7 +69,9 @@ export function DotBrain({ ref, label }: { ref?: Ref<DotBrainHandle>; label: str
     if (!canvas || !ctx) return;
     const shape = new Path2D(BRAIN_PATH);
     const count = window.innerWidth < 768 ? 600 : 1000;
-    // identity transform here, so isPointInPath works in BRAIN_VIEWBOX units
+    // isPointInPath(Path2D, x, y) applies the context's current transform, and a previous paint()
+    // (StrictMode re-run, Fast Refresh) leaves dpr/translate/scale on it: reset so x, y are BRAIN_VIEWBOX units
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     state.current.dots = generateDots(count, SEED, (x, y) => ctx.isPointInPath(shape, x, y));
     paint(canvas, state.current, true);
     const ro = new ResizeObserver(() => paint(canvas, state.current, true));
