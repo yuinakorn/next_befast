@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-04T10:05:15.660Z",
+        "reason": "Agent: index.html is the preserved reference prototype; AGENTS.md and DESIGN.md scope the shipped Next.js type system to src/"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-04T10:05:15.775Z",
+        "reason": "Agent: index.html is the preserved reference prototype; AGENTS.md and DESIGN.md scope the shipped Next.js shape system to src/"
+      }
+    ]
+  }
+}
