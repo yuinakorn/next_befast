@@ -19,3 +19,6 @@ export type ChapterContent = {
   imageAlt: string;
   steps: Step[];
 };
+
+/** A review row for copy that is not a chapter step (cards, tools, quiz). Same columns as the report. */
+export type ReviewNote = { where: string; text: string; check: string };

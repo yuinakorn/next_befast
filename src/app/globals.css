@@ -121,10 +121,6 @@ button { font: inherit; color: inherit; }
 .shade { fill: var(--line); } .redf { fill: var(--red); } .surf { fill: var(--surface); }
 
 /* ---------- next + footer ---------- */
-.next { max-width: 860px; margin: 0 auto; padding: 8vh clamp(20px, 6vw, 40px); }
-.next .ch-num { color: var(--ink-2); }
-.next h2 { font-size: clamp(1.9rem, 5vw, 3.2rem); margin-bottom: .3em; }
-.next p { color: var(--ink-2); }
 .site-footer {
   max-width: 860px; margin: 0 auto; padding: 5vh clamp(20px, 6vw, 40px) 6vh;
   font-size: .85rem; color: var(--ink-2); border-top: 1px solid var(--line);

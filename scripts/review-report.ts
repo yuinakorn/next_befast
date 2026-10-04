@@ -4,6 +4,13 @@ import { pathToFileURL } from "node:url";
 import type { ChapterContent } from "../src/content/types.ts";
 import { CHAPTER_1 } from "../src/content/chapter-1.ts";
 import { CHAPTER_2, SELF_CHECK } from "../src/content/chapter-2.ts";
+import { CHAPTER_5, CHAPTER_5_REVIEWS } from "../src/content/chapter-5.ts";
+import { CHAPTER_6, CHAPTER_6_REVIEWS } from "../src/content/chapter-6.ts";
+import { CHAPTER_7, CHAPTER_7_REVIEWS } from "../src/content/chapter-7.ts";
+import { CHAPTER_8 } from "../src/content/chapter-8.ts";
+
+/** Every chapter whose copy lives in src/content, in page order. */
+export const CHAPTERS = [CHAPTER_1, CHAPTER_2, CHAPTER_5, CHAPTER_6, CHAPTER_7, CHAPTER_8];
 
 export type ReviewRow = { where: string; text: string; check: string };
 
@@ -41,12 +48,17 @@ export function renderReport(rows: readonly ReviewRow[]): string {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const rows = reviewRows([CHAPTER_1, CHAPTER_2]);
-  rows.push({
-    where: "บทที่ 2 แบบสำรวจ",
-    text: SELF_CHECK.options.map((o) => o.label).join(", "),
-    check: SELF_CHECK.review,
-  });
+  const rows = reviewRows(CHAPTERS);
+  rows.push(
+    {
+      where: "บทที่ 2 แบบสำรวจ",
+      text: SELF_CHECK.options.map((o) => o.label).join(", "),
+      check: SELF_CHECK.review,
+    },
+    ...CHAPTER_5_REVIEWS,
+    ...CHAPTER_6_REVIEWS,
+    ...CHAPTER_7_REVIEWS,
+  );
   fs.writeFileSync(new URL("../docs/medical-review.md", import.meta.url), renderReport(rows));
   console.log(`wrote docs/medical-review.md (${rows.length} rows)`);
 }
