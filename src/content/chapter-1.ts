@@ -6,6 +6,7 @@ export const CHAPTER_1: ChapterContent = {
   title: "สโตรกคืออะไร",
   lead: "สมองทำงานได้ทุกวินาทีเพราะมีเลือดไหลไปเลี้ยงไม่หยุด บทนี้จะพาไปดูว่าเกิดอะไรขึ้นเมื่อเลือดไปไม่ถึง",
   leadReview: "คำโปรยร่างใหม่ ไม่มีในสคริปต์",
+  image: "/illustrations/chapter-1-what-is-stroke.webp",
   imageAlt: "ภาพประกอบบทที่ 1 สมองเปรียบเหมือนเมืองที่มีหลอดเลือดเป็นถนน",
   steps: [
     {
