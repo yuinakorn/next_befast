@@ -7,6 +7,7 @@ export const CHAPTER_8: ChapterContent = {
   title: "สิ่งสำคัญที่อย่าลืม",
   lead: "ช่องโหว่ที่หลายคนมักพลาด และวิธีส่งต่อความรู้นี้ไปถึงคนที่คุณรัก",
   leadReview: "คำโปรยร่างใหม่ ไม่มีในสคริปต์",
+  image: "/illustrations/chapter-8-dont-forget.webp",
   imageAlt: "ภาพประกอบบทที่ 8 คนในครอบครัวส่งต่อความห่วงใยกัน",
   steps: [
     {
