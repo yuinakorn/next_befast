@@ -14,7 +14,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## โปรเจกต์นี้คืออะไร
 
-**"ทุกนาทีที่ช้า คือสมองที่สูญเสีย"** เป็นสื่อการสอนโรคหลอดเลือดสมอง (stroke) แบบ scrollytelling ภาษาไทย ตอนนี้มีบทเปิด และบทที่ 1 (สโตรกคืออะไร) 2 (ใกล้ตัวกว่าที่คิด) 3 (นาฬิกาสมอง) และ 4 (จับสัญญาณด้วย BEFAST) ส่วนบทที่ 5–8 และบทปิดยังต้องทำต่อ (ตามสคริปต์ใน `docs/stroke-scrollytelling-script.md`) ผู้ใช้คือประชาชนทั่วไป ญาติผู้ป่วย ผู้สูงอายุ และนักเรียนนักศึกษา ส่วนใหญ่อ่านบนมือถือ
+**"ทุกนาทีที่ช้า คือสมองที่สูญเสีย"** เป็นสื่อการสอนโรคหลอดเลือดสมอง (stroke) แบบ scrollytelling ภาษาไทย ครบทุกบทตามสคริปต์ใน `docs/stroke-scrollytelling-script.md` แล้ว: บทเปิด บทที่ 1–8 และบทปิด ผู้ใช้คือประชาชนทั่วไป ญาติผู้ป่วย ผู้สูงอายุ และนักเรียนนักศึกษา ส่วนใหญ่อ่านบนมือถือ
 
 อ่านไฟล์เหล่านี้ก่อนเริ่มงาน:
 
@@ -27,15 +27,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## สถานะปัจจุบันและแผน
 
 - **ตอนนี้:** เว็บไซต์คือแอป Next.js ใน `src/` (GSAP ติดตั้งจาก npm) ส่วน `index.html` เป็นต้นฉบับไฟล์เดียวที่เก็บไว้อ้างอิง (CSS และ JS อยู่ในไฟล์ ใช้ GSAP 3.12.5 + ScrollTrigger จาก cdnjs และภาพประกอบ `.webp` ใน `assets/illustrations/`) ไม่ได้ใช้ในเว็บจริง
-- **แผน:** ทำบทที่ 5–8 และบทปิดต่อตามสคริปต์
-- หน้าเว็บเป็น Next.js 16 (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) มีบทเปิด บทที่ 1–4 และ footer แบรนด์แคมเปญ Walk Run Bike 12
-  - เนื้อหาบทเปิดและบท 1–2 อยู่ใน `src/content/` (ข้อความ ★ มีฟิลด์ `review`) บทที่ 3–4 ยังเขียนในคอมโพเนนต์
-  - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2 ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
-  - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-4/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`), `NextChapter`, `CampaignFooter`
-  - `src/hooks/`: `usePinnedSteps` (ฮุกคุมฉากที่ pin ของบท 1–2)
+- **แผน:** ให้แพทย์ตรวจข้อความ ★ (`docs/medical-review.md`), ทำภาพหัวบทที่ 5–8 (`docs/illustration-prompts.md`) และงานใน `docs/superpowers/followups/`
+- หน้าเว็บเป็น Next.js 16 (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) มีบทเปิด บทที่ 1–8 บทปิด และ footer แบรนด์แคมเปญ Walk Run Bike 12
+  - เนื้อหาบทเปิด บท 1–2 บท 5–8 และบทปิดอยู่ใน `src/content/` (ข้อความ ★ มีฟิลด์ `review`) บทที่ 3–4 ยังเขียนในคอมโพเนนต์
+  - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2 และ 5–8 ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
+  - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-8/`, `closing/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`, `Shield`), `CampaignFooter`
+  - `src/hooks/`: `usePinnedSteps` (ฮุกคุมฉากที่ pin ของบท 1–2 และ 5–8)
   - `scripts/`: `shots.mjs` (ถ่ายภาพทุกฉากที่ pin + ตรวจเนื้อหาล้น), `review-report.ts` (สร้าง `docs/medical-review.md`)
   - CSS: `src/app/globals.css` (token และสไตล์ร่วม), `src/styles/opening.css`, `story.css`, `chapter-1.css` ถึง `chapter-4.css`
-  - ภาพอยู่ใน `public/illustrations/` และ `public/brand/` ภาพหัวบทที่ 1–2 ยังไม่มี (ดู `docs/illustration-prompts.md`) ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
+  - ภาพอยู่ใน `public/illustrations/` และ `public/brand/` ภาพหัวบทที่ 5–8 ยังไม่มี (ดู `docs/illustration-prompts.md`) ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
 - package manager: **pnpm เท่านั้น** (ห้ามใช้ npm/yarn และห้าม commit `package-lock.json`) คำสั่ง:
   ```bash
   pnpm dev         # dev server (http://localhost:3000)

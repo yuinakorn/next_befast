@@ -32,3 +32,12 @@ generous empty space around the edges. No text, no letters, no numbers, no logos
 1. วางไฟล์ไว้ตาม path ด้านบน
 2. เพิ่ม `image: "/illustrations/<ชื่อไฟล์>.webp"` ใน `CHAPTER_1` หรือ `CHAPTER_2` (`src/content/chapter-1.ts`, `chapter-2.ts`)
 3. รัน `pnpm build` แล้วตรวจหัวบทบนจอ 360px และ 1280px
+
+## บทที่ 5–8 (ยังไม่มีภาพ)
+
+ใช้ข้อกำหนดร่วมด้านบน แล้ววางไฟล์และเพิ่ม `image` ใน `src/content/chapter-<n>.ts`
+
+- **บทที่ 5 เจออาการแล้ว ทำอย่างไร** → `chapter-5-what-to-do.webp`: a Thai family at home in the evening, one person calling for help on a phone while another notes the time on a wall clock, an older relative resting on their side on a sofa; calm, decisive mood.
+- **บทที่ 6 ข่าวดี ป้องกันได้ 90%** → `chapter-6-prevent-90.webp`: a soft glowing shield protecting a stylised brain and blood vessels, gentle teal and blue washes replacing red, hopeful morning light.
+- **บทที่ 7 6 พฤติกรรม สร้างโล่ของคุณ** → `chapter-7-six-habits.webp`: people of different ages walking, running and cycling in a green Thai park, a plate of vegetables and fruit on a picnic cloth, no cigarettes or alcohol in sight.
+- **บทที่ 8 สิ่งสำคัญที่อย่าลืม** → `chapter-8-dont-forget.webp`: a grandparent checking blood pressure at home with a grandchild, a calendar with a circled check-up date, warm light passing between family members.
