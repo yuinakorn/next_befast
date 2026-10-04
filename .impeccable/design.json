@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T03:59:22.402Z",
+  "title": "Design System: ทุกนาทีที่ช้า คือสมองที่สูญเสีย",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Clinic Paper / กระดาษคลินิก",
+        "canonical": "oklch(97.5% 0.008 253.9)",
+        "tonalRamp": [
+          "#090B0E",
+          "#212428",
+          "#3F4347",
+          "#606468",
+          "#83868B",
+          "#A7ABB0",
+          "#CACED3",
+          "#EBEFF4"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Clean Sheet / แผ่นขาว",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#424242",
+          "#636363",
+          "#868686",
+          "#ABABAB",
+          "#CECECE",
+          "#EEEEEE"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Deep Navy Ink / กรมท่าเข้ม",
+        "canonical": "oklch(28.1% 0.101 267.2)",
+        "tonalRamp": [
+          "#020035",
+          "#0F1D54",
+          "#2A3E78",
+          "#49609D",
+          "#6B84C3",
+          "#8EA9EB",
+          "#B9CDFD",
+          "#E8EEFE"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Muted Navy / กรมท่าหม่น",
+        "canonical": "oklch(47.0% 0.062 266.7)",
+        "tonalRamp": [
+          "#020825",
+          "#162242",
+          "#334163",
+          "#536287",
+          "#7586AC",
+          "#99AAD3",
+          "#BBCDF7",
+          "#E8EFFE"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline / เส้นบาง",
+        "canonical": "oklch(90.1% 0.020 257.5)",
+        "tonalRamp": [
+          "#060B14",
+          "#1E242E",
+          "#3C434D",
+          "#5C646F",
+          "#7F8793",
+          "#A3ACB8",
+          "#C6CEDB",
+          "#E6EFFC"
+        ]
+      },
+      "red": {
+        "role": "primary",
+        "displayName": "Alarm Red / แดงสัญญาณ",
+        "canonical": "oklch(55.9% 0.209 25.0)",
+        "tonalRamp": [
+          "#1F0001",
+          "#4A0307",
+          "#7E0C15",
+          "#B81222",
+          "#E93D40",
+          "#FE7F78",
+          "#FFBAB3",
+          "#FEE9E7"
+        ]
+      },
+      "pink": {
+        "role": "tertiary",
+        "displayName": "Living Cell Pink / ชมพูเซลล์ที่ยังทำงาน",
+        "canonical": "oklch(71.7% 0.140 15.7)",
+        "tonalRamp": [
+          "#1E0004",
+          "#480413",
+          "#7C0F28",
+          "#A33948",
+          "#CC5E69",
+          "#F6838D",
+          "#FDB9BD",
+          "#FFE8E9"
+        ]
+      },
+      "pink-deep": {
+        "role": "tertiary",
+        "displayName": "Living Cell Pink Deep",
+        "canonical": "oklch(62.3% 0.167 18.5)",
+        "tonalRamp": [
+          "#1E0003",
+          "#490210",
+          "#7D0B22",
+          "#AE2A3C",
+          "#D8535E",
+          "#FD7E84",
+          "#FEB9B9",
+          "#FEE9E8"
+        ]
+      },
+      "ash": {
+        "role": "tertiary",
+        "displayName": "Lost Cell Ash / เทาเซลล์ที่สูญเสีย",
+        "canonical": "oklch(75.3% 0.026 265.5)",
+        "tonalRamp": [
+          "#060B16",
+          "#1E2431",
+          "#3C4251",
+          "#5C6373",
+          "#7F8696",
+          "#A3ABBC",
+          "#C6CEDF",
+          "#E7EFFE"
+        ]
+      },
+      "ash-deep": {
+        "role": "tertiary",
+        "displayName": "Lost Cell Ash Deep",
+        "canonical": "oklch(62.7% 0.033 267.0)",
+        "tonalRamp": [
+          "#060A19",
+          "#1D2434",
+          "#3A4255",
+          "#5B6377",
+          "#7D869B",
+          "#A1ABC1",
+          "#C4CEE4",
+          "#E7EEFF"
+        ]
+      },
+      "go": {
+        "role": "secondary",
+        "displayName": "Treatment Green / เขียวเวลาที่เหลือ",
+        "canonical": "oklch(55.8% 0.121 160.2)",
+        "tonalRamp": [
+          "#000F07",
+          "#002C1A",
+          "#035033",
+          "#01764D",
+          "#319C6D",
+          "#5CC291",
+          "#81E6B3",
+          "#C5FEDE"
+        ]
+      },
+      "cath": {
+        "role": "secondary",
+        "displayName": "Catheter Blue / ฟ้าสายสวน",
+        "canonical": "oklch(53.3% 0.175 261.2)",
+        "tonalRamp": [
+          "#000827",
+          "#001E59",
+          "#023997",
+          "#225CC5",
+          "#4681EE",
+          "#7BAAFD",
+          "#B3CFFF",
+          "#E6EFFE"
+        ]
+      },
+      "visual-bg": {
+        "role": "neutral",
+        "displayName": "Plate Blue / ฟ้าพื้นภาพ",
+        "canonical": "oklch(93.1% 0.024 250.1)",
+        "tonalRamp": [
+          "#040C15",
+          "#1B252F",
+          "#39444F",
+          "#596571",
+          "#7C8894",
+          "#A0ACBA",
+          "#C3CFDD",
+          "#E3F0FE"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "หัวเรื่องหน้าแรกเท่านั้น"
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "ชื่อบท (h2)"
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "หัวข้อขั้นในฉาก การ์ด แบบฝึก"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "เนื้อหา ขั้นต่ำ 17px"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "ป้ายกำกับตัวนับ คำอธิบายสี คำแนะนำ"
+      },
+      "eyebrow": {
+        "displayName": "Eyebrow",
+        "purpose": "เลขบท สีแดง"
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "ค่าตัวนับ tabular-nums"
+      },
+      "numeral-hero": {
+        "displayName": "Numeral Hero",
+        "purpose": "เลข 1669 เท่านั้น"
+      }
+    },
+    "shadows": [
+      {
+        "name": "plate-inner-highlight",
+        "value": "inset 0 0 0 1px rgba(255,255,255,.42)",
+        "purpose": "ขอบสว่างด้านในกรอบภาพประกอบ เป็นความลึกอย่างเดียวในระบบ"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-draw",
+        "value": "cubic-bezier(.5,0,.2,1)",
+        "purpose": "เส้น ECG วาดตัวเองในหน้าแรก 2.6s"
+      },
+      {
+        "name": "ease-pop",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "ภาพ 1669 ปรากฏหลังตอบแบบฝึกครบ .55s"
+      },
+      {
+        "name": "step-swap",
+        "value": "opacity .45s ease, transform .45s ease (translateY 16px)",
+        "purpose": "สลับข้อความขั้นในฉากบทที่ 3"
+      },
+      {
+        "name": "card-swap",
+        "value": "opacity .4s ease, transform .4s ease (translateY 14px)",
+        "purpose": "สลับการ์ดอาการ BEFAST"
+      },
+      {
+        "name": "scrub",
+        "value": "ScrollTrigger scrub 0.6, pin, end +=520% (ch3) / +=560% (ch4)",
+        "purpose": "ฉากที่ทำงานตามการเลื่อน"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "base",
+        "value": "0px"
+      },
+      {
+        "name": "sm",
+        "value": "600px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "legacy-mobile-max",
+        "value": "860px"
+      },
+      {
+        "name": "legacy-narrow-max",
+        "value": "760px"
+      },
+      {
+        "name": "short-height-max",
+        "value": "640px (height)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Progress Bar",
+      "kind": "custom",
+      "refersTo": "progress-bar",
+      "description": "แถบความคืบหน้าการอ่าน 4px สีแดง ติดบนสุดของจอ ยืดด้วย scaleX",
+      "html": "<div class=\"ds-progress\" aria-hidden=\"true\"><span></span></div>",
+      "css": ".ds-progress{position:relative;height:4px;background:var(--line, #D6DFEC)}.ds-progress span{display:block;height:4px;background:var(--red, #D3222D);transform-origin:0 50%;transform:scaleX(.42);transition:transform .2s}"
+    },
+    {
+      "name": "Choice Button",
+      "kind": "button",
+      "refersTo": "choice-button",
+      "description": "ปุ่มเลือกตัวอักษร BEFAST ในแบบฝึก สถานะปกติ / hover / ถูก / ผิด",
+      "html": "<div class=\"ds-choices\"><button class=\"ds-choice\">B</button><button class=\"ds-choice\">E</button><button class=\"ds-choice ds-choice--wrong\" disabled>F</button><button class=\"ds-choice\">A</button><button class=\"ds-choice ds-choice--right\">S</button><button class=\"ds-choice\">T</button></div>",
+      "css": ".ds-choices{display:grid;grid-template-columns:repeat(6,minmax(44px,54px));gap:10px}.ds-choice{width:100%;aspect-ratio:1;border-radius:12px;border:2px solid var(--ink, #13235A);background:var(--surface, #FFFFFF);color:var(--ink, #13235A);font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;font-weight:700;font-size:1.35rem;cursor:pointer;transition:background .2s,color .2s,opacity .2s}@media (hover:hover){.ds-choice:hover:not(:disabled){background:var(--ink, #13235A);color:var(--paper, #F3F7FC)}}.ds-choice:focus-visible{outline:3px solid var(--red, #D3222D);outline-offset:3px}.ds-choice--right{background:var(--go, #13895B);border-color:var(--go, #13895B);color:#fff}.ds-choice--wrong{opacity:.35;text-decoration:line-through;cursor:not-allowed}"
+    },
+    {
+      "name": "BEFAST Letter Tabs",
+      "kind": "nav",
+      "refersTo": "letter-tab",
+      "description": "ตัวอักษรกลวงขนาดใหญ่ บอกความคืบหน้าและกดกระโดดไปแต่ละอาการ",
+      "html": "<nav class=\"ds-letters\" aria-label=\"สัญญาณเตือน BEFAST\"><button class=\"ds-letter is-done\">B</button><button class=\"ds-letter is-done\">E</button><button class=\"ds-letter is-on\">F</button><button class=\"ds-letter\">A</button><button class=\"ds-letter\">S</button><button class=\"ds-letter\">T</button></nav>",
+      "css": ".ds-letters{display:flex;justify-content:space-between;border-bottom:2px solid var(--line, #D6DFEC);padding-bottom:4px}.ds-letter{background:none;border:0;cursor:pointer;padding:0 .08em;position:relative;font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;font-weight:700;font-size:clamp(2.5rem,8.5vw,4.5rem);line-height:1.05;color:transparent;-webkit-text-stroke:2px var(--ink-2, #4B5A7E);transition:color .35s,-webkit-text-stroke-color .35s}.ds-letter.is-done{color:var(--ink, #13235A);-webkit-text-stroke-color:var(--ink, #13235A)}.ds-letter.is-on{color:var(--red, #D3222D);-webkit-text-stroke-color:var(--red, #D3222D)}.ds-letter::after{content:\"\";position:absolute;left:10%;right:10%;bottom:-7px;height:6px;border-radius:3px;background:var(--red, #D3222D);transform:scaleX(0);transition:transform .35s}.ds-letter.is-on::after{transform:scaleX(1)}.ds-letter:focus-visible{outline:3px solid var(--red, #D3222D);outline-offset:3px;border-radius:6px}"
+    },
+    {
+      "name": "Symptom Card",
+      "kind": "card",
+      "refersTo": "check-callout",
+      "description": "การ์ดอาการ BEFAST: ชื่ออังกฤษ หัวข้อไทย คำอธิบาย และกล่องวิธีสังเกต",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card-en\">Face</p><h3>หน้าเบี้ยว ยิ้มไม่เท่ากัน</h3><p class=\"ds-card-body\">ใบหน้าสองซีกไม่เท่ากัน มุมปากข้างหนึ่งตก หรือหนังตาข้างหนึ่งตก</p><p class=\"ds-check\">ให้ยิ้มหรือยิงฟัน แล้วดูว่ามุมปากสองข้างสูงเท่ากันไหม</p></article>",
+      "css": ".ds-card{font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;color:var(--ink, #13235A);line-height:1.65;max-width:30em}.ds-card h3{font-size:clamp(1.5rem,3.8vw,2.4rem);font-weight:700;line-height:1.28;margin:0 0 .4em}.ds-card p{margin:0}.ds-card-en{font-weight:600;color:var(--red, #D3222D);font-size:1.1rem;margin-bottom:.15em}.ds-card-body{color:var(--ink-2, #4B5A7E)}.ds-check{margin-top:1em !important;padding:11px 14px;border-radius:12px;background:var(--red-soft, rgba(211,34,45,.08));color:var(--ink, #13235A)}"
+    },
+    {
+      "name": "Meter",
+      "kind": "custom",
+      "refersTo": "meter-value",
+      "description": "ตัวนับ: ป้ายกำกับ ค่าตัวเลข Chakra Petch และหน่วย ตัวนับเซลล์สมองใช้สีแดง",
+      "html": "<div class=\"ds-meters\"><div class=\"ds-meter ds-meter--alarm\"><span class=\"ds-m-label\">เซลล์สมองที่สูญเสียไป</span><span class=\"ds-m-val\">114,000,000</span></div><div class=\"ds-meter\"><span class=\"ds-m-label\">เวลาตั้งแต่เริ่มมีอาการ</span><span class=\"ds-m-val\">1:00</span><span class=\"ds-m-unit\">ชม.</span></div><div class=\"ds-meter\"><span class=\"ds-m-label\">สมองแก่ลงเทียบเท่า</span><span class=\"ds-m-val\">3.6</span><span class=\"ds-m-unit\">ปี</span></div></div>",
+      "css": ".ds-meters{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;padding-top:16px;border-top:2px solid var(--ink, #13235A);font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;color:var(--ink, #13235A)}.ds-meter--alarm{grid-column:1/-1}.ds-m-label{display:block;font-size:.85rem;color:var(--ink-2, #4B5A7E);line-height:1.4}.ds-m-val{font-family:'Chakra Petch',Anuphan,system-ui,sans-serif;font-weight:600;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.1;font-variant-numeric:tabular-nums}.ds-meter--alarm .ds-m-val{color:var(--red, #D3222D);font-size:clamp(2rem,4.6vw,3.2rem)}.ds-m-unit{font-size:.9rem;color:var(--ink-2, #4B5A7E);margin-left:.35em;font-weight:500}"
+    },
+    {
+      "name": "Treatment Timeline",
+      "kind": "custom",
+      "refersTo": "timeline-track",
+      "description": "แถบเวลาให้ยาละลายลิ่มเลือด 4.5 ชม. ส่วนที่เลยไปแล้วเป็นสีเทา และมีตัวชี้ตำแหน่ง",
+      "html": "<div class=\"ds-tl\"><div class=\"ds-tl-row\"><span class=\"ds-tl-name\">ยาละลายลิ่มเลือด</span><span class=\"ds-tl-left\">เหลือ 2 ชม. 15 นาที</span></div><div class=\"ds-tl-body\"><div class=\"ds-tl-track\"><div class=\"ds-tl-drug\"><div class=\"ds-tl-passed\"></div></div></div><div class=\"ds-tl-cursor\"></div></div><div class=\"ds-tl-axis\"><span>0</span><span>4.5 ชม.</span></div></div>",
+      "css": ".ds-tl{font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;font-size:.88rem;color:var(--ink-2, #4B5A7E)}.ds-tl-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:6px}.ds-tl-name{font-weight:600;color:var(--ink, #13235A)}.ds-tl-left{font-family:'Chakra Petch',Anuphan,system-ui,sans-serif;font-weight:600;color:#167F54;white-space:nowrap}.ds-tl-body{position:relative}.ds-tl-track{height:14px;border-radius:7px;background:var(--line, #D6DFEC);overflow:hidden;margin-bottom:10px}.ds-tl-drug{position:relative;height:100%;background:var(--go, #13895B);border-radius:7px;overflow:hidden}.ds-tl-passed{position:absolute;left:0;top:0;bottom:0;width:50%;background:var(--ash, #A7AFC0)}.ds-tl-cursor{position:absolute;top:-5px;left:50%;height:18px;width:4px;border-radius:2px;background:var(--ink, #13235A);transform:translateX(-50%)}.ds-tl-axis{display:flex;justify-content:space-between;font-family:'Chakra Petch',Anuphan,system-ui,sans-serif;font-size:.82rem}"
+    },
+    {
+      "name": "Chapter Heading",
+      "kind": "custom",
+      "refersTo": "chapter-visual",
+      "description": "หัวบท: เลขบท Chakra Petch สีแดง ชื่อบท และคำโปรย คู่กับภาพกรอบทรงใบไม้",
+      "html": "<header class=\"ds-ch\"><p class=\"ds-ch-num\">บทที่ 3</p><h2>นาฬิกาสมอง</h2><p class=\"ds-ch-lead\">เมื่อเกิดสโตรก เวลาไม่ได้เป็นแค่ตัวเลขบนนาฬิกา แต่คือเนื้อสมองที่ค่อยๆ หายไป</p><div class=\"ds-leaf\" role=\"img\" aria-label=\"ภาพประกอบ\"></div></header>",
+      "css": ".ds-ch{font-family:Anuphan,'Noto Sans Thai',system-ui,sans-serif;color:var(--ink, #13235A);line-height:1.65;max-width:36em}.ds-ch p,.ds-ch h2{margin:0}.ds-ch-num{font-family:'Chakra Petch',Anuphan,system-ui,sans-serif;font-weight:600;color:var(--red, #D3222D);font-size:1.1rem;margin-bottom:.35em !important}.ds-ch h2{font-size:clamp(2.3rem,6.4vw,3.6rem);font-weight:700;line-height:1.28;margin-bottom:.35em}.ds-ch-lead{color:var(--ink-2, #4B5A7E);font-size:1.12em}.ds-leaf{margin-top:24px;aspect-ratio:3/2;background:var(--visual-bg, #DDEAF8);border:1px solid var(--line, #D6DFEC);border-radius:52px 16px 52px 16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.42)}@media (min-width:768px){.ds-leaf{border-radius:88px 24px 88px 24px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Calm Alarm (สัญญาณเตือนที่ใจเย็น)",
+    "overview": "หน้านี้พูดเรื่องเร่งด่วนด้วยน้ำเสียงใจเย็น พื้นเป็นกระดาษสีฟ้าอ่อน ตัวหนังสือสีกรมท่าเข้ม ทำให้อ่านแล้วรู้สึกเหมือนเอกสารการแพทย์ที่น่าเชื่อถือ ไม่ใช่โฆษณาที่ปลุกให้ตกใจ สีแดงมีหน้าที่เดียวคือบอกว่าเวลากำลังหมดหรือต้องลงมือทำ พอใช้น้อย คนอ่านก็จะไม่ชินกับมัน\n\nข้อมูลอยู่ในตัวภาพ เช่น นาฬิกาทราย ตัวนับเซลล์สมอง แถบเวลาการรักษา และตัวอักษร BEFAST ภาพเหล่านี้คือเนื้อหา ข้อความแต่ละขั้นสั้นพออ่านจบในหนึ่งจังหวะการเลื่อน ตัวเลขใช้ฟอนต์ Chakra Petch ที่ดูเป็นเครื่องวัด ส่วนข้อความภาษาไทยใช้ Anuphan ที่อ่านง่ายและเป็นมิตร\n\nพื้นผิวแบนเหมือนกระดาษ ไม่มีเงาลอย แยกชั้นด้วยสีพื้น (paper / surface) และเส้นบาง (line) ภาพประกอบประจำบทใช้มุมโค้งแบบใบไม้ (โค้งมากสองมุม โค้งน้อยสองมุม) และสลับด้านกันระหว่างบท",
+    "keyCharacteristics": [
+      "พื้นกระดาษฟ้าอ่อน ตัวหนังสือกรมท่า มีสีแดงเป็นสีเตือนเพียงสีเดียว",
+      "สีมีความหมายตายตัว: ชมพู = เซลล์สมองที่ยังทำงาน, เทา = ที่สูญเสียไป, เขียว = เวลาที่ยังเหลือ / คำตอบที่ถูก, ฟ้า = การใส่สายสวน",
+      "ตัวเลขทุกตัวใช้ Chakra Petch แบบ tabular ข้อความไทยใช้ Anuphan",
+      "เลื่อนแล้วภาพเปลี่ยนตาม (pinned + scrubbed) และมีทางแตะแทนการเลื่อนเสมอ",
+      "แบนเหมือนกระดาษ ไม่มี drop shadow",
+      "โหมดมืดเป็นสีกรมท่าเข้ม (ไม่ใช่สีดำ) สีทุกตัวมีคู่สำหรับโหมดมืด"
+    ],
+    "rules": [
+      {
+        "name": "The One Alarm Rule",
+        "body": "ใช้สีแดงเฉพาะสิ่งที่เกี่ยวกับเวลา ความเร่งด่วน หรือสิ่งที่ต้องลงมือทำ ห้ามใช้ตกแต่ง ลองถามว่า \"ถ้าเอาสีแดงออก คนอ่านจะพลาดเรื่องเร่งด่วนไหม\" ถ้าไม่พลาด ก็ไม่ต้องใช้สีแดง",
+        "section": "colors"
+      },
+      {
+        "name": "The Fixed Meaning Rule",
+        "body": "ชมพู เทา เขียว และฟ้าสายสวน มีความหมายทางการแพทย์ตายตัว ห้ามเอาไปใช้ความหมายอื่นในบทอื่น ถ้าต้องการสีสำหรับข้อมูลใหม่ ให้เพิ่ม token ใหม่",
+        "section": "colors"
+      },
+      {
+        "name": "The Small Green Text Rule",
+        "body": "ตัวอักษรสีเขียว `go` บนพื้นสว่างมีคอนทราสต์แค่ 4.10:1 (บน paper) และ 4.41:1 (บน surface) ซึ่งไม่ผ่าน AA สำหรับตัวอักษรเล็ก ถ้าเป็นตัวอักษรเล็กกว่า 18.66px ตัวหนา ในโหมดสว่าง ให้ใช้เขียวเข้ม `#167F54` (4.65:1) แทน (ยังไม่ได้แก้ใน `index.html` ดูที่ `.tl-left`) ส่วนโหมดมืดผ่านแล้ว",
+        "section": "colors"
+      },
+      {
+        "name": "The Numbers Wear Chakra Rule",
+        "body": "ตัวเลขที่เป็นค่าวัด เวลา หรือเบอร์โทร ใช้ Chakra Petch และ `font-variant-numeric: tabular-nums` เสมอ ห้ามใช้ Chakra Petch กับประโยคภาษาไทย",
+        "section": "typography"
+      },
+      {
+        "name": "The Thai Breathing Room Rule",
+        "body": "ข้อความไทยมีสระบนและวรรณยุกต์ซ้อนกัน จึงต้องการระยะบรรทัดมาก เนื้อหาใช้ line-height ≥ 1.55 หัวข้อ ≥ 1.22 ห้ามใส่ letter-spacing บวกกับข้อความไทย และห้ามใช้ `text-transform` กับข้อความไทย",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "ห้ามใช้ shadow แบบยกลอย ถ้าต้องการให้อะไรเด่น ให้เปลี่ยนสีพื้นเป็น `surface` หรือใส่เส้น `line` แทน",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** เขียน CSS สำหรับจอ 360–430px ก่อน แล้วขยายด้วย `min-width` สำหรับแท็บเล็ต (768/1024) และ desktop (1280)",
+      "**Do** ใช้ token จาก `:root` (`var(--ink)`, `var(--red)` ฯลฯ) ทุกครั้ง และเพิ่มค่าโหมดมืดทุกครั้งที่เพิ่ม token ใหม่",
+      "**Do** ใช้ `svh` / `dvh` กับความสูงที่อิงจอ และ `clamp()` กับขนาดตัวอักษรและระยะ",
+      "**Do** ใช้ Chakra Petch + `tabular-nums` กับตัวเลขที่เปลี่ยนค่าระหว่างเลื่อน เพื่อไม่ให้ตัวเลขกระโดด",
+      "**Do** ใช้ `transform` และ `opacity` กับ transition/animation ของ CSS (ยกเว้นเอฟเฟกต์เบลอที่จำลองอาการ E) ถ้าต้องแก้ attribute ของ SVG ตามการเลื่อน (ทราย, path) ให้อัปเดตครั้งเดียวต่อเฟรมผ่าน ScrollTrigger และทุกอย่างต้องมีเวอร์ชัน reduced-motion",
+      "**Do** ตรวจคอนทราสต์ทั้งโหมดสว่างและมืดทุกครั้งที่ใช้สีกับตัวอักษร"
+    ],
+    "donts": [
+      "**Don't** ใช้สีแดงตกแต่ง หรือใช้กับสิ่งที่ไม่เร่งด่วน (The One Alarm Rule)",
+      "**Don't** เอาสีชมพู เทา เขียว และฟ้าสายสวนไปใช้ความหมายอื่น",
+      "**Don't** ใช้ drop shadow, glassmorphism หรือ gradient ตกแต่ง (สีไล่มีที่เดียวคือสายทรายในนาฬิกาทราย)",
+      "**Don't** ใช้ `ash` หรือ `red-soft` เป็นสีตัวอักษร",
+      "**Don't** ใส่ letter-spacing หรือ `text-transform` กับข้อความไทย",
+      "**Don't** ใช้ hover อย่างเดียวในการบอกว่ากดได้ หรือซ่อนข้อมูลไว้หลัง hover",
+      "**Don't** ใช้ `100vh` อย่างเดียวกับฉากที่ pin บนมือถือ",
+      "**Don't** ใช้ตัวอักษรเนื้อหาเล็กกว่า 17px หรือป้ายกำกับเล็กกว่า 0.72rem"
+    ]
+  }
+}
