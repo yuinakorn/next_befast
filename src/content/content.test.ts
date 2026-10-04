@@ -49,6 +49,10 @@ test("chapter 2 notes: PM2.5 and filler, each with a review row", () => {
 for (const [chapter, filename] of [
   [CHAPTER_1, "chapter-1-what-is-stroke.webp"],
   [CHAPTER_2, "chapter-2-closer-than-you-think.webp"],
+  [CHAPTER_5, "chapter-5-what-to-do.webp"],
+  [CHAPTER_6, "chapter-6-prevent-90.webp"],
+  [CHAPTER_7, "chapter-7-six-habits.webp"],
+  [CHAPTER_8, "chapter-8-dont-forget.webp"],
 ] as const) {
   test(`chapter ${chapter.number} links to an existing illustration`, () => {
     assert.equal(chapter.image, `/illustrations/${filename}`);
