@@ -126,11 +126,18 @@ button { font: inherit; color: inherit; }
 .next h2 { font-size: clamp(1.9rem, 5vw, 3.2rem); margin-bottom: .3em; }
 .next p { color: var(--ink-2); }
 .site-footer {
-  max-width: 860px; margin: 0 auto; padding: 5vh clamp(20px, 6vw, 40px) 10vh;
+  max-width: 860px; margin: 0 auto; padding: 5vh clamp(20px, 6vw, 40px) 6vh;
   font-size: .85rem; color: var(--ink-2); border-top: 1px solid var(--line);
 }
 .site-footer p + p { margin-top: .8em; }
 .site-footer strong { color: var(--ink); }
+.campaign-band {
+  background: var(--brand-navy); color: var(--on-brand);
+  padding: 32px clamp(20px, 6vw, 40px) calc(32px + env(safe-area-inset-bottom, 0px));
+}
+.campaign-band-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 18px; }
+.campaign-logo { width: 112px; height: auto; flex: none; display: block; }
+.campaign-band p { font-size: .9rem; line-height: 1.5; color: var(--on-brand); }
 
 /* ---------- larger screens ---------- */
 @media (min-width: 761px) {

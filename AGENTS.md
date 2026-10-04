@@ -28,15 +28,20 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - **ตอนนี้:** ทั้งหน้าอยู่ใน `index.html` ไฟล์เดียว (CSS และ JS อยู่ในไฟล์) ใช้ GSAP 3.12.5 + ScrollTrigger จาก cdnjs และภาพประกอบ `.webp` ใน `assets/illustrations/`
 - **แผน:** ย้ายไป **Next.js** โดยต้องได้หน้าตาและการทำงานเหมือนเดิมทุกอย่าง (pixel และพฤติกรรม) ก่อนจะปรับปรุงอะไร
-- หน้าแรกย้ายมาเป็น Next.js 16 แล้ว (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) หน้ามือถือและ desktop เทียบภาพกับ `index.html` แล้วตรงกัน
-  - `src/app/globals.css`: token และสไตล์ร่วม, `src/styles/chapter-3.css` และ `chapter-4.css`: สไตล์ของแต่ละบท (mobile-first มี layout ของแท็บเล็ตแนวตั้งและมือถือแนวนอน)
-  - `src/components/`: `Hero`, `chapter-3/` (`BrainClock` = ฉากที่ pin), `chapter-4/` (`BefastStage`, `SymptomScenes`, `Quiz`), `ui/` (`ProgressBar`, `ChapterVisual`)
-  - ภาพอยู่ใน `public/illustrations/` ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
+- หน้าเว็บเป็น Next.js 16 (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) มีบทเปิด บทที่ 1–4 และ footer แบรนด์แคมเปญ Walk Run Bike 12
+  - เนื้อหาบทเปิดและบท 1–2 อยู่ใน `src/content/` (ข้อความ ★ มีฟิลด์ `review`) บทที่ 3–4 ยังเขียนในคอมโพเนนต์
+  - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2 ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
+  - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-4/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`), `CampaignFooter`
+  - CSS: `src/app/globals.css` (token และสไตล์ร่วม), `src/styles/opening.css`, `story.css`, `chapter-1.css` ถึง `chapter-4.css`
+  - ภาพอยู่ใน `public/illustrations/` และ `public/brand/` ภาพหัวบทที่ 1–2 ยังไม่มี (ดู `docs/illustration-prompts.md`) ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
 - package manager: **pnpm เท่านั้น** (ห้ามใช้ npm/yarn และห้าม commit `package-lock.json`) คำสั่ง:
   ```bash
   pnpm dev         # dev server (http://localhost:3000)
   pnpm build       # production build
   pnpm lint        # ESLint
+  pnpm test        # unit tests (node --test)
+  pnpm content:review  # สร้าง docs/medical-review.md ใหม่หลังแก้ src/content/
+  pnpm shots capture --out .shots/x   # ถ่ายภาพทุกฉากที่ pin + ตรวจเนื้อหาล้น (ต้องเปิด pnpm start -p 3100 ก่อน)
   pnpm dlx serve . # ดู index.html ต้นแบบ
   ```
 
@@ -126,6 +131,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - ข้อความใหม่ที่เป็นข้อเท็จจริงทางการแพทย์ต้องมีแหล่งอ้างอิง และต้องเพิ่มแหล่งนั้นใน footer
 - ห้ามลบข้อความ "เนื้อหานี้เพื่อการเรียนรู้ ไม่ใช้แทนคำแนะนำของแพทย์" และเบอร์ 1669
 - ใช้ภาษาง่าย ประโยคสั้น และอธิบายศัพท์แพทย์ทุกครั้ง
+- ข้อความในบท 1–2 ที่มี ★ ในสคริปต์ต้องมี `review` ใน `src/content/` และต้องรัน `pnpm content:review` ทุกครั้งที่แก้ เพื่อให้ `docs/medical-review.md` ตรงกับหน้าเว็บ
 
 ## การเข้าถึง (Accessibility)
 

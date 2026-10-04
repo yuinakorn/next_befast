@@ -1,5 +1,5 @@
+import { CampaignFooter } from "@/components/CampaignFooter";
 import { NextChapter } from "@/components/NextChapter";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Chapter1 } from "@/components/chapter-1/Chapter1";
 import { Chapter2 } from "@/components/chapter-2/Chapter2";
 import { Chapter3 } from "@/components/chapter-3/Chapter3";
@@ -17,7 +17,7 @@ export default function Home() {
       <Chapter3 />
       <Chapter4 />
       <NextChapter />
-      <SiteFooter />
+      <CampaignFooter />
     </>
   );
 }
