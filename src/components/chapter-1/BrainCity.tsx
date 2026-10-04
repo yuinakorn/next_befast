@@ -27,7 +27,8 @@ function setup(pin: HTMLElement, reduce: boolean): PinnedScene {
   const oxygen = pin.querySelector<HTMLElement>('[data-stat="oxygen"]')!;
   return {
     render(p, step) {
-      const s0 = reduce ? 1 : stepProgress(p, STARTS, 0);
+      // stats settle at 2% / 20% by halfway through step 0, so they read right while the headline is up
+      const s0 = reduce ? 1 : Math.min(1, stepProgress(p, STARTS, 0) / 0.5);
       weight.textContent = `${Math.round(2 * s0)}%`;
       oxygen.textContent = `${Math.round(20 * s0)}%`;
       // clot drifts up the frontal road during the first 60% of its step, then sticks

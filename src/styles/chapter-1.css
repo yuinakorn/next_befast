@@ -67,7 +67,10 @@
 @keyframes tia-flicker { 0%, 100% { fill: var(--pink); } 30%, 60% { fill: var(--ash); } }
 
 .type-toggle { margin-top: 12px; }
-.type-toggle-buttons { display: inline-flex; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
+/* no overflow: hidden here, it would clip the :focus-visible ring; the outer buttons round their own corners */
+.type-toggle-buttons { display: inline-flex; border: 2px solid var(--ink); border-radius: 12px; }
+.type-toggle-buttons button:first-child { border-radius: 10px 0 0 10px; }
+.type-toggle-buttons button:last-child { border-radius: 0 10px 10px 0; }
 .type-toggle-buttons button {
   min-width: 72px; min-height: 48px; padding: 0 18px; border: 0; background: var(--surface);
   font-weight: 700; cursor: pointer; transition: background .2s, color .2s;
