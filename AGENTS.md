@@ -28,8 +28,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - **ตอนนี้:** ทั้งหน้าอยู่ใน `index.html` ไฟล์เดียว (CSS และ JS อยู่ในไฟล์) ใช้ GSAP 3.12.5 + ScrollTrigger จาก cdnjs และภาพประกอบ `.webp` ใน `assets/illustrations/`
 - **แผน:** ย้ายไป **Next.js** โดยต้องได้หน้าตาและการทำงานเหมือนเดิมทุกอย่าง (pixel และพฤติกรรม) ก่อนจะปรับปรุงอะไร
-- หน้าแรกย้ายมาเป็น Next.js 16 แล้ว (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) เทียบภาพกับ `index.html` แล้วตรงกันที่ 360/390/820/1280px
-  - `src/app/globals.css`: token และสไตล์ร่วม, `src/styles/chapter-3.css` และ `chapter-4.css`: สไตล์ของแต่ละบท (mobile-first, breakpoint 761/861px ยังเป็นค่าเดิมจาก index.html)
+- หน้าแรกย้ายมาเป็น Next.js 16 แล้ว (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) หน้ามือถือและ desktop เทียบภาพกับ `index.html` แล้วตรงกัน
+  - `src/app/globals.css`: token และสไตล์ร่วม, `src/styles/chapter-3.css` และ `chapter-4.css`: สไตล์ของแต่ละบท (mobile-first มี layout ของแท็บเล็ตแนวตั้งและมือถือแนวนอน)
   - `src/components/`: `Hero`, `chapter-3/` (`BrainClock` = ฉากที่ pin), `chapter-4/` (`BefastStage`, `SymptomScenes`, `Quiz`), `ui/` (`ProgressBar`, `ChapterVisual`)
   - ภาพอยู่ใน `public/illustrations/` ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
 - package manager: **pnpm เท่านั้น** (ห้ามใช้ npm/yarn และห้าม commit `package-lock.json`) คำสั่ง:
@@ -50,17 +50,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - เขียนสไตล์พื้นฐานสำหรับจอ **360–430px** ก่อน แล้วค่อยเพิ่มสำหรับจอใหญ่ด้วย **`min-width`** เท่านั้น
 - CSS ใน `index.html` ตอนนี้ยังเป็น desktop-first (`max-width: 860px` / `760px`) ถ้าแก้ส่วนไหนหรือย้ายไป Next.js ให้กลับเป็น mobile-first โดยผลลัพธ์บนจอต้องเหมือนเดิม
-- breakpoint ที่ใช้:
+- breakpoint ที่ใช้ตอนนี้ (ดูรายละเอียดใน DESIGN.md › Layout):
 
   | ชื่อ | เงื่อนไข | อุปกรณ์ |
   |---|---|---|
-  | base | (ไม่มี query) | มือถือ 360–599px |
-  | `sm` | `min-width: 600px` | มือถือจอใหญ่ / มือถือแนวนอน |
-  | `md` | `min-width: 768px` | แท็บเล็ตแนวตั้ง |
-  | `lg` | `min-width: 1024px` | แท็บเล็ตแนวนอน / laptop เล็ก |
-  | `xl` | `min-width: 1280px` | desktop |
+  | phone | (ไม่มี query) | มือถือแนวตั้ง 360–699px |
+  | short | `(max-width: 860px) and (max-height: 640px)` | มือถือจอเตี้ย: ซ่อนคำแนะนำ |
+  | wide | `min-width: 761px` | ภาพประกอบเต็มกว้าง และคำบรรยายที่ทับบนภาพ 1669 |
+  | tablet | `(min-width: 700px) and (min-height: 900px)` | แท็บเล็ตแนวตั้ง (iPad mini ขึ้นไป) |
+  | desktop | `min-width: 861px` | แท็บเล็ตแนวนอน, laptop, desktop |
+  | landscape | `(orientation: landscape) and (max-height: 500px)` | มือถือแนวนอน (ใส่ไว้ท้ายไฟล์ เพื่อให้ทับ desktop ได้) |
 
-  เพิ่ม `max-height` query ได้เมื่อจอเตี้ย (มือถือแนวนอน, แป้นพิมพ์เปิด) เช่น `@media (max-height: 640px)`
+  ใส่ query ตามลำดับในตารางนี้ (phone → tablet → desktop → landscape) ถ้าบล็อก tablet แก้ property ไหน บล็อก desktop ต้องตั้งค่า property นั้นกลับด้วย ถ้าจะเพิ่ม breakpoint ใหม่ ให้ใช้ `min-width` หรือเงื่อนไขความสูงเท่านั้น และแก้ตารางนี้ใน commit เดียวกัน
 - **แท็บเล็ตต้องมี layout ของตัวเอง** ห้ามแค่ยืด layout มือถือให้เต็มจอ iPad แนวตั้ง แต่ต้องใช้พื้นที่ให้คุ้ม เช่น ขยายนาฬิกาทรายหรือฉาก SVG วางการ์ดคู่กับภาพ แล้วตรวจทั้งแนวตั้งและแนวนอน
 - ห้ามมี scroll แนวนอนที่ความกว้าง 320px ขึ้นไป
 

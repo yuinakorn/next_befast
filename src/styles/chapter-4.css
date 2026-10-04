@@ -84,7 +84,7 @@
 .case.solved .choices button:not(.right) { opacity: .4; }
 .feedback { margin-top: 12px; min-height: 1.65em; color: var(--ink-2); }
 .case.solved .feedback { color: var(--ink); }
-.case.solved .feedback strong { color: var(--go); }
+.case.solved .feedback strong { color: var(--go-text); }
 .score { margin-top: 18px; font-size: .95rem; color: var(--ink-2); }
 .finale { margin-top: 36px; }
 .finale[hidden] { display: none; }
@@ -117,6 +117,16 @@
   .action-visual p { color: #4B5A7E; }
 }
 
+/* tablet portrait: stacked like phones, bigger scene, card centred under it */
+@media (min-width: 700px) and (min-height: 900px) {
+  .stage4 { row-gap: clamp(20px, 3vh, 36px); }
+  #scenes { height: clamp(300px, 38svh, 480px); }
+  .cards { justify-self: center; width: min(100%, 36em); }
+  .card p { font-size: 1.05em; line-height: inherit; }
+  .card p.card-en { font-size: 1.15rem; }
+  .card h3 { font-size: clamp(2rem, 4.8vw, 2.6rem); }
+}
+
 /* desktop: letters across the top, scene and card side by side */
 @media (min-width: 861px) {
   .stage4 {
@@ -125,10 +135,27 @@
   }
   .scene-wrap { height: 100%; }
   #scenes { height: min(54vh, 440px); }
-  .cards { align-self: center; }
+  .cards { align-self: center; justify-self: auto; width: auto; }
   .card p { font-size: inherit; line-height: inherit; }
   .card p.card-en { font-size: 1.1rem; }
   .card h3 { font-size: clamp(1.8rem, 3.8vw, 3rem); }
+}
+
+/* short landscape (phones turned sideways): letters on top, scene left, card right */
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage4 {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); grid-template-rows: auto auto;
+    grid-template-areas: "letters letters" "scene card"; column-gap: 28px; row-gap: 10px;
+  }
+  .letters button { font-size: clamp(1.8rem, 12svh, 3rem); }
+  .letters button::after { height: 4px; bottom: -5px; }
+  .scene-wrap { height: 100%; }
+  #scenes { height: clamp(120px, 52svh, 240px); }
+  .cards { align-self: center; justify-self: auto; width: auto; }
+  .card p, .card p.card-en { font-size: .85rem; line-height: 1.45; }
+  .card h3 { font-size: 1.3rem; margin-bottom: .25em; }
+  .card .check { margin-top: .5em; padding: 8px 12px; }
+  .hint { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

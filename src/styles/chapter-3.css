@@ -41,7 +41,7 @@
 .tl { grid-area: tl; font-size: .78rem; }
 .tl-row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px; color: var(--ink-2); }
 .tl-name { font-weight: 600; color: var(--ink); }
-.tl-left { font-family: var(--num); font-weight: 600; color: var(--go); white-space: nowrap; }
+.tl-left { font-family: var(--num); font-weight: 600; color: var(--go-text); white-space: nowrap; }
 .tl-left.out { color: var(--red); }
 .tl-body { position: relative; }
 .tl-track { height: 14px; border-radius: 7px; background: var(--line); overflow: hidden; margin-bottom: 10px; }
@@ -55,6 +55,21 @@
 #ax0 { left: 0; }
 #ax45 { left: 100%; transform: translateX(-100%); }
 #ax24 { right: 0; opacity: 0; }
+
+/* tablet portrait (iPad mini and up): keep the phone stacking, scale it up to fill the screen */
+@media (min-width: 700px) and (min-height: 900px) {
+  .stage3 { column-gap: 40px; row-gap: 28px; }
+  #hg { height: clamp(320px, 42svh, 520px); }
+  .legend { flex-direction: row; gap: 14px; font-size: .82rem; align-items: center; }
+  .step h3 { font-size: clamp(1.8rem, 4.2vw, 2.4rem); }
+  .step p { font-size: 1.08em; line-height: inherit; }
+  .meters { gap: 18px; }
+  .m-label { font-size: .9rem; }
+  .m-val { font-size: clamp(2.1rem, 4.8vw, 3rem); }
+  .cells .m-val { font-size: clamp(2.6rem, 6.4vw, 4rem); }
+  .m-unit { font-size: .9rem; }
+  .tl { font-size: .88rem; }
+}
 
 /* desktop: hourglass column on the left, story column on the right */
 @media (min-width: 861px) {
@@ -73,4 +88,27 @@
   .cells .m-val { font-size: clamp(2.3rem, 4.6vw, 3.9rem); }
   .m-unit { font-size: .9rem; }
   .tl { font-size: .88rem; }
+}
+
+/* short landscape (phones turned sideways): hourglass left, compact story column right */
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage3 {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "hg ." "hg steps" "hg meters" "hg tl" "hg .";
+    column-gap: 28px; row-gap: 10px;
+  }
+  .hg-wrap { gap: 6px; }
+  #hg { height: clamp(140px, 60svh, 300px); }
+  .legend { flex-direction: column; gap: 2px; font-size: .66rem; align-items: flex-start; }
+  .step h3 { font-size: 1.15rem; margin-bottom: .2em; }
+  .step p { font-size: .82rem; line-height: 1.45; }
+  .meters { grid-template-columns: repeat(3, auto); justify-content: start; gap: 4px 20px; padding-top: 0; border-top: 0; }
+  .meter.cells { grid-column: auto; }
+  .m-label { font-size: .66rem; }
+  .m-val { font-size: 1.15rem; }
+  .cells .m-val { font-size: 1.3rem; }
+  .m-unit { font-size: .7rem; }
+  .tl { font-size: .72rem; }
+  .tl-row { margin-bottom: 3px; }
+  .tl-track { margin-bottom: 6px; }
 }
