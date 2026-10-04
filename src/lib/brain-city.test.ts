@@ -30,7 +30,7 @@ test("pointOnRoad starts at `from` and ends at `to`", () => {
 });
 
 test("roadD writes an SVG cubic path", () => {
-  assert.equal(roadD(ROADS.trunk), "M206,320 C206,296 208,268 210,244");
+  assert.equal(roadD(ROADS.trunk), "M200,360 C200,330 200,282 200,250");
 });
 
 test("every branch road ends inside the brain outline", () => {

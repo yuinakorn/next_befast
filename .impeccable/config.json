@@ -20,6 +20,30 @@
         ],
         "createdAt": "2026-10-04T10:05:15.775Z",
         "reason": "Agent: index.html is the preserved reference prototype; AGENTS.md and DESIGN.md scope the shipped Next.js shape system to src/"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "16px",
+        "createdAt": "2026-10-04T11:42:13.534Z",
+        "reason": "Documented leaf-sm radius in DESIGN.md."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": ".72rem",
+        "createdAt": "2026-10-04T11:42:13.607Z",
+        "reason": "Documented minimum label size in DESIGN.md."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.3rem",
+        "createdAt": "2026-10-04T11:42:13.679Z",
+        "reason": "Documented pinned-stage mobile title size in DESIGN.md."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": ".95rem",
+        "createdAt": "2026-10-04T11:42:13.750Z",
+        "reason": "Documented pinned-stage mobile body size in DESIGN.md."
       }
     ]
   }

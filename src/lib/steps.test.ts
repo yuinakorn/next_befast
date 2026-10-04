@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { activeStep, stepProgress } from "./steps.ts";
+import { activeStep, formatStepCounter, stepProgress } from "./steps.ts";
 
 const STARTS = [0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.85];
 
@@ -31,4 +31,9 @@ test("stepProgress for the last step runs to the end of the pin", () => {
 test("stepProgress is clamped outside its step", () => {
   assert.equal(stepProgress(0.1, STARTS, 3), 0);
   assert.equal(stepProgress(0.9, STARTS, 3), 1);
+});
+
+test("formatStepCounter pads the current step to match the total", () => {
+  assert.equal(formatStepCounter(0, 7), "01 / 07");
+  assert.equal(formatStepCounter(11, 12), "12 / 12");
 });

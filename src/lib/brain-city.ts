@@ -1,31 +1,41 @@
-/** Chapter 1 "brain city" map in a 400×320 SVG box (same coordinates as BRAIN_PATH in dot-brain.ts). */
+/** Chapter 1 "brain city" map in a 400×360 SVG box. */
 export type Point = readonly [number, number];
 export type DistrictId = "frontal" | "parietal" | "occipital" | "temporal";
 export type Road = { from: Point; c1: Point; c2: Point; to: Point };
 export type Light = { x: number; y: number; district: DistrictId };
 
-/** Polygon slightly inside BRAIN_PATH, used to keep window lights off the outline. */
+/** Front-facing brain silhouette used only by chapter 1. */
+export const CITY_BRAIN_PATH =
+  "M200,48 C178,27 139,31 116,58 C84,54 64,76 62,105 C37,115 26,143 39,169 " +
+  "C22,192 31,223 57,239 C52,266 79,286 109,279 C124,304 163,306 187,284 " +
+  "C196,276 199,260 200,244 C201,260 204,276 213,284 C237,306 276,304 291,279 " +
+  "C321,286 348,266 343,239 C369,223 378,192 361,169 C374,143 363,115 338,105 " +
+  "C336,76 316,54 284,58 C261,31 222,27 200,48 Z";
+
+/** Polygon slightly inside CITY_BRAIN_PATH, used to keep cellular lights off the outline. */
 export const BRAIN_OUTLINE: readonly Point[] = [
-  [80, 168], [78, 128], [98, 88], [132, 60], [170, 44], [215, 38], [260, 42], [298, 60], [330, 82],
-  [346, 116], [344, 152], [330, 180], [306, 196], [300, 214], [282, 226], [250, 234], [222, 226],
-  [190, 230], [150, 230], [114, 216], [90, 196],
+  [200, 52], [170, 39], [140, 44], [116, 66], [88, 64], [70, 86], [68, 111], [45, 124],
+  [36, 148], [46, 169], [34, 194], [44, 219], [64, 232], [60, 257], [83, 277], [109, 271],
+  [127, 294], [160, 298], [185, 278], [200, 248], [215, 278], [240, 298], [273, 294], [291, 271],
+  [317, 277], [340, 257], [336, 232], [356, 219], [366, 194], [354, 169], [364, 148], [355, 124],
+  [332, 111], [330, 86], [312, 64], [284, 66], [260, 44], [230, 39],
 ];
 
-/** City districts (rough lobes). Earlier entries win where polygons overlap. */
+/** Four readable territories. Earlier entries win where polygons touch. */
 export const DISTRICTS: Record<DistrictId, readonly Point[]> = {
-  frontal: [[60, 40], [170, 30], [165, 120], [150, 240], [60, 240]],
-  parietal: [[170, 30], [290, 30], [270, 115], [165, 120]],
-  occipital: [[290, 30], [380, 40], [380, 200], [306, 196], [270, 115]],
-  temporal: [[165, 120], [270, 115], [306, 196], [282, 232], [150, 240]],
+  frontal: [[24, 28], [198, 28], [198, 188], [160, 170], [120, 178], [78, 160], [24, 188]],
+  parietal: [[202, 28], [376, 28], [376, 184], [330, 168], [282, 182], [240, 166], [202, 184]],
+  occipital: [[202, 184], [240, 166], [282, 182], [330, 168], [376, 184], [376, 330], [202, 330]],
+  temporal: [[24, 188], [78, 160], [120, 178], [160, 170], [198, 188], [198, 330], [24, 330]],
 };
 
-/** Blood vessels as roads: a trunk up from the neck that branches into each district. */
+/** Blood vessels as roads: one central trunk with four deliberate branches. */
 export const ROADS = {
-  trunk: { from: [206, 320], c1: [206, 296], c2: [208, 268], to: [210, 244] },
-  frontal: { from: [210, 244], c1: [188, 218], c2: [150, 200], to: [112, 168] },
-  parietal: { from: [210, 244], c1: [214, 196], c2: [220, 140], to: [226, 76] },
-  temporal: { from: [210, 244], c1: [232, 232], c2: [252, 218], to: [268, 198] },
-  occipital: { from: [210, 244], c1: [252, 220], c2: [300, 196], to: [332, 146] },
+  trunk: { from: [200, 360], c1: [200, 330], c2: [200, 282], to: [200, 250] },
+  frontal: { from: [200, 250], c1: [174, 236], c2: [137, 215], to: [96, 184] },
+  parietal: { from: [200, 250], c1: [188, 199], c2: [166, 137], to: [143, 82] },
+  temporal: { from: [200, 250], c1: [226, 236], c2: [263, 218], to: [294, 194] },
+  occipital: { from: [200, 250], c1: [235, 220], c2: [292, 186], to: [329, 139] },
 } satisfies Record<string, Road>;
 
 export function pointInPolygon([x, y]: Point, poly: readonly Point[]): boolean {
@@ -74,6 +84,6 @@ export const BLEED_AT = pointOnRoad(ROADS.occipital, 0.85);
 
 /** Functions lost when the frontal district goes dark (step 3). */
 export const LABELS = [
-  { text: "การพูด", at: [104, 150] as Point },
-  { text: "การขยับแขน", at: [132, 104] as Point },
+  { text: "การพูด", at: [91, 169] as Point },
+  { text: "การขยับแขน", at: [126, 112] as Point },
 ] as const;

@@ -1,95 +1,385 @@
-/* Chapter 1: brain city. Scene states follow data-step (0-based) on #pin1 and data-focus on .city. */
-.city-base { fill: var(--surface); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
-.district { fill: transparent; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 3 5; transition: fill .45s; }
-.light { fill: var(--pink); transition: fill .45s, opacity .45s; }
-.road-bed { fill: none; stroke: var(--line); stroke-width: 8; stroke-linecap: round; }
-.road-flow { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 12; opacity: 0; transition: opacity .45s; }
-.clot { fill: var(--red); stroke: var(--ink); stroke-width: 2; opacity: 0; transition: opacity .3s; }
-.queue circle { fill: var(--red); opacity: 0; transition: opacity .3s; }
-.bleed { fill: var(--red); opacity: 0; transition: opacity .3s; }
-.city-label {
-  font-family: var(--font); font-weight: 600; font-size: 13px; fill: var(--ink); opacity: 0;
-  paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; transition: opacity .45s;
+/* Chapter 1: detailed raster anatomy below a semantic SVG interaction layer. */
+.city-board {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto;
+  width: min(100%, 640px);
 }
-.split, .tia-warn, .focus-mask { opacity: 0; transition: opacity .45s; }
-.split-line { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 6; }
-.split-label { font-family: var(--font); font-weight: 700; font-size: 16px; fill: var(--ink); }
-.scan { fill: url(#scanGrad); }
-.focus-mask { fill: var(--paper); pointer-events: none; }
-.tia-warn path { fill: var(--red); }
-.tia-warn text { font-family: var(--font); font-weight: 700; font-size: 18px; fill: #fff; }
-
-.city-stats {
-  position: absolute; left: 0; bottom: 0; display: flex; gap: 18px; opacity: 0; transition: opacity .45s;
+.city-visual {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+.city-base-image,
+.city {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.city-base-image {
+  object-fit: contain;
   pointer-events: none;
+  user-select: none;
+}
+.city { overflow: visible; }
+.city-outline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .32;
+}
+.affected-zone {
+  fill: var(--ash);
+  opacity: 0;
+  transition: opacity .45s;
+}
+.road-flow {
+  fill: none;
+  stroke: var(--pink-deep);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1 10;
+  opacity: 0;
+  transition: opacity .45s;
+}
+.clot {
+  fill: var(--red);
+  stroke: var(--ink);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.queue circle {
+  fill: var(--red);
+  stroke: var(--surface);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.bleed-mark { opacity: 0; transition: opacity .3s; }
+.bleed-mark path,
+.bleed-mark circle { fill: var(--red); }
+.bleed-mark .bleed-shadow { opacity: .18; }
+.bleed-mark circle { stroke: var(--surface); stroke-width: 1; }
+.city-label {
+  font-family: var(--font);
+  font-size: .85rem;
+  font-weight: 600;
+  fill: var(--ink);
+  opacity: 0;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  transition: opacity .45s;
+}
+.split,
+.tia-warn,
+.focus-mask { opacity: 0; transition: opacity .45s; }
+.split-line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 7;
+}
+.split-tag rect {
+  fill: var(--line);
+  stroke: none;
+}
+.split-label {
+  font-family: var(--font);
+  font-size: .85rem;
+  font-weight: 700;
+  fill: var(--ink);
+}
+.split-leader { stroke: var(--ink); stroke-width: 1.5; }
+.split-pin { fill: var(--ink); }
+.scan { fill: var(--ink-2); opacity: .2; }
+.focus-mask { fill: var(--surface); pointer-events: none; }
+.tia-warn path { fill: var(--red); }
+.tia-warn text {
+  font-family: var(--font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  fill: var(--on-brand);
+}
+
+/* One stable rail crossfades from source statistics to the image key. */
+.city-rail {
+  display: grid;
+  min-height: 72px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.city-stats,
+.city-legend {
+  grid-area: 1 / 1;
+  transition: opacity .25s, visibility .25s;
+}
+.city-stats {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  opacity: 1;
 }
 .city-stats p {
-  display: flex; flex-direction: column; font-size: .75rem; line-height: 1.3; color: var(--ink-2);
-  /* the trunk road runs under the stats on narrow phones: keep the text clear of it */
-  text-shadow: 0 0 3px var(--paper), 0 0 3px var(--paper), 0 0 6px var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 12px;
+  color: var(--ink-2);
+  font-size: .72rem;
+  line-height: 1.35;
 }
-.city-stat-num { font-family: var(--num); font-weight: 700; font-size: 1.6rem; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.city-stats p + p { border-left: 1px solid var(--line); }
+.city-stat-num {
+  flex: none;
+  color: var(--ink);
+  font-family: var(--num);
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
 .city-stat-num.alarm { color: var(--red); }
+.city-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 12px;
+  align-content: center;
+  min-width: 0;
+  margin: 0;
+  padding: 8px 12px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.city-legend li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--ink-2);
+  font-size: .72rem;
+  line-height: 1.35;
+}
+.legend-dot,
+.legend-bleed {
+  position: relative;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+}
+.legend-dot {
+  border-radius: 50%;
+  background: var(--pink);
+}
+.legend-dot--affected { background: var(--ash); }
+.legend-dot--clot {
+  background: var(--red);
+  border: 2px solid var(--ink);
+}
+.legend-bleed i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.legend-bleed i:nth-child(1) { left: 5px; top: 0; }
+.legend-bleed i:nth-child(2) { left: 0; top: 9px; }
+.legend-bleed i:nth-child(3) { right: 0; top: 8px; }
+#pin1:not([data-step="0"]) .city-stats { opacity: 0; visibility: hidden; }
+#pin1:not([data-step="0"]) .city-legend { opacity: 1; visibility: visible; }
 
-/* step 0: stats */
-#pin1[data-step="0"] .city-stats { opacity: 1; }
-/* step 1+: blood flows on every road */
-#pin1:not([data-step="0"]) .road-flow { opacity: 1; }
+/* Story progress is hierarchy, not alarm: this chapter really has seven steps. */
+#pin1 .story-step-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+#pin1 .story-step-count {
+  flex: none;
+  color: var(--ink);
+  font-family: var(--num);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+#pin1 .story-step-dots { display: flex; align-items: center; gap: 6px; }
+#pin1 .story-step-dots i {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background .25s;
+}
+#pin1 .story-step-dots i.reached { background: var(--ink-2); }
+#pin1 .story-step-dots i.current { width: 18px; background: var(--ink); }
+#pin1 .step h3 { text-wrap: pretty; }
+
+/* Step 1+: small moving pulses reinforce the living vessels in the base art. */
+#pin1:not([data-step="0"]) .road-flow { opacity: .72; }
 .anim #pin1 .road-flow { animation: city-flow 1.6s linear infinite; }
-@keyframes city-flow { to { stroke-dashoffset: -28; } }
-/* step 1: district functions named; step 2: they fade as the frontal district goes dark */
+@keyframes city-flow { to { stroke-dashoffset: -22; } }
+
+/* Step 2: label the function, then desaturate the affected territory. */
 #pin1[data-step="1"] .city-label { opacity: 1; }
-#pin1[data-step="2"] .city-label { opacity: .25; }
-#pin1[data-step="2"] .light[data-d="frontal"], #pin1[data-step="3"] .light[data-d="frontal"],
-#pin1[data-step="5"] .light[data-d="frontal"] { fill: var(--ash); }
-#pin1[data-step="2"] .district[data-d="frontal"], #pin1[data-step="3"] .district[data-d="frontal"],
-#pin1[data-step="5"] .district[data-d="frontal"] { fill: var(--line); }
-/* step 3: clot stuck in the frontal road, flow stops past it */
-#pin1[data-step="3"] .clot, #pin1[data-step="3"] .queue circle,
-#pin1[data-step="5"] .clot, #pin1[data-step="5"] .queue circle { opacity: 1; }
+#pin1[data-step="2"] .city-label { opacity: .42; }
+#pin1[data-step="2"] .affected-zone[data-side="left"],
+#pin1[data-step="3"] .affected-zone[data-side="left"],
+#pin1[data-step="5"] .affected-zone[data-side="left"] { opacity: .56; }
+
+/* Step 3: a clot blocks the left route and blood cells queue behind it. */
+#pin1[data-step="3"] .clot,
+#pin1[data-step="3"] .queue circle,
+#pin1[data-step="5"] .clot,
+#pin1[data-step="5"] .queue circle { opacity: 1; }
 #pin1[data-step="3"] .road[data-road="frontal"] .road-flow,
 #pin1[data-step="5"] .road[data-road="frontal"] .road-flow { opacity: 0; }
-/* step 4: occipital road bursts */
-#pin1[data-step="4"] .bleed, #pin1[data-step="5"] .bleed { opacity: .85; }
-#pin1[data-step="4"] .light[data-d="occipital"], #pin1[data-step="5"] .light[data-d="occipital"] { fill: var(--ash); }
-#pin1[data-step="4"] .district[data-d="occipital"], #pin1[data-step="5"] .district[data-d="occipital"] { fill: var(--line); }
+
+/* Step 4: a right-side route ruptures. */
+#pin1[data-step="4"] .bleed-mark,
+#pin1[data-step="5"] .bleed-mark { opacity: .96; }
+#pin1[data-step="4"] .affected-zone[data-side="right"],
+#pin1[data-step="5"] .affected-zone[data-side="right"] { opacity: .46; }
 #pin1[data-step="4"] .road[data-road="occipital"] .road-flow,
 #pin1[data-step="5"] .road[data-road="occipital"] .road-flow { opacity: 0; }
-/* step 5: split view + scanner; toggle dims the other half */
+
+/* Step 5: comparison plate + scan; selected side quiets the other side. */
 #pin1[data-step="5"] .split { opacity: 1; }
 .anim #pin1[data-step="5"] .scan { animation: city-scan 2.4s ease-in-out infinite alternate; }
-@keyframes city-scan { to { transform: translateX(270px); } }
+@keyframes city-scan { to { transform: translateX(312px); } }
 #pin1[data-step="5"] .city[data-focus="clot"] .focus-mask[data-side="right"],
-#pin1[data-step="5"] .city[data-focus="bleed"] .focus-mask[data-side="left"] { opacity: .7; }
-/* step 6: TIA — parietal lights flicker off and back on */
-#pin1[data-step="6"] .tia-warn { opacity: 1; }
-.anim #pin1[data-step="6"] .light[data-d="parietal"] { animation: tia-flicker 2.4s steps(1) infinite; }
-@keyframes tia-flicker { 0%, 60%, 100% { fill: var(--pink); } 30% { fill: var(--ash); } }
+#pin1[data-step="5"] .city[data-focus="bleed"] .focus-mask[data-side="left"] { opacity: .76; }
 
-.type-toggle { margin-top: 12px; }
-/* no overflow: hidden here, it would clip the :focus-visible ring; the outer buttons round their own corners */
-.type-toggle-buttons { display: inline-flex; border: 2px solid var(--ink); border-radius: 12px; }
-.type-toggle-buttons button:first-child { border-radius: 10px 0 0 10px; }
-.type-toggle-buttons button:last-child { border-radius: 0 10px 10px 0; }
+/* Step 6: TIA activity goes quiet and returns. */
+#pin1[data-step="6"] .tia-warn { opacity: 1; }
+.anim #pin1[data-step="6"] .affected-zone[data-side="right"] { animation: tia-flicker 2.4s steps(1) infinite; }
+@keyframes tia-flicker { 0%, 60%, 100% { opacity: 0; } 30% { opacity: .46; } }
+
+.type-toggle { width: min(100%, 32rem); margin-top: 14px; }
+.type-toggle-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+}
 .type-toggle-buttons button {
-  min-width: 72px; min-height: 48px; padding: 0 18px; border: 0; background: var(--surface);
-  font-weight: 700; cursor: pointer; transition: background .2s, color .2s;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 0;
+  background: var(--surface);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background .2s, color .2s;
 }
 .type-toggle-buttons button + button { border-left: 2px solid var(--ink); }
 .type-toggle-buttons button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-.type-toggle-caption { margin-top: 8px; font-size: .9rem; line-height: 1.5; color: var(--ink-2); min-height: 3em; }
+.type-toggle-caption {
+  min-height: 1.5em;
+  margin-top: 7px;
+  color: var(--ink-2);
+  font-size: clamp(17px, 1rem + .25vw, 20px);
+  line-height: 1.5;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .type-toggle-buttons button:hover:not([aria-pressed="true"]) { background: var(--paper); }
+}
+
+@media (max-width: 860px) and (max-height: 640px) {
+  .city-visual { width: min(100%, 248px); }
+  .city-rail { min-height: 62px; }
+  .city-stats p { padding-block: 6px; }
+  .city-legend { gap: 3px 8px; padding-block: 6px; }
+  #pin1 .story-step-progress { margin-bottom: 6px; }
+  #pin1 .step h3 { font-size: clamp(1.3rem, 5.6vw, 1.7rem); }
+  #pin1 .step p { font-size: .95rem; line-height: 1.55; }
+  .type-toggle { margin-top: 9px; }
+  .type-toggle-buttons button { min-height: 46px; }
+}
+
+@media (min-width: 700px) and (min-height: 900px) {
+  .city-rail { min-height: 86px; border-radius: 12px; }
+  .city-stats p { gap: 12px; padding: 12px 20px; font-size: .85rem; }
+  .city-legend { grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 12px 20px; }
+  .city-legend li { font-size: .85rem; }
+  #pin1 .story-step-progress { gap: 18px; margin-bottom: 16px; }
+  #pin1 .story-step-count { font-size: 1.1rem; }
+  #pin1 .story-step-dots { gap: 8px; }
+  #pin1 .story-step-dots i { width: 8px; height: 8px; }
+  #pin1 .story-step-dots i.current { width: 24px; }
+  .type-toggle { margin-top: 20px; }
+  .type-toggle-buttons button { min-height: 62px; }
+  .type-toggle-caption { margin-top: 10px; }
+}
 
 @media (min-width: 861px) {
-  .city-stat-num { font-size: 2.2rem; }
-  .city-stats p { font-size: .85rem; }
+  .city-board { width: 100%; }
+  .city-rail { min-height: 82px; border-radius: 12px; }
+  .city-stats p { gap: 12px; padding: 12px 20px; font-size: .85rem; }
+  .city-legend { grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 18px; }
+  .city-legend li { font-size: .85rem; }
+  #pin1 .story-stage .steps {
+    padding-left: clamp(24px, 4vw, 56px);
+    border-left: 1px solid var(--line);
+  }
+  #pin1 .story-step-progress { gap: 18px; margin-bottom: 18px; }
+  #pin1 .story-step-count { font-size: 1.1rem; }
+  #pin1 .story-step-dots { gap: 8px; }
+  #pin1 .story-step-dots i { width: 8px; height: 8px; }
+  #pin1 .story-step-dots i.current { width: 24px; }
+  #pin1 .step h3 { font-size: clamp(1.55rem, 3.1vw, 2.45rem); }
+  #pin1 .step p { max-width: 31em; }
+  .type-toggle { margin-top: 22px; }
+  .type-toggle-buttons button { min-height: 62px; }
+  .type-toggle-caption { margin-top: 10px; }
 }
+
 @media (orientation: landscape) and (max-height: 500px) {
+  .city-board { width: min(100%, 360px); }
+  .city-visual { width: min(100%, 270px); }
+  .city-rail { min-height: 58px; border-radius: 12px; }
+  .city-stats p { gap: 6px; padding: 5px 9px; font-size: .72rem; }
+  .city-legend { gap: 2px 7px; padding: 5px 8px; }
+  .city-legend li { gap: 5px; }
+  .legend-dot,
+  .legend-bleed { flex-basis: 15px; width: 15px; height: 15px; }
+  #pin1 .story-stage .steps { padding-left: 22px; border-left: 1px solid var(--line); }
+  #pin1 .story-step-progress { gap: 9px; margin-bottom: 5px; }
+  #pin1 .story-step-count { font-size: .85rem; }
+  #pin1 .story-step-dots { gap: 4px; }
+  #pin1 .story-step-dots i { width: 5px; height: 5px; }
+  #pin1 .story-step-dots i.current { width: 14px; }
+  #pin1 .step h3 { font-size: 1.3rem; margin-bottom: .2em; }
+  #pin1 .step p { font-size: .95rem; line-height: 1.55; }
+  .type-toggle { margin-top: 7px; }
   .type-toggle-buttons button { min-height: 44px; }
-  .type-toggle-caption { font-size: .78rem; min-height: 0; }
-  .city-stat-num { font-size: 1.2rem; }
+  .type-toggle-caption { min-height: 0; margin-top: 4px; line-height: 1.55; }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .city-base-image { filter: brightness(.78) saturate(.86); }
+  :root:not([data-theme="light"]) .city-outline { opacity: .76; }
+}
+:root[data-theme="dark"] .city-base-image { filter: brightness(.78) saturate(.86); }
+:root[data-theme="dark"] .city-outline { opacity: .76; }
+
 @media (prefers-reduced-motion: reduce) {
-  .road-flow, .scan, .light { animation: none !important; }
+  .road-flow,
+  .scan,
+  .affected-zone { animation: none !important; }
   .scan { opacity: 0; }
-  #pin1[data-step="6"] .light[data-d="parietal"] { fill: var(--ash); opacity: .6; }
+  #pin1[data-step="6"] .affected-zone[data-side="right"] { opacity: .46; }
 }
