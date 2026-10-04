@@ -1,0 +1,113 @@
+/* Chapter 5: action checklist (steps 0–3), outcome grid (steps 4–5) and myth flip cards.
+   Scene states follow data-step (0-based) on #pin5. Mobile-first; tiers as DESIGN.md › Layout. */
+
+/* ---------- scene: shared ---------- */
+.c5-checklist, .c5-outcomes { transition: opacity .45s; }
+.c5-outcomes { opacity: 0; }
+#pin5:is([data-step="4"], [data-step="5"]) .c5-checklist { opacity: 0; }
+#pin5:is([data-step="4"], [data-step="5"]) .c5-outcomes { opacity: 1; }
+.c5-num { font-family: var(--num); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---------- scene: checklist ---------- */
+.c5-card { fill: var(--surface); stroke: var(--line); stroke-width: 2; transition: stroke .3s; }
+.c5-todo.current .c5-card { stroke: var(--red); stroke-width: 3; }
+.c5-todo-label { font-family: var(--font); font-weight: 600; font-size: 18px; fill: var(--ink); }
+.c5-box { fill: none; stroke: var(--ink-2); stroke-width: 2.5; transition: stroke .3s; }
+.c5-todo.done .c5-box { stroke: var(--go); }
+.c5-tick {
+  fill: none; stroke: var(--go); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset .35s, opacity .2s;
+}
+.c5-todo.done .c5-tick { stroke-dashoffset: 0; opacity: 1; }
+
+.c5-ic-line { fill: none; stroke: var(--ink-2); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.c5-ic-surface { fill: var(--surface); }
+.c5-ic-fill { fill: var(--ink-2); }
+.c5-ic-num { font-family: var(--num); font-weight: 700; font-size: 10px; fill: var(--red); }
+.c5-ic-alarm { fill: none; stroke: var(--red); stroke-width: 2.5; stroke-linecap: round; }
+.c5-ic-ground { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; }
+.c5-ic-leg { fill: none; stroke: var(--pants); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* the clock keeps ticking while the list builds up */
+.c5-clock-face { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+.c5-clock-mark { fill: none; stroke: var(--ink-2); stroke-width: 2.5; stroke-linecap: round; }
+.c5-clock-hour { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.c5-clock-hand { fill: none; stroke: var(--red); stroke-width: 2.5; stroke-linecap: round; }
+.c5-clock-pivot { fill: none; stroke: none; }
+.c5-clock-sweep { transform-box: fill-box; transform-origin: 50% 50%; animation: c5-tick 6s steps(12, end) infinite; }
+@keyframes c5-tick { to { transform: rotate(360deg); } }
+
+/* ---------- scene: 100 patients ---------- */
+.c5-dot[data-k="died"], .c5-legend-row[data-k="died"] { --c5-c: var(--ink-2); }
+.c5-dot[data-k="recovered"], .c5-legend-row[data-k="recovered"] { --c5-c: var(--go); }
+.c5-dot[data-k="disabled"], .c5-legend-row[data-k="disabled"] { --c5-c: var(--orange); }
+.c5-dot { fill: var(--c5-c); opacity: 0; transition: opacity .25s; }
+.c5-dot.in { opacity: 1; }
+.c5-legend-row { opacity: 0; transition: opacity .3s; }
+.c5-legend-row.in { opacity: 1; }
+.c5-legend-dot { fill: var(--c5-c); }
+.c5-legend-count { font-family: var(--num); font-weight: 700; font-size: 22px; font-variant-numeric: tabular-nums; fill: var(--ink); }
+.c5-legend-label { font-family: var(--font); font-weight: 500; font-size: 17px; fill: var(--ink); }
+.c5-frame { fill: none; stroke: var(--ink); stroke-width: 2.5; opacity: 0; transition: opacity .4s; }
+#pin5[data-step="5"] .c5-frame { opacity: 1; }
+
+/* ---------- myth flip cards ---------- */
+.myths-hint { margin-bottom: 1.2em; }
+.myth-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.myth-grid > li { display: grid; }
+.chapter-extra .myth-card { max-width: none; }
+.myth-card {
+  display: block; width: 100%; margin: 0; padding: 0; border: 0; border-radius: 12px; background: none;
+  text-align: left; cursor: pointer; perspective: 1000px; -webkit-tap-highlight-color: transparent;
+}
+.myth-card:focus-visible { border-radius: 12px; }
+.myth-inner {
+  position: relative; display: grid; height: 100%;
+  transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4, .1, .2, 1);
+}
+.myth-card[aria-pressed="true"] .myth-inner { transform: rotateY(180deg); }
+.myth-face {
+  grid-area: 1 / 1; position: relative; display: block; min-height: 96px; padding: 16px 52px 16px 18px;
+  border: 2px solid var(--ink); border-radius: 12px; background: var(--surface);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.myth-back { transform: rotateY(180deg); border-color: var(--go); padding-right: 18px; }
+.myth-label { display: block; font-size: .9rem; font-weight: 700; line-height: 1.4; color: var(--ink-2); }
+.myth-back .myth-label { color: var(--go-text); }
+.myth-text { display: block; font-weight: 600; line-height: 1.55; color: var(--ink); }
+.myth-back .myth-text { font-weight: 500; }
+.myth-flip {
+  position: absolute; top: 14px; right: 14px; width: 24px; height: 24px;
+  fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+@media (hover: hover) and (pointer: fine) {
+  .myth-card:hover .myth-face { background: var(--paper); }
+}
+
+@media (min-width: 700px) and (min-height: 900px) {
+  .myth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .myth-face { padding: 20px 56px 20px 22px; }
+  .myth-back { padding-right: 22px; }
+  .myth-text { font-size: 1.05em; }
+}
+@media (min-width: 861px) {
+  .myth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .myth-face { padding: 20px 56px 20px 22px; }
+  .myth-back { padding-right: 22px; }
+  .myth-text { font-size: 1.05em; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .myth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c5-clock-sweep { animation: none; }
+  .c5-checklist, .c5-outcomes, .c5-card, .c5-box, .c5-tick, .c5-dot, .c5-legend-row, .c5-frame { transition: none; }
+  /* flip becomes a crossfade */
+  .myth-card { perspective: none; }
+  .myth-inner, .myth-card[aria-pressed="true"] .myth-inner { transform: none; transition: none; }
+  .myth-face { -webkit-backface-visibility: visible; backface-visibility: visible; transition: opacity .2s; }
+  .myth-back { transform: none; opacity: 0; }
+  .myth-card[aria-pressed="true"] .myth-front { opacity: 0; }
+  .myth-card[aria-pressed="true"] .myth-back { opacity: 1; }
+}

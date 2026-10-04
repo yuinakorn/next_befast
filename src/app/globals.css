@@ -9,7 +9,7 @@
 :root {
   --paper: #F3F7FC; --surface: #FFFFFF; --ink: #13235A; --ink-2: #4B5A7E; --line: #D6DFEC;
   --red: #D3222D; --pink: #EE7C86; --pink-deep: #D9545F; --ash: #A7AFC0; --ash-deep: #7F889D;
-  --go: #13895B; --go-text: #167F54; --cath: #2C66D0; --skin: #F2C6A0; --skin-shade: #DFA47E; --shirt: #2C66D0;
+  --go: #13895B; --go-text: #167F54; --orange: #C9731B; --cath: #2C66D0; --skin: #F2C6A0; --skin-shade: #DFA47E; --shirt: #2C66D0;
   --pants: #13235A; --hair: #2E3247; --feature: #1E2440; --red-soft: rgba(211,34,45,.08);
   --glass: rgba(255,255,255,.55); --ghost: rgba(19,35,90,.3);
   --visual-bg: #DDEAF8;
@@ -24,7 +24,7 @@
   :root:not([data-theme="light"]) {
     --paper: #0B1330; --surface: #141E42; --ink: #E9EEFF; --ink-2: #A8B3D4; --line: #28345F;
     --red: #FF5560; --pink: #F08690; --pink-deep: #E0606B; --ash: #5E6888; --ash-deep: #4A5373;
-    --go: #2BC28A; --go-text: #2BC28A; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
+    --go: #2BC28A; --go-text: #2BC28A; --orange: #F0A050; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
     --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
     --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
     color-scheme: dark;
@@ -33,7 +33,7 @@
 :root[data-theme="dark"] {
   --paper: #0B1330; --surface: #141E42; --ink: #E9EEFF; --ink-2: #A8B3D4; --line: #28345F;
   --red: #FF5560; --pink: #F08690; --pink-deep: #E0606B; --ash: #5E6888; --ash-deep: #4A5373;
-  --go: #2BC28A; --go-text: #2BC28A; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
+  --go: #2BC28A; --go-text: #2BC28A; --orange: #F0A050; --cath: #5B91F2; --skin: #E9B892; --skin-shade: #CF9670; --shirt: #4A7FE0;
   --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
   --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
   color-scheme: dark;
