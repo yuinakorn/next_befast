@@ -3,6 +3,7 @@ import { Anuphan, Chakra_Petch } from "next/font/google";
 import "./globals.css";
 import "@/styles/chapter-3.css";
 import "@/styles/chapter-4.css";
+import "@/styles/opening.css";
 
 const anuphan = Anuphan({
   variable: "--font-anuphan",

@@ -61,20 +61,13 @@ button { font: inherit; color: inherit; }
 .progress { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); pointer-events: none; }
 .progress span { display: block; height: 4px; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); }
 
-/* ---------- hero ---------- */
-.hero {
-  min-height: 94vh; min-height: 94svh; max-width: 1180px; margin: 0 auto; padding: 12vh clamp(20px, 6vw, 80px) 8vh;
-  display: flex; flex-direction: column; justify-content: center; gap: clamp(18px, 3vh, 30px);
-}
-.hero-note { color: var(--ink-2); font-size: .95rem; }
-.hero h1 { font-size: clamp(2.7rem, 9vw, 6.6rem); letter-spacing: -.01em; line-height: 1.22; }
+/* ---------- shared: ECG line + scroll cue ---------- */
 .ecg { width: 100%; height: auto; display: block; overflow: visible; }
 .ecg path {
   fill: none; stroke: var(--red); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke;
   stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s .3s cubic-bezier(.5, 0, .2, 1) forwards;
 }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-.hero-lead { max-width: 34em; color: var(--ink-2); font-size: 1.08em; }
 .cue { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: .95rem; color: var(--ink); }
 .cue svg { width: 22px; height: 22px; }
 
