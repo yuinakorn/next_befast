@@ -11,7 +11,7 @@ export type ShareNavigator = {
 
 /**
  * shared: the share sheet took it. copied: the link is on the clipboard.
- * dismissed: the reader closed the share sheet (nothing to say). failed: neither worked (stay silent).
+ * dismissed: the reader closed the share sheet (nothing to say). failed: neither worked (show the link to copy by hand).
  */
 export type ShareOutcome = "shared" | "copied" | "dismissed" | "failed";
 

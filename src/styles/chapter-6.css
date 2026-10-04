@@ -105,7 +105,7 @@
   cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .c6-pulse-btn--stop { background: var(--surface); color: var(--ink); }
-.chapter-extra .c6-advice { min-height: 3.3em; max-width: 24em; text-align: center; color: var(--ink); font-weight: 500; }
+.chapter-extra .c6-advice { color: var(--ink); font-weight: 500; }
 @media (hover: hover) and (pointer: fine) {
   .c6-pulse-btn:hover { background: var(--ink-2); border-color: var(--ink-2); color: var(--surface); }
   .c6-pulse-btn--stop:hover { background: var(--paper); border-color: var(--ink); color: var(--ink); }
@@ -130,7 +130,6 @@
   .c6-ring-num { font-size: 2.4rem; }
   .c6-ring-done { width: 40px; height: 40px; }
   .c6-pulse-btn { min-height: 48px; }
-  .chapter-extra .c6-advice { min-height: 3.1em; }
 }
 
 @media (prefers-reduced-motion: reduce) {

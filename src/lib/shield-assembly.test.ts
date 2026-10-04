@@ -114,9 +114,9 @@ test("toggleIndex adds a missing index and removes a present one, keeping the li
   assert.deepEqual(input, [1, 3]);
 });
 
-test("checklistStatus: silent at 0, encouragement from 1, finish at the total", () => {
-  assert.equal(checklistStatus(0, 10), "empty");
-  assert.equal(checklistStatus(1, 10), "some");
-  assert.equal(checklistStatus(9, 10), "some");
+test("checklistStatus: encouragement for every count below the total (0 included), finish at the total", () => {
+  assert.equal(checklistStatus(0, 10), "encourage");
+  assert.equal(checklistStatus(1, 10), "encourage");
+  assert.equal(checklistStatus(9, 10), "encourage");
   assert.equal(checklistStatus(10, 10), "complete");
 });

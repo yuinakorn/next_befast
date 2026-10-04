@@ -7,14 +7,17 @@ import { remainingMs, ringTarget, secondsLeft } from "@/lib/countdown";
 type Phase = "idle" | "running" | "done";
 
 const TOTAL = PULSE_CHECK.seconds;
+/** Spoken once when the timer runs out (UI string, not script copy). */
+const DONE_NOTICE = `ครบ ${TOTAL} วินาที`;
 /** Re-check the clock this often; the number only re-renders when the whole second changes. */
 const POLL_MS = 200;
 
 /**
  * "ลองจับชีพจรตัวเอง": a 30-second countdown for counting the pulse. The time is computed from a
  * timestamp (performance.now) so a throttled tab or a slow frame never drifts it. Nothing is
- * stored or sent. Only the end result is announced (aria-live); the ticking number is a
- * `role="timer"`, which screen readers do not announce on every change.
+ * stored or sent. The advice is plain text under the instructions, always visible. Only the end of the
+ * countdown is announced (aria-live); the ticking number is a `role="timer"`, which screen readers do
+ * not announce on every change.
  */
 export function PulseCheck() {
   const [phase, setPhase] = useState<Phase>("idle");
@@ -50,6 +53,7 @@ export function PulseCheck() {
       <div className="c6-pulse-copy">
         <h3 id="pulse-title">{PULSE_CHECK.title}</h3>
         <p>{PULSE_CHECK.how}</p>
+        <p className="c6-advice">{PULSE_CHECK.advice}</p>
       </div>
       <div className="c6-pulse-card">
         <div className="c6-ring" role="timer" aria-label="เวลาที่เหลือ">
@@ -87,9 +91,7 @@ export function PulseCheck() {
         >
           {label}
         </button>
-        <p className="c6-advice" aria-live="polite">
-          {phase === "done" ? PULSE_CHECK.advice : ""}
-        </p>
+        <p className="sr-only" aria-live="polite">{phase === "done" ? DONE_NOTICE : ""}</p>
       </div>
     </section>
   );

@@ -4,8 +4,11 @@ import { useState } from "react";
 import { CLOSING } from "@/content/closing";
 import { choiceStatus, choose, freshQuiz, solvedCount, type ChoiceStatus } from "@/lib/closing-quiz";
 
-/** Shown under a question after a wrong choice (the page copy has no wording for it). */
+/** Shown under a question after a wrong choice, after the choice itself (the page copy has no wording for it). */
 const TRY_AGAIN = "ยังไม่ใช่ ลองเลือกใหม่อีกครั้ง";
+
+/** Read out inside a marked choice (the ✓ / ✗ icon is decorative). */
+const MARK_TEXT: Record<ChoiceStatus, string> = { open: "", off: "", right: "ถูก", wrong: "ผิด" };
 
 function Mark({ status }: { status: ChoiceStatus }) {
   return (
@@ -56,6 +59,8 @@ export function ClosingQuiz() {
                       onClick={() => pick(qi, ci)}
                     >
                       <Mark status={status} />
+                      {/* before the label: the strike-through rule targets the last span */}
+                      {MARK_TEXT[status] && <span className="sr-only">{MARK_TEXT[status]} </span>}
                       <span>{choice}</span>
                     </button>
                   );
@@ -64,10 +69,11 @@ export function ClosingQuiz() {
               <p className="cq-feedback" id={`cq-fb-${qi}`} aria-live="polite">
                 {s.solved ? (
                   <>
-                    <strong>ถูกต้อง</strong> {q.explain}
+                    “{q.choices[q.answer]}” <strong>ถูกต้อง</strong> {q.explain}
                   </>
                 ) : tried ? (
-                  TRY_AGAIN
+                  // the picked choice is in the text, so each answer is announced as a new message
+                  `“${q.choices[s.wrong[s.wrong.length - 1]]}” ${TRY_AGAIN}`
                 ) : null}
               </p>
             </li>

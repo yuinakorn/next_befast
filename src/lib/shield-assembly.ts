@@ -79,10 +79,9 @@ export function toggleIndex(ticked: readonly number[], index: number): number[] 
   return next.sort((a, b) => a - b);
 }
 
-export type ChecklistStatus = "empty" | "some" | "complete";
+export type ChecklistStatus = "encourage" | "complete";
 
-/** Which message the checklist shows: nothing until one item is ticked, encouragement, then the finish. */
+/** Which message the checklist shows: encouragement for any count below the total (0 included), the finish at the total. */
 export function checklistStatus(count: number, total: number): ChecklistStatus {
-  if (count <= 0) return "empty";
-  return count >= total ? "complete" : "some";
+  return count >= total ? "complete" : "encourage";
 }

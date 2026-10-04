@@ -1,3 +1,4 @@
+import { CLOSING } from "./closing.ts";
 import type { ChapterContent } from "./types";
 
 /** Chapter 8 copy (script › บทที่ 8: สิ่งสำคัญที่อย่าลืม). */
@@ -32,6 +33,7 @@ export const CHAPTER_8: ChapterContent = {
 export const SHARE = {
   label: "ส่งต่อให้คนที่คุณรัก",
   title: "ทุกนาทีที่ช้า คือสมองที่สูญเสีย",
-  text: "จำสัญญาณเตือน BEFAST เห็นอาการแม้ข้อเดียว จำเวลา แล้วโทร 1669 ทันที",
+  text: CLOSING.summary[0],
   copied: "คัดลอกลิงก์แล้ว",
+  copyFailed: "คัดลอกลิงก์ไม่ได้ ลองคัดลอกจากข้อความนี้",
 } as const;

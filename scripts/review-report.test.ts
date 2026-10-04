@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { CHAPTERS, renderReport, reviewRows } from "./review-report.ts";
+import fs from "node:fs";
+import { CHAPTERS, allReviewRows, renderReport, reviewRows } from "./review-report.ts";
 import { CHAPTER_1 } from "../src/content/chapter-1.ts";
 import { CHAPTER_2 } from "../src/content/chapter-2.ts";
 import type { ChapterContent } from "../src/content/types.ts";
@@ -41,4 +42,9 @@ test("every ★ step from appendix ก for chapters 5–8 is in the report", () 
   for (const phrase of ["1669", "เวลาสุดท้าย", "นอนตะแคง", "ยาต้านการแข็งตัว", "90%", "เบาหวาน", "สายยาง", "คราบ", "สั่นพลิ้ว", "รอบเอว", "1600", "แอลกอฮอล์", "ผักครึ่งจาน", "150 นาที", "ค่าเป้าหมาย"]) {
     assert.ok(rows.some((r) => r.text.includes(phrase)), `missing review row for ${phrase}`);
   }
+});
+
+test("docs/medical-review.md is up to date: run `pnpm content:review` after editing src/content", () => {
+  const committed = fs.readFileSync(new URL("../docs/medical-review.md", import.meta.url), "utf8");
+  assert.equal(renderReport(allReviewRows()), committed);
 });

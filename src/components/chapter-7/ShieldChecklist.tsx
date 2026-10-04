@@ -5,7 +5,7 @@ import { SHIELD_CHECKLIST } from "@/content/chapter-7";
 import { Shield } from "@/components/ui/Shield";
 import { checklistStatus, toggleIndex } from "@/lib/shield-assembly";
 
-const MESSAGES = { empty: "", some: SHIELD_CHECKLIST.encourage, complete: SHIELD_CHECKLIST.complete } as const;
+const MESSAGES = { encourage: SHIELD_CHECKLIST.encourage, complete: SHIELD_CHECKLIST.complete } as const;
 
 /**
  * "วันนี้คุณทำได้กี่ข้อ": item i lights shield piece i (4 diseases first, then 6 behaviours).

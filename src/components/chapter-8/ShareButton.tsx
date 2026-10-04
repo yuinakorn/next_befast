@@ -9,10 +9,13 @@ const MESSAGE_MS = 4000;
 
 /**
  * "ส่งต่อให้คนที่คุณรัก": opens the system share sheet when the browser has one, otherwise copies the
- * page link and says so (aria-live). Closing the sheet or a refused copy is silent. Nothing is tracked.
+ * page link and says so (aria-live). Closing the sheet is silent. If neither sharing nor copying works,
+ * the page link is shown as selectable text, with a line (aria-live) that says to copy it from there.
+ * Nothing is tracked.
  */
 export function ShareButton() {
   const [message, setMessage] = useState("");
+  const [manualUrl, setManualUrl] = useState("");
   const timer = useRef<number | undefined>(undefined);
   const busy = useRef(false);
 
@@ -22,11 +25,20 @@ export function ShareButton() {
     if (busy.current) return;
     busy.current = true;
     try {
-      const outcome = await shareOrCopy(navigator, { title: SHARE.title, text: SHARE.text, url: location.href });
+      const url = location.href;
+      const outcome = await shareOrCopy(navigator, { title: SHARE.title, text: SHARE.text, url });
+      window.clearTimeout(timer.current);
       if (outcome === "copied") {
+        setManualUrl("");
         setMessage(SHARE.copied);
-        window.clearTimeout(timer.current);
         timer.current = window.setTimeout(() => setMessage(""), MESSAGE_MS);
+      } else if (outcome === "shared") {
+        setManualUrl("");
+        setMessage("");
+      } else if (outcome === "failed") {
+        // stays on screen: the reader needs time to select and copy the link
+        setManualUrl(url);
+        setMessage(SHARE.copyFailed);
       }
     } finally {
       busy.current = false;
@@ -45,6 +57,7 @@ export function ShareButton() {
         <span>{SHARE.label}</span>
       </button>
       <p className="c8-share-msg" aria-live="polite">{message}</p>
+      {manualUrl && <p className="c8-share-url">{manualUrl}</p>}
     </div>
   );
 }

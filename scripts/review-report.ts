@@ -47,9 +47,10 @@ export function renderReport(rows: readonly ReviewRow[]): string {
   ].join("\n");
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const rows = reviewRows(CHAPTERS);
-  rows.push(
+/** Every row of docs/medical-review.md, in the order the CLI writes them: chapters, chapter 2 self-check, then the extra rows of chapters 5–7. */
+export function allReviewRows(): ReviewRow[] {
+  return [
+    ...reviewRows(CHAPTERS),
     {
       where: "บทที่ 2 แบบสำรวจ",
       text: SELF_CHECK.options.map((o) => o.label).join(", "),
@@ -58,7 +59,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     ...CHAPTER_5_REVIEWS,
     ...CHAPTER_6_REVIEWS,
     ...CHAPTER_7_REVIEWS,
-  );
+  ];
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const rows = allReviewRows();
   fs.writeFileSync(new URL("../docs/medical-review.md", import.meta.url), renderReport(rows));
   console.log(`wrote docs/medical-review.md (${rows.length} rows)`);
 }

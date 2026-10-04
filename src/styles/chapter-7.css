@@ -40,9 +40,12 @@
   cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .c7-item:has(.c7-box:checked) { border-color: var(--shield); }
-/* the ring goes round the whole row, so no ancestor may clip it (none does) */
-.c7-item:has(.c7-box:focus-visible) { outline: 3px solid var(--red); outline-offset: 3px; }
-.c7-box:focus-visible { outline: none; }
+/* the ring goes round the whole row, so no ancestor may clip it (none does). The reset sits in the same
+   block as the :has() ring: a browser without :has() keeps the default ring on the box itself. */
+@supports selector(:has(*)) {
+  .c7-item:has(.c7-box:focus-visible) { outline: 3px solid var(--red); outline-offset: 3px; }
+  .c7-box:focus-visible { outline: none; }
+}
 /* keyboard focus must not end up under the bar */
 .c7-box { scroll-margin-top: 150px; }
 

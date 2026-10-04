@@ -84,6 +84,12 @@
 }
 .c8-share-btn svg { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .chapter-extra .c8-share-msg { min-height: 1.65em; max-width: none; margin: 0; color: var(--ink); font-weight: 600; text-align: center; }
+/* the link, when neither sharing nor copying works: one tap or click selects all of it */
+.chapter-extra .c8-share-url {
+  width: 100%; max-width: 24em; margin: 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  color: var(--ink); font-size: .95rem; line-height: 1.5; text-align: center; overflow-wrap: anywhere;
+  -webkit-user-select: all; user-select: all;
+}
 @media (hover: hover) and (pointer: fine) {
   .c8-share-btn:hover { background: var(--surface); color: var(--ink); }
 }
