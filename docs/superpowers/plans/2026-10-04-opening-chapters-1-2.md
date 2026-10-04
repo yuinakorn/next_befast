@@ -15,7 +15,7 @@
 - Package manager is pnpm only; never create `package-lock.json`.
 - Before using a Next.js API, check `node_modules/next/dist/docs/` (Next 16 differs from older versions; e.g. `next/image` uses `preload`/`loading`, not `priority`).
 - CSS is mobile-first. Query order in every stylesheet: phone (no query) → tablet `(min-width: 700px) and (min-height: 900px)` → desktop `(min-width: 861px)` → landscape `(orientation: landscape) and (max-height: 500px)`. Anything the tablet block changes, the desktop block must set back.
-- Every colour comes from a CSS custom property in `src/app/globals.css`. Content tokens need light and dark values; brand-plate tokens (`--brand-*`, `--on-brand-*`) are the same in both themes.
+- Every colour comes from a CSS custom property in `src/app/globals.css`. Content tokens need light and dark values; brand-plate tokens (`--brand-*`, `--on-brand-*`) are the same in both themes. Approved exceptions (owner decision, 2026-10-04): the literal colours written in this plan for `DotBrain.tsx` canvas (`LIT`, `LIT_HALO`, `OFF`), `.dot-brain-outline path` in `opening.css`, and `.tia-warn text { fill: #fff }` in `chapter-1.css`. No other literals.
 - `brand-red` (#D72828) is used only inside the logo file, never for text.
 - Fixed colour meanings: pink = living brain cells / lights on, ash = lost cells / lights off, red = urgency or action, go = time remaining / correct answer.
 - Medical copy must match `docs/stroke-scrollytelling-script.md` word for word. Items marked ★ in the script carry a `review` note in the content module; ★ is never shown on the page.
