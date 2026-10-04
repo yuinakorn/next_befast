@@ -2,7 +2,8 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 type Props = {
-  src: string;
+  /** Omit until the illustration exists: a plain leaf-shaped plate is shown instead. */
+  src?: string;
   alt: string;
   /** Modifier class, e.g. "chapter-visual--time". */
   variant: string;
@@ -14,7 +15,11 @@ type Props = {
 export function ChapterVisual({ src, alt, variant, sizes, children }: Props) {
   return (
     <figure className={`chapter-visual ${variant}`}>
-      <Image src={src} alt={alt} width={1536} height={1024} sizes={sizes} />
+      {src ? (
+        <Image src={src} alt={alt} width={1536} height={1024} sizes={sizes} />
+      ) : (
+        <div className="chapter-visual-placeholder" aria-hidden="true" />
+      )}
       {children}
     </figure>
   );

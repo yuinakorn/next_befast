@@ -1,0 +1,31 @@
+/* Pinned story stages (chapters 1–2): scene + one step of text. Reuses .steps/.step from chapter-3.css.
+   Mobile-first; tiers as DESIGN.md › Layout. */
+.story-stage {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto 1fr; grid-template-areas: "." "scene" "steps" ".";
+  row-gap: 18px;
+}
+.story-scene { grid-area: scene; position: relative; display: flex; justify-content: center; align-items: center; min-height: 0; }
+.story-svg { height: clamp(180px, 40svh, 320px); width: auto; max-width: 100%; display: block; overflow: visible; }
+.story-stage .steps { grid-area: steps; }
+
+@media (min-width: 700px) and (min-height: 900px) {
+  .story-svg { height: clamp(320px, 44svh, 520px); }
+  .story-stage .steps { justify-self: center; width: min(100%, 36em); }
+}
+@media (min-width: 861px) {
+  .story-stage {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); grid-template-rows: 1fr;
+    grid-template-areas: "scene steps"; column-gap: clamp(24px, 5vw, 80px); align-items: center;
+  }
+  .story-svg { height: min(64vh, 520px); }
+  .story-stage .steps { justify-self: auto; width: auto; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .story-stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr;
+    grid-template-areas: "scene steps"; column-gap: 28px; align-items: center;
+  }
+  .story-svg { height: clamp(140px, 62svh, 280px); }
+  .story-stage .steps { justify-self: auto; width: auto; }
+}
