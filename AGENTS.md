@@ -105,7 +105,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## การออกแบบ
 
 - **[DESIGN.md](DESIGN.md) เป็นตัวตัดสินเรื่องหน้าตา** ใช้ token จาก `:root` เสมอ (`var(--ink)`, `var(--red)` ฯลฯ) ห้าม hardcode สี
-- token ใหม่ต้องมีค่าโหมดมืด และประกาศครบทั้ง 2 ที่ (`prefers-color-scheme` และ `[data-theme="dark"]`)
+- token ใหม่ต้องมีค่าโหมดมืด และประกาศครบทั้ง 2 ที่ (`prefers-color-scheme` และ `[data-theme="dark"]`) ยกเว้น token พื้นที่แบรนด์ (`--brand-*`, `--on-brand-*`) ที่ใช้ค่าเดียวทั้งสองโหมด
+- แบรนด์แคมเปญ Walk Run Bike 12: ใช้โลโก้ `public/brand/wrb12-on-navy.webp` บนพื้น `--brand-navy` เท่านั้น ห้ามใช้ `--brand-red` กับตัวหนังสือ
 - สีแดงใช้กับเรื่องเร่งด่วนหรือสิ่งที่ต้องลงมือทำเท่านั้น สีชมพู เทา เขียว และฟ้ามีความหมายทางการแพทย์ตายตัว (ดู Named Rules ใน DESIGN.md)
 - แบนเหมือนกระดาษ: ไม่มี drop shadow, glassmorphism หรือ gradient ตกแต่ง
 - ถ้าเปลี่ยนดีไซน์จนกระทบระบบ (เช่น token ใหม่ คอมโพเนนต์ใหม่ หรือ breakpoint ใหม่) ให้แก้ DESIGN.md ใน commit เดียวกัน

@@ -31,6 +31,11 @@ colors:
   ash-dark: "#5E6888"
   go-dark: "#2BC28A"
   cath-dark: "#5B91F2"
+  brand-navy: "#202D5D"
+  brand-red: "#D72828"
+  on-brand: "#FFFFFF"
+  on-brand-muted: "#A8B3D4"
+  on-brand-alert: "#FF5560"
 typography:
   display:
     fontFamily: "Anuphan, Noto Sans Thai, Leelawadee UI, Thonburi, system-ui, sans-serif"
@@ -182,12 +187,20 @@ components:
 ### Dark Mode
 token ทุกตัวมีค่าสำหรับโหมดมืด (`*-dark` ใน frontmatter สำหรับสีหลัก ที่เหลือดูใน `index.html`) และต้องประกาศครบทั้ง 2 ที่: `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {...} }` และ `:root[data-theme="dark"] {...}` พื้นโหมดมืดเป็นสีกรมท่าลึก (`paper-dark`) ห้ามใช้สีดำ
 
+### Brand (แคมเปญ Walk Run Bike ครั้งที่ 12 Fighting Stroke)
+พื้นที่แบรนด์ใช้สีเดียวกันทั้งโหมดสว่างและมืด
+- **Campaign Navy / กรมท่าแคมเปญ** (`brand-navy`): พื้นบทเปิด และแถบแคมเปญใน footer
+- **Campaign Red / แดงแคมเปญ** (`brand-red`): อยู่ในไฟล์โลโก้เท่านั้น
+- **บนพื้นกรมท่า:** ตัวหนังสือ `on-brand` (13.2:1), ป้ายกำกับ `on-brand-muted` (6.3:1), ตัวเลขตัวนับขนาด ≥ 24px `on-brand-alert` (4.2:1), จุดแสงสมอง `pink` (4.9:1)
+
 ### Named Rules
 **The One Alarm Rule.** ใช้สีแดงเฉพาะสิ่งที่เกี่ยวกับเวลา ความเร่งด่วน หรือสิ่งที่ต้องลงมือทำ ห้ามใช้ตกแต่ง ลองถามว่า "ถ้าเอาสีแดงออก คนอ่านจะพลาดเรื่องเร่งด่วนไหม" ถ้าไม่พลาด ก็ไม่ต้องใช้สีแดง
 
 **The Fixed Meaning Rule.** ชมพู เทา เขียว และฟ้าสายสวน มีความหมายทางการแพทย์ตายตัว ห้ามเอาไปใช้ความหมายอื่นในบทอื่น ถ้าต้องการสีสำหรับข้อมูลใหม่ ให้เพิ่ม token ใหม่
 
 **The Small Green Text Rule.** สีเขียว `go` บนพื้นสว่างมีคอนทราสต์แค่ 4.10:1 ใช้กับแถบหรือพื้นหลังได้ แต่ห้ามใช้เป็นสีตัวอักษร ตัวอักษรสีเขียวต้องใช้ `go-text` (`#167F54` ได้ 4.65:1 บน paper) ในโหมดมืด `go-text` มีค่าเท่ากับ `go-dark` ตอนนี้ใช้อยู่ที่ "เหลือ x ชม." และคำว่า "ถูกต้อง" ในแบบฝึก
+
+**The Logo-Only Red Rule.** `brand-red` อยู่ในไฟล์โลโก้เท่านั้น ห้ามใช้กับตัวหนังสือหรือกราฟิก เพราะบน `brand-navy` ได้คอนทราสต์แค่ 2.65:1 ถ้าต้องการสีแดงบนพื้นกรมท่าให้ใช้ `on-brand-alert`
 
 ## Typography
 

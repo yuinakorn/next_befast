@@ -13,6 +13,9 @@
   --pants: #13235A; --hair: #2E3247; --feature: #1E2440; --red-soft: rgba(211,34,45,.08);
   --glass: rgba(255,255,255,.55); --ghost: rgba(19,35,90,.3);
   --visual-bg: #DDEAF8;
+  /* brand plate (Walk Run Bike 12): identical in light and dark themes, so no dark override */
+  --brand-navy: #202D5D; --brand-red: #D72828;
+  --on-brand: #FFFFFF; --on-brand-muted: #A8B3D4; --on-brand-alert: #FF5560;
   --font: var(--font-anuphan), "Anuphan", "Noto Sans Thai", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
   --num: var(--font-chakra), "Chakra Petch", var(--font-anuphan), "Noto Sans Thai", system-ui, sans-serif;
   color-scheme: light;
@@ -49,6 +52,10 @@ p { margin: 0; }
 img, svg { max-width: 100%; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
 
 /* ---------- progress ---------- */
 .progress { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); pointer-events: none; }
