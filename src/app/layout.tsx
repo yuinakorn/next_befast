@@ -5,6 +5,7 @@ import "@/styles/chapter-3.css";
 import "@/styles/chapter-4.css";
 import "@/styles/opening.css";
 import "@/styles/story.css";
+import "@/styles/chapter-1.css";
 
 const anuphan = Anuphan({
   variable: "--font-anuphan",
