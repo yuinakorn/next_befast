@@ -14,7 +14,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## โปรเจกต์นี้คืออะไร
 
-**"ทุกนาทีที่ช้า คือสมองที่สูญเสีย"** เป็นสื่อการสอนโรคหลอดเลือดสมอง (stroke) แบบ scrollytelling ภาษาไทย ตอนนี้มีตัวอย่างบทที่ 3 (นาฬิกาสมอง) และบทที่ 4 (จับสัญญาณด้วย BEFAST) ผู้ใช้คือประชาชนทั่วไป ญาติผู้ป่วย ผู้สูงอายุ และนักเรียนนักศึกษา ส่วนใหญ่อ่านบนมือถือ
+**"ทุกนาทีที่ช้า คือสมองที่สูญเสีย"** เป็นสื่อการสอนโรคหลอดเลือดสมอง (stroke) แบบ scrollytelling ภาษาไทย ตอนนี้มีบทเปิด และบทที่ 1 (สโตรกคืออะไร) 2 (ใกล้ตัวกว่าที่คิด) 3 (นาฬิกาสมอง) และ 4 (จับสัญญาณด้วย BEFAST) ส่วนบทที่ 5–8 และบทปิดยังต้องทำต่อ (ตามสคริปต์ใน `docs/stroke-scrollytelling-script.md`) ผู้ใช้คือประชาชนทั่วไป ญาติผู้ป่วย ผู้สูงอายุ และนักเรียนนักศึกษา ส่วนใหญ่อ่านบนมือถือ
 
 อ่านไฟล์เหล่านี้ก่อนเริ่มงาน:
 
@@ -26,12 +26,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## สถานะปัจจุบันและแผน
 
-- **ตอนนี้:** ทั้งหน้าอยู่ใน `index.html` ไฟล์เดียว (CSS และ JS อยู่ในไฟล์) ใช้ GSAP 3.12.5 + ScrollTrigger จาก cdnjs และภาพประกอบ `.webp` ใน `assets/illustrations/`
-- **แผน:** ย้ายไป **Next.js** โดยต้องได้หน้าตาและการทำงานเหมือนเดิมทุกอย่าง (pixel และพฤติกรรม) ก่อนจะปรับปรุงอะไร
+- **ตอนนี้:** เว็บไซต์คือแอป Next.js ใน `src/` (GSAP ติดตั้งจาก npm) ส่วน `index.html` เป็นต้นฉบับไฟล์เดียวที่เก็บไว้อ้างอิง (CSS และ JS อยู่ในไฟล์ ใช้ GSAP 3.12.5 + ScrollTrigger จาก cdnjs และภาพประกอบ `.webp` ใน `assets/illustrations/`) ไม่ได้ใช้ในเว็บจริง
+- **แผน:** ทำบทที่ 5–8 และบทปิดต่อตามสคริปต์
 - หน้าเว็บเป็น Next.js 16 (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) มีบทเปิด บทที่ 1–4 และ footer แบรนด์แคมเปญ Walk Run Bike 12
   - เนื้อหาบทเปิดและบท 1–2 อยู่ใน `src/content/` (ข้อความ ★ มีฟิลด์ `review`) บทที่ 3–4 ยังเขียนในคอมโพเนนต์
   - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2 ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
-  - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-4/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`), `CampaignFooter`
+  - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-4/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`), `NextChapter`, `CampaignFooter`
+  - `src/hooks/`: `usePinnedSteps` (ฮุกคุมฉากที่ pin ของบท 1–2)
+  - `scripts/`: `shots.mjs` (ถ่ายภาพทุกฉากที่ pin + ตรวจเนื้อหาล้น), `review-report.ts` (สร้าง `docs/medical-review.md`)
   - CSS: `src/app/globals.css` (token และสไตล์ร่วม), `src/styles/opening.css`, `story.css`, `chapter-1.css` ถึง `chapter-4.css`
   - ภาพอยู่ใน `public/illustrations/` และ `public/brand/` ภาพหัวบทที่ 1–2 ยังไม่มี (ดู `docs/illustration-prompts.md`) ส่วน `index.html` และ `assets/` เก็บไว้เป็นต้นฉบับอ้างอิง
 - package manager: **pnpm เท่านั้น** (ห้ามใช้ npm/yarn และห้าม commit `package-lock.json`) คำสั่ง:
@@ -61,6 +63,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   |---|---|---|
   | phone | (ไม่มี query) | มือถือแนวตั้ง 360–699px |
   | short | `(max-width: 860px) and (max-height: 640px)` | มือถือจอเตี้ย: ซ่อนคำแนะนำ |
+  | short-phone | `(max-width: 860px) and (max-height: 700px)` | มือถือแนวตั้งจอเตี้ย (360×640, 375×667): บีบบทเปิดให้อยู่ในจอแรก (ใน `opening.css` วางต่อจากบล็อก tablet และก่อน desktop) |
   | wide | `min-width: 761px` | ภาพประกอบเต็มกว้าง และคำบรรยายที่ทับบนภาพ 1669 |
   | tablet | `(min-width: 700px) and (min-height: 900px)` | แท็บเล็ตแนวตั้ง (iPad mini ขึ้นไป) |
   | desktop | `min-width: 861px` | แท็บเล็ตแนวนอน, laptop, desktop |

@@ -64,7 +64,7 @@
 /* step 6: TIA — parietal lights flicker off and back on */
 #pin1[data-step="6"] .tia-warn { opacity: 1; }
 .anim #pin1[data-step="6"] .light[data-d="parietal"] { animation: tia-flicker 2.4s steps(1) infinite; }
-@keyframes tia-flicker { 0%, 100% { fill: var(--pink); } 30%, 60% { fill: var(--ash); } }
+@keyframes tia-flicker { 0%, 60%, 100% { fill: var(--pink); } 30% { fill: var(--ash); } }
 
 .type-toggle { margin-top: 12px; }
 /* no overflow: hidden here, it would clip the :focus-visible ring; the outer buttons round their own corners */
@@ -90,5 +90,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .road-flow, .scan, .light { animation: none !important; }
+  .scan { opacity: 0; }
   #pin1[data-step="6"] .light[data-d="parietal"] { fill: var(--ash); opacity: .6; }
 }
