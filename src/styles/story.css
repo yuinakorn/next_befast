@@ -30,13 +30,11 @@
   .story-stage .steps { justify-self: auto; width: auto; }
 }
 
-/* Non-pinned sections that follow a story stage (cards, tools, checklists) and the closing. */
+/* Non-pinned sections that follow a story stage (cards, tools, checklists). */
 .chapter-extra { max-width: 860px; margin: 0 auto; padding: 10vh clamp(20px, 6vw, 40px) 6vh; }
 .chapter-extra h3 { font-size: clamp(1.7rem, 4.4vw, 2.6rem); margin-bottom: .4em; }
 .chapter-extra p { color: var(--ink-2); max-width: 36em; }
 .chapter-extra p + p { margin-top: .6em; }
-.extra-list { margin: 0; padding-left: 1.2em; display: grid; gap: 14px; }
-.closing { padding-top: 12vh; }
-.closing > .ch-num, .closing > h2 { max-width: 860px; margin-left: auto; margin-right: auto; padding: 0 clamp(20px, 6vw, 40px); }
-.closing > h2 { font-size: clamp(2.1rem, 6vw, 3.8rem); }
-.closing-final { max-width: 860px; margin: 0 auto; padding: 4vh clamp(20px, 6vw, 40px) 12vh; font-size: 1.3em; font-weight: 700; color: var(--ink); }
+
+/* Keeps a phrase of a Thai headline on one line (see ui/Phrases.tsx). */
+.phrase { white-space: nowrap; }

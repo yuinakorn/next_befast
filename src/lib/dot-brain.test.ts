@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { generateDots, litCount, mulberry32 } from "./dot-brain.ts";
+import { generateDots, litCount, mulberry32, relit } from "./dot-brain.ts";
 
 const insideCircle = (x: number, y: number) => (x - 200) ** 2 + (y - 150) ** 2 < 100 ** 2;
 
@@ -33,4 +33,12 @@ test("litCount clamps to 0–1 and rounds", () => {
   assert.equal(litCount(0.5, 10), 5);
   assert.equal(litCount(2, 10), 10);
   assert.equal(litCount(-1, 10), 0);
+});
+
+test("relit climbs from the minimum to all dots and clamps", () => {
+  assert.equal(relit(0, 0.15), 0.15);
+  assert.equal(relit(1, 0.15), 1);
+  assert.ok(Math.abs(relit(0.5, 0.2) - 0.6) < 1e-9);
+  assert.equal(relit(-1, 0.15), 0.15);
+  assert.equal(relit(2, 0.15), 1);
 });

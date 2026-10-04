@@ -3,6 +3,8 @@ export type Step = {
   /** Scroll progress (0–1) at which this step becomes active. */
   at: number;
   title: string;
+  /** Break the title only at its spaces, never inside a phrase (for headlines the browser breaks badly). */
+  keepPhrases?: boolean;
   body?: string;
   /** What a doctor must verify before publishing (★ in the script). Never shown on the page. */
   review?: string;

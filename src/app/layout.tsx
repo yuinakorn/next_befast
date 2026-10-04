@@ -10,6 +10,8 @@ import "@/styles/chapter-2.css";
 import "@/styles/chapter-5.css";
 import "@/styles/chapter-6.css";
 import "@/styles/chapter-7.css";
+import "@/styles/chapter-8.css";
+import "@/styles/closing.css";
 import "@/styles/shield.css";
 
 const anuphan = Anuphan({

@@ -1,0 +1,90 @@
+/* Closing: summary cards, review quiz and the navy plate where the dot brain lights up again.
+   Not pinned. Mobile-first; tiers as DESIGN.md › Layout. The plate uses brand tokens (same in both themes). */
+
+.closing { padding-top: 12vh; }
+.closing-block { max-width: 860px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 40px); }
+.closing h3 { font-size: clamp(1.7rem, 4.4vw, 2.6rem); margin-bottom: .4em; }
+/* sized so the phrase "เริ่มดูแลหลอดเลือดของเรา" fits one line from 320px up (Phrases keeps phrases whole) */
+.closing-head h2 { font-size: clamp(1.6rem, 7.4vw, 3.8rem); }
+.closing-summary, .closing-quiz { margin-top: 9vh; }
+
+/* ---------- summary: three numbered cards ---------- */
+.closing-cards { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; counter-reset: summary; }
+.closing-cards li {
+  counter-increment: summary; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 16px;
+  padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+}
+.closing-cards li::before {
+  content: counter(summary); min-width: 1ch; font-family: var(--num); font-weight: 700; font-size: 2.2rem; line-height: 1.1;
+  font-variant-numeric: tabular-nums; color: var(--ink);
+}
+.closing-cards p { color: var(--ink); font-weight: 600; line-height: 1.6; max-width: 30em; }
+
+/* ---------- quiz ---------- */
+.cq-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 2px solid var(--ink); counter-reset: question; }
+.cq-item { counter-increment: question; padding: 22px 0 24px; border-bottom: 1px solid var(--line); }
+.cq-q { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; max-width: 34em; margin-bottom: 14px; font-size: 1.1em; font-weight: 600; color: var(--ink); }
+.cq-q::before { content: counter(question); min-width: 1.1ch; font-family: var(--num); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.cq-choices { display: grid; gap: 10px; max-width: 34em; }
+.cq-choice {
+  display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 12px; width: 100%; min-height: 52px;
+  padding: 10px 14px; text-align: left; font-weight: 500; line-height: 1.45; color: var(--ink);
+  background: var(--surface); border: 2px solid var(--ink); border-radius: 12px;
+  cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: background-color .2s, color .2s, opacity .2s;
+}
+.cq-mark {
+  display: grid; place-items: center; width: 24px; height: 24px; border: 2px solid var(--ink-2); border-radius: 50%;
+  transition: background-color .2s, border-color .2s;
+}
+.cq-mark svg { width: 14px; height: 14px; fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.cq-choice.right { border-color: var(--go); }
+.cq-choice.right .cq-mark { background: var(--go); border-color: var(--go); }
+.cq-choice.right .cq-mark svg { stroke: var(--surface); }
+.cq-choice.wrong { opacity: .6; border-style: dashed; border-color: var(--ink-2); }
+.cq-choice.wrong span:last-child { text-decoration: line-through; }
+.cq-choice.wrong .cq-mark svg { stroke: var(--ink-2); }
+.cq-choice.off { opacity: .55; border-color: var(--line); }
+.cq-choice[aria-disabled="true"] { cursor: default; }
+@media (hover: hover) and (pointer: fine) {
+  .cq-choice.open:hover { background: var(--ink); color: var(--paper); }
+  .cq-choice.open:hover .cq-mark { border-color: var(--paper); }
+}
+.cq-feedback { max-width: 34em; min-height: 1.65em; margin-top: 12px; color: var(--ink-2); }
+.cq-item.solved .cq-feedback { color: var(--ink); }
+.cq-feedback strong { color: var(--go-text); }
+.cq-score { margin-top: 18px; font-size: .95rem; color: var(--ink-2); }
+.cq-score-num { font-family: var(--num); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+
+/* ---------- plate: the brain relights above the closing line ---------- */
+.closing-plate { margin-top: 12vh; background: var(--brand-navy); color: var(--on-brand); }
+.closing-plate-inner {
+  max-width: 1180px; margin: 0 auto; padding: clamp(44px, 9vh, 96px) clamp(20px, 6vw, 80px);
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(20px, 4vh, 36px);
+}
+.closing-plate-art { height: clamp(170px, 30svh, 280px); }
+.closing-final { font-size: clamp(1.5rem, 6.2vw, 3rem); font-weight: 700; line-height: 1.4; text-align: center; text-wrap: balance; color: var(--on-brand); }
+
+@media (min-width: 700px) and (min-height: 900px) {
+  .closing-cards { gap: 16px; }
+  .closing-cards li { gap: 22px; padding: 24px 26px; }
+  .closing-cards li::before { font-size: 2.8rem; }
+  .closing-cards p { font-size: 1.1em; }
+  .cq-choice { min-height: 58px; padding: 12px 18px; }
+  .closing-plate-art { height: clamp(260px, 32svh, 400px); }
+  .closing-final { font-size: clamp(2rem, 5vw, 3rem); }
+}
+@media (min-width: 861px) {
+  .closing-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .closing-cards li { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 22px; }
+  .closing-cards li::before { font-size: 2.8rem; }
+  .closing-cards p { font-size: 1em; }
+  .cq-choice { min-height: 56px; padding: 12px 18px; }
+  .closing-plate-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; column-gap: clamp(32px, 5vw, 80px); }
+  .closing-plate-art { height: min(56vh, 440px); }
+  .closing-final { font-size: clamp(2rem, 3.6vw, 3.2rem); text-align: start; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .closing-plate-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center; column-gap: 28px; padding-top: 28px; padding-bottom: 28px; }
+  .closing-plate-art { height: 64svh; }
+  .closing-final { font-size: clamp(1.2rem, 3.4vw, 1.9rem); text-align: start; }
+}

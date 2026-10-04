@@ -47,8 +47,11 @@ function paint(canvas: HTMLCanvasElement, s: BrainState, force: boolean) {
   }
 }
 
-/** Brain drawn from points of light. `setLit(0–1)` dims dots in a fixed random order. */
-export function DotBrain({ ref, label }: { ref?: Ref<DotBrainHandle>; label: string }) {
+/**
+ * Brain drawn from points of light. `setLit(0–1)` dims dots in a fixed random order.
+ * Without a `label` the drawing is decorative and hidden from screen readers.
+ */
+export function DotBrain({ ref, label }: { ref?: Ref<DotBrainHandle>; label?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const state = useRef<BrainState>({ dots: [], lit: 1, drawn: -1 });
 
@@ -80,7 +83,7 @@ export function DotBrain({ ref, label }: { ref?: Ref<DotBrainHandle>; label: str
   }, []);
 
   return (
-    <div className="dot-brain" role="img" aria-label={label}>
+    <div className="dot-brain" {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}>
       <svg
         className="dot-brain-outline"
         viewBox={`0 0 ${BRAIN_VIEWBOX.width} ${BRAIN_VIEWBOX.height}`}

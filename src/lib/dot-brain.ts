@@ -46,3 +46,8 @@ export function generateDots(count: number, seed: number, isInside: (x: number, 
 export function litCount(lit: number, total: number): number {
   return Math.round(Math.min(1, Math.max(0, lit)) * total);
 }
+
+/** The closing relights the brain that the opening dimmed: `min` of the dots at progress 0, all of them at 1. */
+export function relit(progress: number, min: number): number {
+  return min + (1 - min) * Math.min(1, Math.max(0, progress));
+}

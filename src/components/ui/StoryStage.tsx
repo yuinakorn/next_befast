@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from "react";
 import type { Step } from "@/content/types";
 import { usePinnedSteps, type PinnedScene } from "@/hooks/usePinnedSteps";
 import { formatStepCounter } from "@/lib/steps";
+import { Phrases } from "./Phrases";
 
 type Props = {
   /** Pin id, e.g. "pin1". Also the hook for CSS scene states: #pin1[data-step="3"]. */
@@ -44,7 +45,7 @@ export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showS
                     </span>
                   </div>
                 )}
-                <h3>{s.title}</h3>
+                <h3>{s.keepPhrases ? <Phrases text={s.title} /> : s.title}</h3>
                 {s.body && <p>{s.body}</p>}
                 {stepExtra?.(i)}
               </article>
