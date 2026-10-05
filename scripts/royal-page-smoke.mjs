@@ -9,6 +9,7 @@ const browser = await puppeteer.launch({ executablePath, headless: true });
 
 try {
   const page = await browser.newPage();
+  await page.setViewport({ width: 1280, height: 800 });
   await page.goto(url, { waitUntil: "networkidle0" });
 
   const result = await page.evaluate(() => ({
@@ -28,16 +29,34 @@ try {
       result.royalTop < result.openingTop,
   );
 
+  await page.waitForSelector(".royal-gallery.is-enhanced");
+  const enhancedLayout = await page.evaluate(() => ({
+    inlineMedia: getComputedStyle(document.querySelector(".royal-duty-media")).display,
+    stickyVisual: getComputedStyle(document.querySelector(".royal-gallery-visual")).display,
+  }));
+  assert.equal(enhancedLayout.inlineMedia, "none");
+  assert.notEqual(enhancedLayout.stickyVisual, "none");
+
+  await page.evaluate(() =>
+    document.querySelector('[data-royal-duty="1"]')?.scrollIntoView({ block: "center" }),
+  );
+  await page.waitForFunction(() =>
+    document.querySelector(".royal-gallery-state:nth-child(2)")?.classList.contains("is-active"),
+  );
+
   const noJsPage = await browser.newPage();
+  await noJsPage.setViewport({ width: 1280, height: 800 });
   await noJsPage.setJavaScriptEnabled(false);
   await noJsPage.goto(url, { waitUntil: "networkidle0" });
   const noJsResult = await noJsPage.evaluate(() => ({
     duties: document.querySelectorAll("[data-royal-duty]").length,
     images: document.querySelectorAll(".royal-duty-media img").length,
+    inlineMedia: getComputedStyle(document.querySelector(".royal-duty-media")).display,
   }));
 
   assert.equal(noJsResult.duties, 3);
   assert.ok(noJsResult.images >= 4);
+  assert.notEqual(noJsResult.inlineMedia, "none");
   console.log("royal prelude smoke: JavaScript-on and JavaScript-off assertions passed");
 } finally {
   await browser.close();

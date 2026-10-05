@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ROYAL_ASSETS, ROYAL_PRELUDE } from "@/content/royal-prelude";
+import { RoyalGallery } from "./RoyalGallery";
 
 export function RoyalPrelude() {
   const portrait = ROYAL_ASSETS[ROYAL_PRELUDE.hero.image];
@@ -43,7 +44,7 @@ export function RoyalPrelude() {
         <span className="royal-rule" aria-hidden="true" />
       </div>
 
-      <div id="royal-duties" className="royal-duties">
+      <RoyalGallery>
         {ROYAL_PRELUDE.duties.map((duty, dutyIndex) => (
           <article
             className="royal-duty"
@@ -79,7 +80,7 @@ export function RoyalPrelude() {
             </div>
           </article>
         ))}
-      </div>
+      </RoyalGallery>
     </section>
   );
 }
