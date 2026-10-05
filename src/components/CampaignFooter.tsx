@@ -11,6 +11,7 @@ export function CampaignFooter() {
           รายการบ่ายนี้มีคำตอบ ช่อง MCOT HD ออกอากาศ 14 สิงหาคม 2569 ตัวเลข “สมองแก่ลงราว 3.6 ปีต่อชั่วโมง”
           อ้างอิงงานวิจัย Saver JL (2006) Time is Brain—Quantified
           ความเสี่ยงตลอดชีวิต 1 ใน 4 อ้างอิง GBD 2016 Lifetime Risk of Stroke Collaborators (2018) N Engl J Med
+          คำแนะนำเรื่องแอลกอฮอล์ อ้างอิง WHO (2023) No level of alcohol consumption is safe for our health, Lancet Public Health
         </p>
         <p>เนื้อหานี้เพื่อการเรียนรู้ ไม่ใช้แทนคำแนะนำของแพทย์ หากสงสัยว่ามีอาการ โทร 1669 ทันที</p>
       </div>
