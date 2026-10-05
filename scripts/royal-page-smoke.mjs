@@ -57,6 +57,19 @@ try {
   assert.equal(noJsResult.duties, 3);
   assert.ok(noJsResult.images >= 4);
   assert.notEqual(noJsResult.inlineMedia, "none");
+
+  const reducedPage = await browser.newPage();
+  await reducedPage.setViewport({ width: 1280, height: 800 });
+  await reducedPage.emulateMediaFeatures([
+    { name: "prefers-reduced-motion", value: "reduce" },
+  ]);
+  await reducedPage.goto(url, { waitUntil: "networkidle0" });
+  await reducedPage.waitForSelector(".royal-gallery.is-enhanced");
+  const transitionDuration = await reducedPage.$eval(
+    ".royal-gallery-state",
+    (el) => getComputedStyle(el).transitionDuration,
+  );
+  assert.equal(transitionDuration, "0s");
   console.log("royal prelude smoke: JavaScript-on and JavaScript-off assertions passed");
 } finally {
   await browser.close();

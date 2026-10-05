@@ -6,6 +6,7 @@ import path from "node:path";
 import puppeteer from "puppeteer-core";
 import pngjs from "pngjs";
 import pixelmatch from "pixelmatch";
+import { ROYAL_SHOT_TARGETS } from "./royal-shot-targets.mjs";
 
 const { PNG } = pngjs;
 const CHROME = process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -32,6 +33,13 @@ function parseArgs(argv) {
 }
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function horizontalOverflow(page) {
+  return page.evaluate(() => ({
+    width: document.documentElement.scrollWidth,
+    viewport: window.innerWidth,
+  }));
+}
 
 async function capture(opts) {
   const url = opts.url ?? "http://localhost:3100/";
@@ -64,6 +72,36 @@ async function capture(opts) {
     await page.screenshot({ path: path.join(outDir, `${tag}-top.png`) });
     const pins = await page.evaluate(() => [...document.querySelectorAll(".pin[id]")].map((el) => el.id));
     const lines = [];
+
+    const initialWidth = await horizontalOverflow(page);
+    if (initialWidth.width - initialWidth.viewport > 1) {
+      lines.push(`PAGE OVERFLOW ${initialWidth.width}px > ${initialWidth.viewport}px`);
+    }
+
+    for (const target of ROYAL_SHOT_TARGETS) {
+      const found = await page.evaluate((selector) => {
+        const el = document.querySelector(selector);
+        if (!el) return false;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo(0, Math.max(0, Math.round(top - 12)));
+        return true;
+      }, target.selector);
+
+      if (!found) {
+        errors.push(`missing Royal screenshot target: ${target.selector}`);
+        continue;
+      }
+
+      await page.evaluate(() => document.fonts.ready);
+      await page.waitForNetworkIdle({ idleTime: 200, timeout: 5000 });
+      await wait(500);
+      await page.screenshot({ path: path.join(outDir, `${tag}-${target.id}.png`) });
+
+      const width = await horizontalOverflow(page);
+      if (width.width - width.viewport > 1) {
+        lines.push(`${target.id} PAGE OVERFLOW ${width.width}px > ${width.viewport}px`);
+      }
+    }
 
     for (const id of pins) {
       for (const p of PROGRESS) {
