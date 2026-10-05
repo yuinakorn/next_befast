@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anuphan, Chakra_Petch } from "next/font/google";
+import { KeepWords } from "@/components/ui/KeepWords";
 import "./globals.css";
 import "@/styles/chapter-3.css";
 import "@/styles/chapter-4.css";
@@ -46,7 +47,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="th" className={`${anuphan.variable} ${chakraPetch.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <KeepWords />
+      </body>
     </html>
   );
 }
