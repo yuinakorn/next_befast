@@ -13,7 +13,13 @@ export const CHAPTER_2: ChapterContent = {
   image: "/illustrations/chapter-2-closer-than-you-think.webp",
   imageAlt: "ภาพประกอบบทที่ 2 คนหลายวัยในชีวิตประจำวันที่มีความเสี่ยงสโตรก",
   steps: [
-    { at: 0, title: "ความเสี่ยงตลอดชีวิต 1 ใน 4" },
+    {
+      at: 0,
+      title: "ผู้ใหญ่ทุก\u00a04\u00a0คน จะมี\u00a01\u00a0คนที่เป็นสโตรกในช่วงชีวิต",
+      keepPhrases: true,
+      body: "อาจเป็นคนในบ้าน เพื่อนร่วมงาน หรือตัวเราเอง",
+      review: "ความเสี่ยงสโตรกตลอดชีวิตตั้งแต่อายุ 25 ปี ทั่วโลกราว 24.9% (GBD 2016 Lifetime Risk of Stroke Collaborators, NEJM 2018)",
+    },
     {
       at: 0.14,
       title: "อายุน้อยก็เป็นได้!",
