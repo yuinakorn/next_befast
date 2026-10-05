@@ -9,6 +9,7 @@ import { CHAPTER_6, DISEASES } from "./chapter-6.ts";
 import { CHAPTER_7, SHIELD_CHECKLIST } from "./chapter-7.ts";
 import { CHAPTER_8 } from "./chapter-8.ts";
 import { CLOSING } from "./closing.ts";
+import { ROYAL_ASSETS, ROYAL_PRELUDE } from "./royal-prelude.ts";
 
 for (const [chapter, count] of [
   [CHAPTER_1, 7],
@@ -77,4 +78,34 @@ test("shield checklist has 4 diseases + 6 behaviours = one item per chapter 7 st
 test("closing quiz answers point at an existing choice", () => {
   for (const q of CLOSING.quiz) assert.ok(q.answer >= 0 && q.answer < q.choices.length, q.question);
   assert.equal(CLOSING.quiz.length, 5);
+});
+
+test("royal prelude keeps the approved story order and source copy markers", () => {
+  assert.equal(ROYAL_PRELUDE.hero.title, "แสงแห่งพระบารมี");
+  assert.equal(ROYAL_PRELUDE.intro.title, "สู่สุขภาพดีของปวงชน");
+  assert.deepEqual(
+    ROYAL_PRELUDE.duties.map((d) => d.id),
+    ["role-model", "queen-health", "cycling-legacy"],
+  );
+  const copy = ROYAL_PRELUDE.duties.flatMap((d) => d.paragraphs).join(" ");
+  for (const phrase of [
+    "การทรงจักรยาน",
+    "อะเมซิ่ง ไทยแลนด์ มาราธอน แบงค็อก 2024",
+    "Bike for Mom",
+    "Bike for Dad",
+    "Bike อุ่นไอรัก",
+    "พ.ศ. ๒๕๕๘",
+    "พ.ศ. ๒๕๖๑",
+  ]) {
+    assert.ok(copy.includes(phrase), `missing source phrase: ${phrase}`);
+  }
+});
+
+test("every royal prelude image links to an existing optimized asset", () => {
+  assert.deepEqual(Object.keys(ROYAL_ASSETS), ["portrait", "cycling", "running"]);
+  for (const asset of Object.values(ROYAL_ASSETS)) {
+    assert.ok(asset.alt.length > 0);
+    assert.ok(asset.width > 0 && asset.height > 0);
+    assert.ok(existsSync(fileURLToPath(new URL(`../../public${asset.src}`, import.meta.url))), asset.src);
+  }
 });

@@ -122,9 +122,12 @@ Expected: FAIL เพราะ `./royal-prelude.ts` และไฟล์ใน 
 
 ```bash
 mkdir -p public/royal
-ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2300:3200:1650:700,scale=900:-2' -c:v libwebp -q:v 82 public/royal/rama-x-portrait.webp
-ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2350:1700:6200:1050,scale=1600:-2' -c:v libwebp -q:v 82 public/royal/rama-x-cycling.webp
-ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2300:1700:8500:1050,scale=1600:-2' -c:v libwebp -q:v 82 public/royal/queen-running.webp
+ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2300:3200:1650:700,scale=900:-2' -frames:v 1 /private/tmp/rama-x-portrait.png
+ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2350:1700:6200:1050,scale=1600:-2' -frames:v 1 /private/tmp/rama-x-cycling.png
+ffmpeg -hide_banner -loglevel error -y -i 'docs/บอร์ดนิทรรศการเฉลิมพระเกียรติWRB12_4x2m.png' -vf 'crop=2300:1700:8500:1050,scale=1600:-2' -frames:v 1 /private/tmp/queen-running.png
+cwebp -quiet -q 82 /private/tmp/rama-x-portrait.png -o public/royal/rama-x-portrait.webp
+cwebp -quiet -q 82 /private/tmp/rama-x-cycling.png -o public/royal/rama-x-cycling.webp
+cwebp -quiet -q 82 /private/tmp/queen-running.png -o public/royal/queen-running.webp
 sips -g pixelWidth -g pixelHeight public/royal/*.webp
 ```
 
