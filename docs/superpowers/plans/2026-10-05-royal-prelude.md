@@ -49,7 +49,8 @@
 | `src/components/royal-prelude/RoyalGallery.tsx` | Desktop-only progressive enhancement และ sticky visual state |
 | `src/lib/royal-gallery.ts` | Pure active-index selection สำหรับ observer ratios |
 | `src/styles/royal-prelude.css` | Phone-first layout, tablet composition, desktop sticky gallery, short landscape และ reduced motion |
-| `scripts/royal-shot-targets.ts` | Stable selectors สำหรับ screenshot ของ Royal Prelude |
+| `scripts/royal-page-smoke.mjs` | Browser assertions สำหรับ semantic order, visible copy และ no-JavaScript fallback |
+| `scripts/royal-shot-targets.mjs` | Stable selectors สำหรับ screenshot ของ Royal Prelude |
 | `scripts/shots.mjs` | Capture Royal Prelude targets และตรวจ page-wide horizontal overflow |
 | `PRODUCT.md`, `DESIGN.md` | Product narrative, evidence, tokens และ named rules |
 
@@ -185,7 +186,7 @@ git commit -m "feat: add royal prelude content and imagery"
 
 **Files:**
 - Create: `src/components/royal-prelude/RoyalPrelude.tsx`
-- Create: `src/components/royal-prelude/RoyalPrelude.test.ts`
+- Create: `scripts/royal-page-smoke.mjs`
 - Create: `src/styles/royal-prelude.css`
 - Modify: `src/app/page.tsx:1-29`
 - Modify: `src/app/layout.tsx:1-18`
@@ -199,29 +200,31 @@ git commit -m "feat: add royal prelude content and imagery"
 - Consumes: `ROYAL_ASSETS` and `ROYAL_PRELUDE` from Task 1.
 - Produces: `RoyalPrelude(): React.ReactElement`, semantic `#royal-prelude`, `#royal-hero`, `#royal-duties`, and `[data-royal-duty]` hooks consumed by Tasks 3–4.
 
-- [ ] **Step 1: Write a failing source-structure contract test**
+- [ ] **Step 1: Write a failing browser smoke test**
 
-Node's built-in TypeScript stripping does not compile JSX, so keep this test independent from importing the `.tsx` component. Read the three source files with `readFileSync` and assert:
+Create `scripts/royal-page-smoke.mjs` with Puppeteer and assert behavior from a running production server:
 
-```ts
-test("royal prelude owns the page h1 and precedes the stroke opening", () => {
-  const component = readFileSync(new URL("./RoyalPrelude.tsx", import.meta.url), "utf8");
-  const page = readFileSync(new URL("../../app/page.tsx", import.meta.url), "utf8");
-  const opening = readFileSync(new URL("../opening/Opening.tsx", import.meta.url), "utf8");
-  assert.match(component, /<section[^>]+id="royal-prelude"/);
-  assert.match(component, /<h1(?:\s[^>]*)?>/);
-  assert.match(component, /<h2(?:\s[^>]*)?>/);
-  assert.ok(page.indexOf("<RoyalPrelude />") < page.indexOf("<Opening />"));
-  assert.doesNotMatch(opening, /<h1>/);
-  assert.match(opening, /<h2>/);
-});
+```js
+const result = await page.evaluate(() => ({
+  h1s: [...document.querySelectorAll("h1")].map((el) => el.textContent?.trim()),
+  firstSection: document.querySelector("main, body")?.querySelector("section, header")?.id,
+  duties: document.querySelectorAll("[data-royal-duty]").length,
+  royalTop: document.querySelector("#royal-prelude")?.getBoundingClientRect().top,
+  openingTop: document.querySelector(".opening")?.getBoundingClientRect().top,
+}));
+assert.deepEqual(result.h1s, ["แสงแห่งพระบารมี"]);
+assert.equal(result.firstSection, "royal-prelude");
+assert.equal(result.duties, 3);
+assert.ok(result.royalTop < result.openingTop);
 ```
+
+เปิด page ที่สองด้วย `page.setJavaScriptEnabled(false)` ก่อน `goto` แล้ว assert ว่า `[data-royal-duty]` มี 3 รายการและ `.royal-duty-media img` มีอย่างน้อย 4 ภาพ.
 
 - [ ] **Step 2: Run the markup test and confirm red state**
 
-Run: `pnpm test`
+Serve the pre-change build from Task 1, then run: `node scripts/royal-page-smoke.mjs http://localhost:3100/`
 
-Expected: FAIL เพราะ `RoyalPrelude.tsx` ยังไม่มี.
+Expected: FAIL ด้วย assertion ว่าไม่มี `#royal-prelude`/h1 ใหม่ ไม่ใช่ syntax, Chrome หรือ connection error.
 
 - [ ] **Step 3: Implement `RoyalPrelude` as a Server Component**
 
@@ -267,12 +270,12 @@ pnpm exec tsc --noEmit
 pnpm build
 ```
 
-Expected: ทุกคำสั่งผ่าน; source contract ยืนยัน heading/order และ `pnpm build` ยืนยัน Server Component กับ `next/image` compile จริง.
+Restart `pnpm start -p 3100` from the new build and run `node scripts/royal-page-smoke.mjs http://localhost:3100/`. Expected: smoke assertions ผ่านทั้ง JavaScript-on และ JavaScript-off; compile commands ผ่าน.
 
 - [ ] **Step 8: Commit the static Royal Prelude**
 
 ```bash
-git add src/components/royal-prelude/RoyalPrelude.tsx src/components/royal-prelude/RoyalPrelude.test.ts src/styles/royal-prelude.css src/app/page.tsx src/app/layout.tsx src/components/opening/Opening.tsx src/styles/opening.css src/app/globals.css PRODUCT.md DESIGN.md
+git add src/components/royal-prelude/RoyalPrelude.tsx scripts/royal-page-smoke.mjs src/styles/royal-prelude.css src/app/page.tsx src/app/layout.tsx src/components/opening/Opening.tsx src/styles/opening.css src/app/globals.css PRODUCT.md DESIGN.md
 git commit -m "feat: add responsive royal prelude"
 ```
 
@@ -354,8 +357,7 @@ git commit -m "feat: enhance royal duties with sticky gallery"
 ### Task 4: Extend screenshot coverage and complete visual verification
 
 **Files:**
-- Create: `scripts/royal-shot-targets.ts`
-- Create: `scripts/royal-shot-targets.test.ts`
+- Create: `scripts/royal-shot-targets.mjs`
 - Modify: `scripts/shots.mjs`
 - Modify if defects are found: `src/styles/royal-prelude.css`, `src/components/royal-prelude/*.tsx`
 
@@ -363,29 +365,22 @@ git commit -m "feat: enhance royal duties with sticky gallery"
 - Consumes: stable IDs/data attributes from Task 2 and gallery states from Task 3.
 - Produces: `ROYAL_SHOT_TARGETS` with `royal-hero`, `royal-duties-0`, `royal-duties-1`, `royal-duties-2`; `shots.mjs capture` writes one viewport screenshot per target and fails on page-wide horizontal overflow.
 
-- [ ] **Step 1: Write the failing shot-target contract test**
+- [ ] **Step 1: Record the failing screenshot behavior**
 
-```ts
-test("royal screenshot targets cover the hero and every duty", () => {
-  assert.deepEqual(ROYAL_SHOT_TARGETS.map((target) => target.id), [
-    "royal-hero",
-    "royal-duties-0",
-    "royal-duties-1",
-    "royal-duties-2",
-  ]);
-  assert.equal(new Set(ROYAL_SHOT_TARGETS.map((target) => target.selector)).size, 4);
-});
+Run the current capture tool before modifying it:
+
+```bash
+pnpm shots capture --url http://localhost:3100/ --out .shots/royal-target-red --vp 360x640
+test -f .shots/royal-target-red/360x640-royal-hero.png
 ```
 
-- [ ] **Step 2: Run the target test and confirm red state**
+- [ ] **Step 2: Confirm the red state**
 
-Run: `pnpm test`
-
-Expected: FAIL เพราะ `royal-shot-targets.ts` ยังไม่มี.
+Expected: `pnpm shots capture` succeeds for existing pins, then `test -f` exits non-zero because the Royal target file is not emitted.
 
 - [ ] **Step 3: Implement Royal Prelude capture targets**
 
-Define selectors `#royal-hero` and `[data-royal-duty="0"]` through `"2"`. Import the list in `shots.mjs`; for each target scroll it to the top safe area, wait for settled images/fonts, capture `${viewport}-${target.id}.png`, and append errors when the selector is missing.
+Define selectors `#royal-hero` and `[data-royal-duty="0"]` through `"2"` in `scripts/royal-shot-targets.mjs`. Import the list in `shots.mjs`; for each target scroll it to the top safe area, wait for settled images/fonts, capture `${viewport}-${target.id}.png`, and append errors when the selector is missing.
 
 - [ ] **Step 4: Add page-wide horizontal-overflow detection**
 
@@ -393,15 +388,9 @@ After page load and after each Royal target scroll, compare `document.documentEl
 
 - [ ] **Step 5: Run unit and compile checks**
 
-Run:
+Run `pnpm shots capture --url http://localhost:3100/ --out .shots/royal-target-green --vp 360x640`, then assert all four files exist with `test -f`. Also run `pnpm test`, `pnpm lint`, and `pnpm exec tsc --noEmit`.
 
-```bash
-pnpm test
-pnpm lint
-pnpm exec tsc --noEmit
-```
-
-Expected: all pass.
+Expected: capture and all four file checks pass; compile checks pass.
 
 - [ ] **Step 6: Capture required light-mode viewports**
 
@@ -433,7 +422,7 @@ Inspect every Royal screenshot visually, mobile first. Confirm full portrait/fra
 - [ ] **Step 9: Commit screenshot coverage and visual fixes**
 
 ```bash
-git add scripts/royal-shot-targets.ts scripts/royal-shot-targets.test.ts scripts/shots.mjs src/styles/royal-prelude.css src/components/royal-prelude
+git add scripts/royal-shot-targets.mjs scripts/shots.mjs src/styles/royal-prelude.css src/components/royal-prelude
 git commit -m "test: cover royal prelude visuals"
 ```
 
@@ -484,7 +473,7 @@ Expected: only Royal Prelude assets/content/components/styles/docs/tests and the
 If Step 1–3 required changes:
 
 ```bash
-git add src/content/royal-prelude.ts src/components/royal-prelude src/lib/royal-gallery.ts src/styles/royal-prelude.css scripts/shots.mjs scripts/royal-shot-targets.ts scripts/royal-shot-targets.test.ts src/app/page.tsx src/app/layout.tsx src/components/opening/Opening.tsx src/styles/opening.css src/app/globals.css PRODUCT.md DESIGN.md
+git add src/content/royal-prelude.ts src/components/royal-prelude src/lib/royal-gallery.ts src/styles/royal-prelude.css scripts/royal-page-smoke.mjs scripts/shots.mjs scripts/royal-shot-targets.mjs src/app/page.tsx src/app/layout.tsx src/components/opening/Opening.tsx src/styles/opening.css src/app/globals.css PRODUCT.md DESIGN.md
 git diff --cached --name-only
 git commit -m "fix: complete royal prelude verification"
 ```
