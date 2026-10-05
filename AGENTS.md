@@ -166,6 +166,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   ```
 - ย้ายทีละบท และเทียบผลกับ `index.html` ทุก viewport ในรายการทดสอบก่อนลบของเดิม
 
+## งานเล็ก (แก้ข้อความ หรือปรับเล็กน้อย)
+
+- แก้ข้อความหรือปรับเล็กน้อย ไม่ต้อง build, ถ่ายภาพด้วย `pnpm shots` หรือไล่ทดสอบทุก viewport
+- ทำแค่ที่กฎบังคับ: แก้ `src/content/` แล้วรัน `pnpm content:review` และเพิ่มแหล่งอ้างอิงใน footer ถ้าเป็นข้อเท็จจริงทางการแพทย์ใหม่
+- รายการทดสอบเต็มและ Definition of Done ด้านล่างใช้กับงาน UI ที่เปลี่ยน layout คอมโพเนนต์ หรือ animation
+
 ## Definition of Done (สำหรับงาน UI)
 
 - [ ] ใช้ได้บน 360×640 โดยไม่มีอะไรล้น ตัด หรือซ้อนกัน
