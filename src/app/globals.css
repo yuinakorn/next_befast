@@ -18,6 +18,7 @@
   /* brand plate (Walk Run Bike 12): identical in light and dark themes, so no dark override */
   --brand-navy: #202D5D; --brand-red: #D72828;
   --on-brand: #FFFFFF; --on-brand-muted: #A8B3D4; --on-brand-alert: #FF5560;
+  --royal-paper: #EEF3FB; --royal-ink: #173465; --royal-gold: #8A641D; --royal-blue: #1674B8;
   --font: var(--font-anuphan), "Anuphan", "Noto Sans Thai", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
   --num: var(--font-chakra), "Chakra Petch", var(--font-anuphan), "Noto Sans Thai", system-ui, sans-serif;
   color-scheme: light;
@@ -30,6 +31,7 @@
     --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
     --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
     --shield: #4FC3D0; --plaque: #F2C94C;
+    --royal-paper: #101B34; --royal-ink: #EEF3FB; --royal-gold: #E8C878; --royal-blue: #65B7E8;
     color-scheme: dark;
   }
 }
@@ -40,6 +42,7 @@
   --pants: #3B4A80; --hair: #2A2F45; --feature: #1E2440; --red-soft: rgba(255,85,96,.12);
   --glass: rgba(255,255,255,.07); --ghost: rgba(233,238,255,.32);
   --shield: #4FC3D0; --plaque: #F2C94C;
+  --royal-paper: #101B34; --royal-ink: #EEF3FB; --royal-gold: #E8C878; --royal-blue: #65B7E8;
   color-scheme: dark;
 }
 

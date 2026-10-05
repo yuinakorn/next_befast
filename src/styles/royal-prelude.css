@@ -1,0 +1,155 @@
+/* Royal Prelude: quiet ceremonial editorial layout. Mobile-first; no sticky behavior without enhancement. */
+.royal-prelude {
+  background: var(--royal-paper);
+  color: var(--royal-ink);
+  overflow: clip;
+}
+
+.royal-hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  border-bottom: 1px solid color-mix(in srgb, var(--royal-ink) 18%, transparent);
+}
+
+.royal-hero-inner {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) clamp(20px, 6vw, 80px) clamp(32px, 7svh, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "portrait" "copy";
+  gap: clamp(22px, 4svh, 42px);
+  align-content: center;
+}
+
+.royal-hero-copy { grid-area: copy; text-align: center; }
+.royal-brand-mark {
+  width: 104px;
+  margin: 0 auto clamp(18px, 3svh, 30px);
+  padding: 9px 11px;
+  background: var(--brand-navy);
+}
+.royal-brand-logo { display: block; width: 100%; height: auto; }
+.royal-kicker,
+.royal-section-label {
+  font-family: var(--num);
+  font-weight: 600;
+  color: var(--royal-ink);
+}
+.royal-duty-number { font-family: var(--num); font-weight: 700; color: var(--royal-blue); }
+.royal-kicker { margin-bottom: .5rem; font-size: .92rem; }
+.royal-hero h1 {
+  max-width: 8em;
+  margin: 0 auto;
+  color: var(--royal-gold);
+  font-size: clamp(2.75rem, 13vw, 5.6rem);
+  line-height: 1.22;
+}
+.royal-hero-lead {
+  max-width: 34em;
+  margin: 1rem auto 0;
+  font-size: clamp(1rem, 3.8vw, 1.18rem);
+  line-height: 1.7;
+}
+.royal-portrait { grid-area: portrait; width: min(82vw, 310px); margin: 0 auto; }
+.royal-portrait img { display: block; width: 100%; height: auto; }
+
+.royal-intro {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(76px, 13svh, 130px) 20px clamp(50px, 9svh, 90px);
+  text-align: center;
+}
+.royal-section-label { margin-bottom: .65rem; font-size: .84rem; line-height: 1.55; }
+.royal-intro h2 { color: var(--royal-ink); font-size: clamp(2.2rem, 10vw, 4.5rem); line-height: 1.24; }
+.royal-rule { display: block; width: 62px; height: 2px; margin: 24px auto 0; background: var(--royal-gold); }
+
+.royal-duties { max-width: 1120px; margin: 0 auto; padding: 0 20px clamp(88px, 15svh, 160px); }
+.royal-duty {
+  display: grid;
+  gap: 28px;
+  padding: clamp(46px, 9svh, 90px) 0;
+  border-top: 1px solid color-mix(in srgb, var(--royal-ink) 20%, transparent);
+}
+.royal-duty-copy { max-width: 38em; }
+.royal-duty-number { margin-bottom: 12px; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.royal-duty h3 { color: var(--royal-gold); font-size: clamp(1.55rem, 6.2vw, 2.65rem); line-height: 1.3; }
+.royal-duty-copy > p:not(.royal-duty-number) { margin-top: 1.25rem; line-height: 1.78; }
+.royal-duty-media { display: grid; gap: 12px; align-self: start; }
+.royal-duty-media figure { margin: 0; overflow: hidden; border-radius: 2px; background: var(--royal-ink); }
+.royal-duty-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.royal-duty-media--2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.royal-duty-media--2 img { height: 100%; min-height: 160px; }
+
+@media (max-width: 860px) and (max-height: 640px) {
+  .royal-hero-inner { gap: 14px; padding-top: calc(env(safe-area-inset-top, 0px) + 16px); padding-bottom: 18px; }
+  .royal-portrait { width: min(42vw, 180px); }
+  .royal-brand-mark { width: 80px; margin-bottom: 8px; padding: 6px 8px; }
+  .royal-hero h1 { font-size: clamp(2rem, 8.5vw, 3rem); }
+  .royal-hero-lead { margin-top: .5rem; font-size: .88rem; line-height: 1.55; }
+}
+
+@media (min-width: 700px) and (min-height: 900px) {
+  .royal-hero-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+    grid-template-areas: "copy portrait";
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+  .royal-hero-copy { text-align: left; }
+  .royal-brand-mark { width: 128px; margin-inline: 0; }
+  .royal-hero h1 { margin-inline: 0; font-size: clamp(4.6rem, 10vw, 6.4rem); }
+  .royal-hero-lead { margin-inline: 0; }
+  .royal-portrait { width: min(42vw, 410px); }
+  .royal-duty { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(34px, 6vw, 68px); align-items: center; }
+  .royal-duty:nth-child(even) .royal-duty-copy { order: 2; }
+  .royal-duty:nth-child(even) .royal-duty-media { order: 1; }
+}
+
+@media (max-width: 860px) and (max-height: 700px) {
+  .royal-hero-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "portrait" "copy"; }
+  .royal-hero-copy { text-align: center; }
+  .royal-brand-mark { margin-inline: auto; }
+  .royal-hero h1,
+  .royal-hero-lead { margin-inline: auto; }
+  .royal-portrait { width: min(40vw, 190px); }
+}
+
+@media (min-width: 861px) {
+  .royal-hero-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+    grid-template-areas: "copy portrait";
+    gap: clamp(54px, 8vw, 110px);
+    align-items: center;
+  }
+  .royal-hero-copy { text-align: left; }
+  .royal-brand-mark { width: 132px; margin-inline: 0; }
+  .royal-hero h1 { margin-inline: 0; font-size: clamp(5rem, 7.5vw, 7rem); }
+  .royal-hero-lead { margin-inline: 0; }
+  .royal-portrait { width: min(36vw, 430px); }
+  .royal-duty { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(48px, 8vw, 96px); align-items: center; }
+  .royal-duty:nth-child(even) .royal-duty-copy { order: 2; }
+  .royal-duty:nth-child(even) .royal-duty-media { order: 1; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .royal-hero-inner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+    grid-template-areas: "copy portrait";
+    gap: 28px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
+    padding-bottom: 12px;
+    align-items: center;
+  }
+  .royal-hero-copy { text-align: left; }
+  .royal-brand-mark { width: 72px; margin: 0 0 6px; padding: 5px 7px; }
+  .royal-kicker { margin-bottom: 2px; font-size: .75rem; }
+  .royal-hero h1 { margin-inline: 0; font-size: clamp(2.1rem, 6.5vw, 3.8rem); }
+  .royal-hero-lead { margin: .35rem 0 0; font-size: .84rem; line-height: 1.5; }
+  .royal-portrait { width: min(30vw, 190px); }
+  .royal-duty { grid-template-columns: minmax(0, 1fr); }
+  .royal-duty:nth-child(even) .royal-duty-copy,
+  .royal-duty:nth-child(even) .royal-duty-media { order: initial; }
+}

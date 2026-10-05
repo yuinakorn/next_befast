@@ -12,7 +12,7 @@
 /* 550px ≈ the rest of the stacked content, so on 700-850px-tall phones the art gives way instead of pushing the cue off screen */
 .opening-art { grid-area: art; height: clamp(150px, min(34svh, calc(100svh - 550px)), 320px); }
 .opening-copy { grid-area: copy; display: flex; flex-direction: column; gap: clamp(10px, 2vh, 18px); }
-.opening h1 { font-size: clamp(2.3rem, 9vw, 5.6rem); line-height: 1.22; letter-spacing: -.01em; color: var(--on-brand); }
+.opening h2 { font-size: clamp(2.3rem, 9vw, 5.6rem); line-height: 1.22; letter-spacing: -.01em; color: var(--on-brand); }
 .opening .ecg path { stroke: var(--on-brand-alert); }
 .opening-lead { color: var(--on-brand-muted); font-size: 1.05em; max-width: 32em; }
 .counter { color: var(--on-brand-muted); font-size: .95rem; line-height: 1.5; max-width: 30em; }
@@ -38,7 +38,7 @@
   .opening-inner { padding-top: calc(env(safe-area-inset-top, 0px) + 14px); padding-bottom: 14px; gap: 10px; }
   .opening-art { height: clamp(140px, 30svh, 320px); }
   .opening-copy { gap: 8px; }
-  .opening h1 { font-size: 2rem; }
+  .opening h2 { font-size: 2rem; }
   .opening-lead { font-size: 1em; }
   .counter { font-size: .9rem; }
 }
@@ -50,7 +50,7 @@
   .opening-art { height: min(64vh, 520px); }
   .opening-logo { width: 160px; }
   /* the title shares a 6fr column here: size it to the column so "คือสมองที่สูญเสีย" stays on one line */
-  .opening h1 { font-size: clamp(2.8rem, 5.6vw, 4.4rem); }
+  .opening h2 { font-size: clamp(2.8rem, 5.6vw, 4.4rem); }
 }
 @media (orientation: landscape) and (max-height: 500px) {
   .opening-inner {
@@ -61,7 +61,7 @@
   .opening-art { height: 70svh; }
   .opening-logo { width: 76px; }
   .opening-copy { gap: 5px; }
-  .opening h1 { font-size: clamp(1.5rem, 4.2vw, 2.6rem); }
+  .opening h2 { font-size: clamp(1.5rem, 4.2vw, 2.6rem); }
   .opening-lead { font-size: .9em; line-height: 1.45; }
   .counter { font-size: .85rem; line-height: 1.4; }
   .counter-num { font-size: 1.5rem; }

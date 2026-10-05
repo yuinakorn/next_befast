@@ -51,11 +51,11 @@ export function Opening() {
           <DotBrain ref={brainRef} label={OPENING.brainLabel} />
         </div>
         <div className="opening-copy">
-          <h1>
+          <h2>
             {OPENING.title[0]}
             <br />
             {OPENING.title[1]}
-          </h1>
+          </h2>
           <svg className="ecg" viewBox="0 0 1000 90" aria-hidden="true">
             <path pathLength={1} d={ECG} />
           </svg>

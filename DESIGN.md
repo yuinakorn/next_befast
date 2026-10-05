@@ -42,6 +42,14 @@ colors:
   on-brand: "#FFFFFF"
   on-brand-muted: "#A8B3D4"
   on-brand-alert: "#FF5560"
+  royal-paper: "#EEF3FB"
+  royal-ink: "#173465"
+  royal-gold: "#8A641D"
+  royal-blue: "#1674B8"
+  royal-paper-dark: "#101B34"
+  royal-ink-dark: "#EEF3FB"
+  royal-gold-dark: "#E8C878"
+  royal-blue-dark: "#65B7E8"
 typography:
   display:
     fontFamily: "Anuphan, Noto Sans Thai, Leelawadee UI, Thonburi, system-ui, sans-serif"
@@ -201,6 +209,14 @@ token ทุกตัวมีค่าสำหรับโหมดมืด (
 - **Campaign Navy / กรมท่าแคมเปญ** (`brand-navy`): พื้นบทเปิด และแถบแคมเปญใน footer
 - **Campaign Red / แดงแคมเปญ** (`brand-red`): อยู่ในไฟล์โลโก้เท่านั้น
 - **บนพื้นกรมท่า:** ตัวหนังสือ `on-brand` (13.2:1), ป้ายกำกับ `on-brand-muted` (6.3:1), ตัวเลขตัวนับขนาด ≥ 24px `on-brand-alert` (4.2:1), จุดแสงสมอง `pink` (4.9:1)
+
+### Royal Prelude (บทนำเฉลิมพระเกียรติ)
+- **Royal Paper / ฟ้ากระดาษพิธีการ** (`royal-paper`): พื้นเฉพาะบทนำ ค่าโหมดมืดเป็นกรมท่าลึก `#101B34`
+- **Royal Ink / กรมท่าพระราชกรณียกิจ** (`royal-ink`): เนื้อหาและเส้น ได้คอนทราสต์ 10.99:1 บน `royal-paper`
+- **Royal Gold / ทองสงบ** (`royal-gold`): ใช้เฉพาะหัวเรื่องและเส้นคั่น ได้คอนทราสต์ 4.81:1 บน `royal-paper` ห้ามใช้กับเนื้อความขนาดเล็ก
+- **Royal Blue / ฟ้าเฉลิมพระเกียรติ** (`royal-blue`): ใช้กับเลขลำดับขนาดใหญ่หรือกราฟิกเท่านั้น; ป้ายกำกับขนาดเล็กใช้ `royal-ink`
+- ในโหมดมืด `royal-gold-dark` บน `royal-paper-dark` ได้คอนทราสต์ 10.55:1; token ทั้งสี่ประกาศทั้ง media-query และ `data-theme` เช่นเดียวกับ token หลัก
+- กรอบนูนและแสงเงาที่เห็นในพระบรมฉายาลักษณ์เป็นส่วนหนึ่งของภาพต้นฉบับจากบอร์ด ไม่ใช่ CSS drop shadow; UI รอบภาพยังคงแบนเหมือนกระดาษ
 
 ### Named Rules
 **The One Alarm Rule.** ใช้สีแดงเฉพาะสิ่งที่เกี่ยวกับเวลา ความเร่งด่วน หรือสิ่งที่ต้องลงมือทำ ห้ามใช้ตกแต่ง ลองถามว่า "ถ้าเอาสีแดงออก คนอ่านจะพลาดเรื่องเร่งด่วนไหม" ถ้าไม่พลาด ก็ไม่ต้องใช้สีแดง

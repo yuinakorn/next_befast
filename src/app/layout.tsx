@@ -4,6 +4,7 @@ import { KeepWords } from "@/components/ui/KeepWords";
 import "./globals.css";
 import "@/styles/chapter-3.css";
 import "@/styles/chapter-4.css";
+import "@/styles/royal-prelude.css";
 import "@/styles/opening.css";
 import "@/styles/story.css";
 import "@/styles/chapter-1.css";

@@ -9,12 +9,14 @@ import { Chapter7 } from "@/components/chapter-7/Chapter7";
 import { Chapter8 } from "@/components/chapter-8/Chapter8";
 import { Closing } from "@/components/closing/Closing";
 import { Opening } from "@/components/opening/Opening";
+import { RoyalPrelude } from "@/components/royal-prelude/RoyalPrelude";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 
 export default function Home() {
   return (
     <>
       <ProgressBar />
+      <RoyalPrelude />
       <Opening />
       <Chapter1 />
       <Chapter2 />
