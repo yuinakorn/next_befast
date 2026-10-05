@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T10:05:42.000Z",
+  "generatedAt": "2026-10-05T04:35:08.000Z",
   "title": "Design System: ทุกนาทีที่ช้า คือสมองที่สูญเสีย",
   "extensions": {
     "colorMeta": {
@@ -93,6 +93,11 @@
           "#FFBAB3",
           "#FEE9E7"
         ]
+      },
+      "red-soft": {
+        "role": "primary",
+        "displayName": "Soft Alarm Wash / พื้นเตือนอ่อน",
+        "canonical": "rgba(211,34,45,.08)"
       },
       "pink": {
         "role": "tertiary",
@@ -189,6 +194,21 @@
           "#E6EFFE"
         ]
       },
+      "orange": {
+        "role": "tertiary",
+        "displayName": "Outcome Orange / ส้มผลลัพธ์ความพิการ",
+        "canonical": "#C9731B"
+      },
+      "shield": {
+        "role": "secondary",
+        "displayName": "Prevention Teal / ฟ้าเขียวการป้องกัน",
+        "canonical": "#0F7A89"
+      },
+      "plaque": {
+        "role": "tertiary",
+        "displayName": "Plaque Gold / ทองคราบไขมัน",
+        "canonical": "#B07C00"
+      },
       "visual-bg": {
         "role": "neutral",
         "displayName": "Plate Blue / ฟ้าพื้นภาพ",
@@ -273,6 +293,21 @@
         "role": "secondary",
         "displayName": "Night Catheter Blue / ฟ้าสายสวนโหมดมืด",
         "canonical": "#5B91F2"
+      },
+      "orange-dark": {
+        "role": "tertiary",
+        "displayName": "Night Outcome Orange / ส้มผลลัพธ์โหมดมืด",
+        "canonical": "#F0A050"
+      },
+      "shield-dark": {
+        "role": "secondary",
+        "displayName": "Night Prevention Teal / ฟ้าเขียวการป้องกันโหมดมืด",
+        "canonical": "#4FC3D0"
+      },
+      "plaque-dark": {
+        "role": "tertiary",
+        "displayName": "Night Plaque Gold / ทองคราบไขมันโหมดมืด",
+        "canonical": "#F2C94C"
       },
       "brand-navy": {
         "role": "neutral",

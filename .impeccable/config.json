@@ -44,6 +44,24 @@
         "value": ".95rem",
         "createdAt": "2026-10-04T11:42:13.750Z",
         "reason": "Documented pinned-stage mobile body size in DESIGN.md."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "10px",
+        "createdAt": "2026-10-05T04:29:10.146Z",
+        "reason": "Chapter 5 SVG icon numeral must stay fixed in its compact viewBox"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "22px",
+        "createdAt": "2026-10-05T04:29:10.218Z",
+        "reason": "Chapter 5 SVG outcome count must stay fixed against the 400 by 320 diagram viewBox"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": ".9rem",
+        "createdAt": "2026-10-05T04:32:21.276Z",
+        "reason": "Existing Chapter 5 myth-card label size is intentional and outside this icon-only change"
       }
     ]
   }

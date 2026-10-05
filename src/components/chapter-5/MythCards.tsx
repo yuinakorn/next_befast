@@ -3,6 +3,17 @@
 import { useId, useState } from "react";
 import { MYTHS } from "@/content/chapter-5";
 
+function FlipCardIcon() {
+  return (
+    <span className="myth-flip" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M12 4.5a7.5 7.5 0 1 0 6.82 4.4.75.75 0 0 1 1.36-.63A9 9 0 1 1 12 3Z" />
+        <path d="M12 6.7V.8a.4.4 0 0 1 .66-.31l3.54 2.95a.4.4 0 0 1 0 .62l-3.54 2.95A.4.4 0 0 1 12 6.7Z" />
+      </svg>
+    </span>
+  );
+}
+
 /**
  * Myth / fact flip cards. Each card is a toggle button: its name stays the myth, `aria-pressed`
  * says whether it is flipped, and the fact is announced through a polite live region (and
@@ -46,15 +57,14 @@ export function MythCards() {
                       <span className="myth-label">ความเชื่อผิด:</span>{" "}
                       <span className="myth-text">{m.myth}</span>
                     </span>
-                    <svg className="myth-flip" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M20,12 A8,8 0 1 1 15.5,4.9 M15.5,2 V5.5 H19" />
-                    </svg>
+                    <FlipCardIcon />
                   </span>
                   <span className="myth-face myth-back" aria-hidden={!on}>
                     <span className="myth-copy" id={backId}>
                       <span className="myth-label">ความจริง:</span>{" "}
                       <span className="myth-text">{m.fact}</span>
                     </span>
+                    <FlipCardIcon />
                   </span>
                 </span>
               </button>

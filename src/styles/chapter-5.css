@@ -71,29 +71,32 @@
   border: 2px solid var(--ink); border-radius: 12px; background: var(--surface);
   -webkit-backface-visibility: hidden; backface-visibility: hidden;
 }
-.myth-back { transform: rotateY(180deg); border-color: var(--go); padding-right: 18px; }
+.myth-back { transform: rotateY(180deg); border-color: var(--go-text); background: var(--go-text); }
 .myth-label { display: block; font-size: .9rem; font-weight: 700; line-height: 1.4; color: var(--ink-2); }
-.myth-back .myth-label { color: var(--go-text); }
+.myth-back .myth-label { color: var(--surface); }
 .myth-text { display: block; font-weight: 600; line-height: 1.55; color: var(--ink); }
-.myth-back .myth-text { font-weight: 500; }
+.myth-back .myth-text { color: var(--surface); font-weight: 500; }
 .myth-flip {
-  position: absolute; top: 14px; right: 14px; width: 24px; height: 24px;
-  fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  position: absolute; top: 12px; right: 12px; display: grid; place-items: center;
+  width: 36px; height: 36px; border: 1.5px solid var(--line); border-radius: 12px;
+  background: var(--paper); color: var(--ink-2);
 }
+.myth-flip svg {
+  width: 24px; height: 24px; fill: currentColor;
+}
+.myth-back .myth-flip { border-color: var(--surface); background: var(--surface); color: var(--go-text); }
 @media (hover: hover) and (pointer: fine) {
-  .myth-card:hover .myth-face { background: var(--paper); }
+  .myth-card:hover .myth-front { background: var(--paper); }
 }
 
 @media (min-width: 700px) and (min-height: 900px) {
   .myth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .myth-face { padding: 20px 56px 20px 22px; }
-  .myth-back { padding-right: 22px; }
   .myth-text { font-size: 1.05em; }
 }
 @media (min-width: 861px) {
   .myth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .myth-face { padding: 20px 56px 20px 22px; }
-  .myth-back { padding-right: 22px; }
   .myth-text { font-size: 1.05em; }
 }
 @media (orientation: landscape) and (max-height: 500px) {
