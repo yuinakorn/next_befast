@@ -87,6 +87,10 @@ test("royal prelude keeps the approved story order and source copy markers", () 
     ROYAL_PRELUDE.duties.map((d) => d.id),
     ["role-model", "queen-health", "cycling-legacy"],
   );
+  assert.equal(
+    ROYAL_PRELUDE.duties[1].title,
+    "สมเด็จพระนางเจ้า ฯ พระบรมราชินี ทรงเป็นแบบอย่างอันประเสริฐแห่งการมีสุขภาวะที่สมบูรณ์",
+  );
   const copy = ROYAL_PRELUDE.duties.flatMap((d) => d.paragraphs).join(" ");
   for (const phrase of [
     "การทรงจักรยาน",

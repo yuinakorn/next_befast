@@ -14,15 +14,19 @@ try {
 
   const result = await page.evaluate(() => ({
     h1s: [...document.querySelectorAll("h1")].map((el) => el.textContent?.trim()),
+    openingH2s: [...document.querySelectorAll(".opening h2")].map((el) => el.textContent?.trim()),
     firstSection: document.querySelector("main, body")?.querySelector("section, header")?.id,
     duties: document.querySelectorAll("[data-royal-duty]").length,
+    progressAway: document.querySelector(".progress")?.classList.contains("is-away"),
     royalTop: document.querySelector("#royal-prelude")?.getBoundingClientRect().top,
     openingTop: document.querySelector(".opening")?.getBoundingClientRect().top,
   }));
 
   assert.deepEqual(result.h1s, ["แสงแห่งพระบารมี"]);
+  assert.deepEqual(result.openingH2s, ["ทุกนาทีที่ช้าคือสมองที่สูญเสีย"]);
   assert.equal(result.firstSection, "royal-prelude");
   assert.equal(result.duties, 3);
+  assert.equal(result.progressAway, true);
   assert.ok(
     result.royalTop !== undefined &&
       result.openingTop !== undefined &&
@@ -44,19 +48,28 @@ try {
     document.querySelector(".royal-gallery-state:nth-child(2)")?.classList.contains("is-active"),
   );
 
-  const noJsPage = await browser.newPage();
-  await noJsPage.setViewport({ width: 1280, height: 800 });
-  await noJsPage.setJavaScriptEnabled(false);
-  await noJsPage.goto(url, { waitUntil: "networkidle0" });
-  const noJsResult = await noJsPage.evaluate(() => ({
-    duties: document.querySelectorAll("[data-royal-duty]").length,
-    images: document.querySelectorAll(".royal-duty-media img").length,
-    inlineMedia: getComputedStyle(document.querySelector(".royal-duty-media")).display,
-  }));
+  for (const viewport of [
+    { width: 360, height: 640 },
+    { width: 1280, height: 800 },
+  ]) {
+    const noJsPage = await browser.newPage();
+    await noJsPage.setViewport(viewport);
+    await noJsPage.setJavaScriptEnabled(false);
+    await noJsPage.goto(url, { waitUntil: "networkidle0" });
+    const noJsResult = await noJsPage.evaluate(() => ({
+      duties: document.querySelectorAll("[data-royal-duty]").length,
+      images: document.querySelectorAll(".royal-duty-media img").length,
+      inlineMedia: getComputedStyle(document.querySelector(".royal-duty-media")).display,
+      copy: document.querySelector("#royal-duties")?.textContent,
+    }));
 
-  assert.equal(noJsResult.duties, 3);
-  assert.ok(noJsResult.images >= 4);
-  assert.notEqual(noJsResult.inlineMedia, "none");
+    assert.equal(noJsResult.duties, 3);
+    assert.ok(noJsResult.images >= 4);
+    assert.notEqual(noJsResult.inlineMedia, "none");
+    for (const phrase of ["การทรงจักรยาน", "อะเมซิ่ง ไทยแลนด์ มาราธอน แบงค็อก 2024", "Bike for Dad"]) {
+      assert.ok(noJsResult.copy?.includes(phrase));
+    }
+  }
 
   const reducedPage = await browser.newPage();
   await reducedPage.setViewport({ width: 1280, height: 800 });
