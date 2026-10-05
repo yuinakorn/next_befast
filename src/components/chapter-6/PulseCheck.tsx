@@ -5,6 +5,7 @@ import { PULSE_CHECK } from "@/content/chapter-6";
 import { remainingMs, ringTarget, secondsLeft } from "@/lib/countdown";
 
 type Phase = "idle" | "running" | "done";
+type AnswerId = (typeof PULSE_CHECK.answers)[number]["id"];
 
 const TOTAL = PULSE_CHECK.seconds;
 /** Spoken once when the timer runs out (UI string, not script copy). */
@@ -13,7 +14,8 @@ const DONE_NOTICE = `ครบ ${TOTAL} วินาที`;
 const POLL_MS = 200;
 
 /**
- * "ลองจับชีพจรตัวเอง": a 30-second countdown for counting the pulse. The time is computed from a
+ * "ลองจับชีพจรตัวเอง": a 30-second countdown for feeling whether the pulse is regular (an AF self-check,
+ * not a count). When it ends the reader picks what they felt and gets the matching advice. The time is computed from a
  * timestamp (performance.now) so a throttled tab or a slow frame never drifts it. Nothing is
  * stored or sent. The advice is plain text under the instructions, always visible. Only the end of the
  * countdown is announced (aria-live); the ticking number is a `role="timer"`, which screen readers do
@@ -22,6 +24,7 @@ const POLL_MS = 200;
 export function PulseCheck() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [left, setLeft] = useState<number>(TOTAL);
+  const [answer, setAnswer] = useState<AnswerId | null>(null);
   const startedAt = useRef(0);
 
   useEffect(() => {
@@ -38,10 +41,12 @@ export function PulseCheck() {
   const start = () => {
     startedAt.current = performance.now();
     setLeft(TOTAL);
+    setAnswer(null);
     setPhase("running");
   };
   const reset = () => {
     setLeft(TOTAL);
+    setAnswer(null);
     setPhase("idle");
   };
 
@@ -52,6 +57,7 @@ export function PulseCheck() {
     <section className="chapter-extra c6-pulse" aria-labelledby="pulse-title">
       <div className="c6-pulse-copy">
         <h3 id="pulse-title">{PULSE_CHECK.title}</h3>
+        <p>{PULSE_CHECK.why}</p>
         <p>{PULSE_CHECK.how}</p>
         <p className="c6-advice">{PULSE_CHECK.advice}</p>
       </div>
@@ -84,9 +90,30 @@ export function PulseCheck() {
             )}
           </div>
         </div>
+        {phase === "done" && (
+          <fieldset className="c6-pulse-ask">
+            <legend>{PULSE_CHECK.ask}</legend>
+            <div className="c6-pulse-answers">
+              {PULSE_CHECK.answers.map((a) => (
+                <button
+                  key={a.id}
+                  type="button"
+                  className="c6-pulse-answer"
+                  aria-pressed={answer === a.id}
+                  onClick={() => setAnswer(a.id)}
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+        )}
+        <p className="c6-pulse-result" aria-live="polite">
+          {phase === "done" && answer ? PULSE_CHECK.answers.find((a) => a.id === answer)?.result : ""}
+        </p>
         <button
           type="button"
-          className={running ? "c6-pulse-btn c6-pulse-btn--stop" : "c6-pulse-btn"}
+          className={running || phase === "done" ? "c6-pulse-btn c6-pulse-btn--stop" : "c6-pulse-btn"}
           onClick={running ? reset : start}
         >
           {label}
