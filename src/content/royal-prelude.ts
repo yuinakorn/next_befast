@@ -16,7 +16,7 @@ export type RoyalDuty = {
 
 export const ROYAL_ASSETS: Record<RoyalAssetId, RoyalAsset> = {
   portrait: {
-    src: "/royal/rama-x-portrait.webp",
+    src: "/royal/rama-x-portrait-original.webp",
     alt: "พระบรมฉายาลักษณ์พระบาทสมเด็จพระวชิรเกล้าเจ้าอยู่หัว",
     width: 900,
     height: 1252,
