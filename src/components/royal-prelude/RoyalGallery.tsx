@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ROYAL_ASSETS } from "@/content/royal-prelude";
 import { activeRoyalDuty } from "@/lib/royal-gallery";
 
@@ -21,7 +22,11 @@ export function RoyalGallery({ children }: { children: ReactNode }) {
       observer?.disconnect();
       observer = undefined;
 
-      if (!media.matches || !rootRef.current) {
+      if (
+        !media.matches ||
+        !rootRef.current ||
+        typeof IntersectionObserver === "undefined"
+      ) {
         setEnhanced(false);
         return;
       }
@@ -56,6 +61,11 @@ export function RoyalGallery({ children }: { children: ReactNode }) {
       media.removeEventListener("change", updateMode);
     };
   }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => window.cancelAnimationFrame(frame);
+  }, [enhanced]);
 
   const cycling = ROYAL_ASSETS.cycling;
   const running = ROYAL_ASSETS.running;

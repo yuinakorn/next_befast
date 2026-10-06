@@ -13,6 +13,7 @@ const CHROME = process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Conte
 const DEFAULT_VPS =
   "360x640,390x844,430x932,744x1133,768x1024,820x1180,1024x1366,1024x768,1180x820,740x360,932x430,1280x800";
 const PROGRESS = [0.1, 0.5, 0.9];
+const PIN4_EXPECTED = [["B"], ["F", "A"], ["T"]];
 
 function parseArgs(argv) {
   const out = { _: [] };
@@ -117,6 +118,15 @@ async function capture(opts) {
         );
         await wait(1300);
         await page.screenshot({ path: path.join(outDir, `${tag}-${id}-${p}.png`) });
+        if (id === "pin4") {
+          const activeLetter = await page.evaluate(
+            () => document.querySelector("#pin4 .letters button.on")?.textContent?.trim(),
+          );
+          const expectedLetters = PIN4_EXPECTED[PROGRESS.indexOf(p)];
+          if (!expectedLetters.includes(activeLetter ?? "")) {
+            errors.push(`pin4@${p} expected ${expectedLetters.join("/")}, got ${activeLetter ?? "none"}`);
+          }
+        }
         const overflow = await page.evaluate((id) => {
           const stage = document.querySelector(`#${id} .stage`);
           if (!stage) return [];
@@ -157,6 +167,7 @@ async function capture(opts) {
 
 function compare(dirA, dirB, opts) {
   const only = opts.only ? String(opts.only).split(",") : null;
+  const max = Number(opts.max ?? 10);
   const files = fs
     .readdirSync(dirA)
     .filter((f) => f.endsWith(".png") && fs.existsSync(path.join(dirB, f)))
@@ -175,7 +186,8 @@ function compare(dirA, dirB, opts) {
     worst = Math.max(worst, pct);
     console.log(`${f}: ${pct.toFixed(2)}%`);
   }
-  console.log(`compared ${files.length} files, worst ${worst.toFixed(2)}%`);
+  console.log(`compared ${files.length} files, worst ${worst.toFixed(2)}% (max ${max.toFixed(2)}%)`);
+  if (files.length === 0 || !Number.isFinite(max) || worst > max) process.exitCode = 1;
 }
 
 const [cmd, ...rest] = process.argv.slice(2);

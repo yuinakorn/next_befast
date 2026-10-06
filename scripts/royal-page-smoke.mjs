@@ -48,6 +48,17 @@ try {
     document.querySelector(".royal-gallery-state:nth-child(2)")?.classList.contains("is-active"),
   );
 
+  await page.evaluate(() => {
+    const pin = document.querySelector("#pin4");
+    const spacer = pin?.parentElement?.classList.contains("pin-spacer") ? pin.parentElement : pin;
+    if (!spacer) return;
+    const top = spacer.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, Math.round(top + (spacer.offsetHeight - window.innerHeight) * 0.1));
+  });
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  const firstBefastLetter = await page.$eval("#pin4 .letters button.on", (el) => el.textContent);
+  assert.equal(firstBefastLetter, "B");
+
   for (const viewport of [
     { width: 360, height: 640 },
     { width: 1280, height: 800 },
@@ -70,6 +81,24 @@ try {
       assert.ok(noJsResult.copy?.includes(phrase));
     }
   }
+
+  const observerFallbackPage = await browser.newPage();
+  await observerFallbackPage.setViewport({ width: 1280, height: 800 });
+  await observerFallbackPage.evaluateOnNewDocument(() => {
+    Object.defineProperty(window, "IntersectionObserver", {
+      configurable: true,
+      value: undefined,
+    });
+  });
+  await observerFallbackPage.goto(url, { waitUntil: "networkidle0" });
+  const observerFallback = await observerFallbackPage.evaluate(() => ({
+    duties: document.querySelectorAll("[data-royal-duty]").length,
+    enhanced: document.querySelector(".royal-gallery")?.classList.contains("is-enhanced"),
+    inlineMedia: getComputedStyle(document.querySelector(".royal-duty-media")).display,
+  }));
+  assert.equal(observerFallback.duties, 3);
+  assert.equal(observerFallback.enhanced, false);
+  assert.notEqual(observerFallback.inlineMedia, "none");
 
   const reducedPage = await browser.newPage();
   await reducedPage.setViewport({ width: 1280, height: 800 });
