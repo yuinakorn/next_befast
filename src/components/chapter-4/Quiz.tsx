@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/track";
 import { KEYS } from "./BefastStage";
 
 const CASES = [
@@ -31,6 +32,24 @@ export function Quiz() {
   const [state, setState] = useState<CaseState[]>(() => CASES.map(() => ({ wrong: [], solved: false })));
   const solvedCount = state.filter((s) => s.solved).length;
   const allSolved = solvedCount === CASES.length;
+  const reported = useRef<boolean[]>(CASES.map(() => false));
+  const finished = useRef(false);
+
+  // Anonymous results for Umami: which signal each case was, and the wrong letters tried first.
+  useEffect(() => {
+    state.forEach((s, i) => {
+      if (!s.solved || reported.current[i]) return;
+      reported.current[i] = true;
+      track("befast-answer", { signal: CASES[i].answer, firstTry: s.wrong.length === 0, wrong: s.wrong.join(",") || "-" });
+    });
+    if (allSolved && !finished.current) {
+      finished.current = true;
+      track("befast-quiz-complete", {
+        firstTry: state.filter((s) => s.wrong.length === 0).length,
+        total: CASES.length,
+      });
+    }
+  }, [state, allSolved]);
 
   function choose(ci: number, key: string) {
     setState((prev) =>

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SHARE } from "@/content/chapter-8";
-import { shareOrCopy } from "@/lib/share";
+import { shareOrCopy, shareUrl } from "@/lib/share";
+import { track } from "@/lib/track";
 
 /** How long "คัดลอกลิงก์แล้ว" stays on screen. */
 const MESSAGE_MS = 4000;
@@ -11,7 +12,7 @@ const MESSAGE_MS = 4000;
  * "ส่งต่อให้คนที่คุณรัก": opens the system share sheet when the browser has one, otherwise copies the
  * page link and says so (aria-live). Closing the sheet is silent. If neither sharing nor copying works,
  * the page link is shown as selectable text, with a line (aria-live) that says to copy it from there.
- * Nothing is tracked.
+ * The outcome (shared, copied, dismissed, failed) is sent to Umami, nothing else.
  */
 export function ShareButton() {
   const [message, setMessage] = useState("");
@@ -25,8 +26,9 @@ export function ShareButton() {
     if (busy.current) return;
     busy.current = true;
     try {
-      const url = location.href;
+      const url = shareUrl(location.href);
       const outcome = await shareOrCopy(navigator, { title: SHARE.title, text: SHARE.text, url });
+      track("share", { outcome });
       window.clearTimeout(timer.current);
       if (outcome === "copied") {
         setManualUrl("");

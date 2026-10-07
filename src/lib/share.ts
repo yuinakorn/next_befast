@@ -39,3 +39,15 @@ export async function shareOrCopy(nav: ShareNavigator, data: ShareData): Promise
   }
   return copy(nav, data.url);
 }
+
+/**
+ * The link to pass on: the reader's own campaign tags (utm_*) and #hash are dropped and replaced by
+ * utm_source=share, so visits from shared links are counted as shares, not as the original channel.
+ */
+export function shareUrl(href: string): string {
+  const u = new URL(href);
+  for (const key of [...u.searchParams.keys()]) if (key.startsWith("utm_")) u.searchParams.delete(key);
+  u.searchParams.set("utm_source", "share");
+  u.hash = "";
+  return u.toString();
+}
