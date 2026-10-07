@@ -176,9 +176,15 @@ button { font: inherit; color: inherit; }
   background: var(--brand-navy); color: var(--on-brand);
   padding: 32px clamp(20px, 6vw, 40px) calc(32px + env(safe-area-inset-bottom, 0px));
 }
-.campaign-band-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 18px; }
-.campaign-logo { width: 112px; height: auto; flex: none; display: block; }
-.campaign-band p { font-size: .9rem; line-height: 1.5; color: var(--on-brand); }
+.campaign-band-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+.campaign-logo { width: 96px; height: auto; flex: none; display: block; }
+.campaign-band p { min-width: 0; flex: 1; font-size: .9rem; line-height: 1.5; color: var(--on-brand); }
+.campaign-agency {
+  flex: none;
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid color-mix(in srgb, var(--on-brand) 24%, transparent);
+}
+.campaign-agency-logo { width: 56px; height: 56px; display: block; border-radius: 50%; }
 
 /* ---------- larger screens ---------- */
 @media (min-width: 761px) {
@@ -187,6 +193,8 @@ button { font: inherit; color: inherit; }
   .chapter-visual--treatment figcaption { padding: clamp(22px, 3vw, 36px) clamp(0px, 4vw, 48px) 0; }
 }
 @media (min-width: 861px) {
+  .campaign-logo { width: 112px; }
+  .campaign-agency-logo { width: 72px; height: 72px; }
   .ch-head--visual {
     grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); grid-template-areas: "copy art";
     gap: clamp(32px, 6vw, 88px); padding-top: 12vh; padding-bottom: 10vh;

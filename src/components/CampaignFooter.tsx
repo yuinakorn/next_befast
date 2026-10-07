@@ -17,7 +17,13 @@ export function CampaignFooter() {
       </div>
       <div className="campaign-band">
         <div className="campaign-band-inner">
-          <Image src="/brand/wrb12-on-navy.webp" alt={OPENING.logoAlt} width={640} height={441} className="campaign-logo" />
+          <Image
+            src="/brand/wrb12-on-navy.webp"
+            alt={OPENING.logoAlt}
+            width={640}
+            height={441}
+            className="campaign-logo"
+          />
           <p>
             แสงนำใจไทยทั้งชาติ
             <br />
@@ -25,6 +31,16 @@ export function CampaignFooter() {
             <br />
             ครั้งที่ 12 เฉลิมพระเกียรติ
           </p>
+          <div className="campaign-agency">
+            <Image
+              src="/brand/chiang-mai-ppho.png"
+              alt="สำนักงานสาธารณสุขจังหวัดเชียงใหม่"
+              width={1000}
+              height={1000}
+              sizes="(min-width: 861px) 72px, 56px"
+              className="campaign-agency-logo"
+            />
+          </div>
         </div>
       </div>
     </footer>

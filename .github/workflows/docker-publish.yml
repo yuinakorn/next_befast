@@ -59,30 +59,27 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  ## Remove this job entirely if the server has a public IP reachable via SSH —
-  ## use appleboy/ssh-action instead. Keep it if the server has NO public IP
-  ## (self-hosted runner makes an outbound-only connection to GitHub).
-  #deploy:
-  #  needs: build
-  #  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-  #  runs-on: [self-hosted, next-befast]
-  #  permissions:
-  #    packages: read
-  #
-  #  steps:
-  #    - name: Log in to GHCR
-  #      uses: docker/login-action@v3
-  #      with:
-  #        registry: ${{ env.REGISTRY }}
-  #        username: ${{ github.actor }}
-  #        password: ${{ secrets.GITHUB_TOKEN }}
-  #
-  #    - name: Deploy
-  #      run: |
-  #        cd "$DEPLOY_PATH"
-  #        docker compose pull
-  #        docker rm -f next-befast || true
-  #        docker compose up -d
-  #        docker image prune -f
-  #      env:
-  #        DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/opt/next-befast' }}
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, next-befast]
+    permissions:
+      packages: read
+
+    steps:
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        run: |
+          cd "$DEPLOY_PATH"
+          docker compose pull
+          docker rm -f next-befast || true
+          docker compose up -d
+          docker image prune -f
+        env:
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/var/Docker/js/next_befast' }}
