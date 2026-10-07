@@ -43,6 +43,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   pnpm lint        # ESLint
   pnpm test        # unit tests (node --test)
   pnpm content:review  # สร้าง docs/medical-review.md ใหม่หลังแก้ src/content/
+  pnpm umami:dev   # Umami ในเครื่อง (ต้องเปิด OrbStack/Docker) dashboard http://localhost:3012 ข้อมูลแยกจาก prod ตั้งค่าใน .env.local ตาม .env.example
   pnpm shots capture --out .shots/x   # ถ่ายภาพทุกฉากที่ pin + ตรวจเนื้อหาล้น (ต้องเปิด pnpm start -p 3100 ก่อน)
   pnpm dlx serve . # ดู index.html ต้นแบบ
   ```

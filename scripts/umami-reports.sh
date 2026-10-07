@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Create the Umami reports for the stroke site (funnel + goals).
-# Run on the server from the deploy directory: ./umami-reports.sh  (reads .env)
+# Server: run from the deploy directory (reads .env).
+# Local:  ENV_FILE=.env.local scripts/umami-reports.sh
 set -euo pipefail
-source .env
+source "${ENV_FILE:-.env}"
+UMAMI_WEBSITE_ID=${UMAMI_WEBSITE_ID:-${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}}
 B=${UMAMI_LOCAL_URL:-http://localhost:3012}
 T=$(curl -sf -X POST "$B/api/auth/login" -H "Content-Type: application/json" \
   -d "{\"username\":\"$UMAMI_USERNAME\",\"password\":\"$UMAMI_PASSWORD\"}" | sed -E 's/.*"token":"([^"]+)".*/\1/')

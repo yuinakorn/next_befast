@@ -19,17 +19,9 @@ async function login(base: string): Promise<string | null> {
   return ((await res.json()) as { token?: string }).token ?? null;
 }
 
-/** Without Umami (e.g. local dev), read the total from another deployment's /api/visitors. */
-async function fetchUpstreamVisitors(url: string): Promise<number | null> {
-  const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(3000) });
-  return res.ok ? readVisitors(await res.json()) : null;
-}
-
 async function fetchVisitors(): Promise<number | null> {
-  const upstream = process.env.VISITORS_UPSTREAM_URL;
-  if (upstream) return fetchUpstreamVisitors(upstream);
   const base = process.env.UMAMI_URL;
-  const id = process.env.UMAMI_WEBSITE_ID;
+  const id = process.env.UMAMI_WEBSITE_ID || process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
   if (!base || !id || !process.env.UMAMI_PASSWORD) return null;
 
   for (let attempt = 0; attempt < 2; attempt++) {

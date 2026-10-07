@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test \"src/**/*.test.ts\" \"scripts/**/*.test.ts\"",
+    "umami:dev": "docker compose -p next-befast-dev -f docker-compose.dev.yml up -d",
     "content:review": "node scripts/review-report.ts",
     "shots": "node scripts/shots.mjs"
   },
