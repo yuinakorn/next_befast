@@ -179,12 +179,12 @@ button { font: inherit; color: inherit; }
 .campaign-band-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
 .campaign-logo { width: 96px; height: auto; flex: none; display: block; }
 .campaign-band p { min-width: 0; flex: 1; font-size: .9rem; line-height: 1.5; color: var(--on-brand); }
-.campaign-agency {
-  flex: none;
-  padding-inline-start: 14px;
-  border-inline-start: 1px solid color-mix(in srgb, var(--on-brand) 24%, transparent);
+/* partner seals carry dark navy text, so they sit on a white plate inside the navy band */
+.campaign-partners {
+  max-width: 860px; margin: 24px auto 0; padding: 12px;
+  background: var(--on-brand); border-radius: 12px;
 }
-.campaign-agency-logo { width: 56px; height: 56px; display: block; border-radius: 50%; }
+.campaign-partners-logo { width: 100%; height: auto; display: block; }
 
 /* ---------- larger screens ---------- */
 @media (min-width: 761px) {
@@ -194,7 +194,7 @@ button { font: inherit; color: inherit; }
 }
 @media (min-width: 861px) {
   .campaign-logo { width: 112px; }
-  .campaign-agency-logo { width: 72px; height: 72px; }
+  .campaign-partners { padding: 20px 24px; }
   .ch-head--visual {
     grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); grid-template-areas: "copy art";
     gap: clamp(32px, 6vw, 88px); padding-top: 12vh; padding-bottom: 10vh;

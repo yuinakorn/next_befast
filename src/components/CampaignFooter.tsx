@@ -31,16 +31,16 @@ export function CampaignFooter() {
             <br />
             ครั้งที่ 12 เฉลิมพระเกียรติ
           </p>
-          <div className="campaign-agency">
-            <Image
-              src="/brand/chiang-mai-ppho.png"
-              alt="สำนักงานสาธารณสุขจังหวัดเชียงใหม่"
-              width={1000}
-              height={1000}
-              sizes="(min-width: 861px) 72px, 56px"
-              className="campaign-agency-logo"
-            />
-          </div>
+        </div>
+        <div className="campaign-partners">
+          <Image
+            src="/brand/partners.webp"
+            alt="ตราหน่วยงานผู้ร่วมจัด เช่น คณะแพทยศาสตร์ศิริราชพยาบาล มหาวิทยาลัยมหิดล ศูนย์โรคหลอดเลือดสมองศิริราช มูลนิธิศิริราช มูลนิธิไทยคม กระทรวงสาธารณสุข กระทรวงการท่องเที่ยวและกีฬา กรมประชาสัมพันธ์ และสถาบันการแพทย์ฉุกเฉินแห่งชาติ"
+            width={1965}
+            height={390}
+            sizes="(min-width: 861px) 812px, calc(100vw - 72px)"
+            className="campaign-partners-logo"
+          />
         </div>
       </div>
     </footer>
