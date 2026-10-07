@@ -11,8 +11,9 @@ services:
       UMAMI_USERNAME: ${UMAMI_USERNAME:-admin}
       UMAMI_PASSWORD: ${UMAMI_PASSWORD:-}
 
-  # Visitor analytics. The site proxies /stats/* here, so Umami is only
-  # published on localhost (open the dashboard through an SSH tunnel).
+  # Visitor analytics. The site proxies the tracker under /stats; the
+  # dashboard is served by Nginx Proxy Manager (umami.chiangmaihealth.go.th
+  # -> next-befast-umami:3000) over the shared proxy network.
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest
     container_name: next-befast-umami
@@ -24,6 +25,7 @@ services:
       APP_SECRET: ${UMAMI_APP_SECRET}
       CLIENT_IP_HEADER: cf-connecting-ip
       DISABLE_TELEMETRY: 1
+    networks: [default, proxy]
     depends_on:
       umami-db:
         condition: service_healthy
@@ -47,3 +49,8 @@ services:
 
 volumes:
   umami-db-data:
+
+networks:
+  proxy:
+    external: true
+    name: nginx_proxy_manager_default
