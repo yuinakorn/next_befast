@@ -42,8 +42,8 @@
   50% { transform: translateY(3px); }
 }
 
-@media (max-width: 860px) and (max-height: 640px) {
-  .anim .stage--with-scroll-cue { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 46px); }
+@media (max-width: 860px) and (max-height: 700px) {
+  .anim .stage--with-scroll-cue { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); }
   .scroll-cue {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
     flex-direction: row;
