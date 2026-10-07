@@ -133,6 +133,9 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
     padding: "11px 14px"
+  scroll-cue:
+    textColor: "{colors.ink-2}"
+    size: "0.85rem"
   meter-value:
     textColor: "{colors.ink}"
     typography: "{typography.numeral}"
@@ -279,6 +282,8 @@ token ทุกตัวมีค่าสำหรับโหมดมืด (
 - tablet: คอลัมน์เดียว ฉาก `clamp(300px, 38svh, 480px)` การ์ดกว้างสุด 36em อยู่กลางจอ
 - desktop: ตัวอักษรเต็มแถวบน ฉากและการ์ดอยู่คู่กัน 1:1
 - landscape: ตัวอักษรอยู่บน ฉากซ้าย การ์ดขวา (2:3) ซ่อนคำแนะนำ
+
+**ตัวนำทางฉากที่ pin (`ScrollCue`):** ทุกฉากในบท 1–8 แสดงข้อความนำทางและลูกศรที่กึ่งกลางด้านล่าง ใช้ `ink-2` กับข้อความและ `red` กับลูกศรเพราะเป็นคำสั่งให้ลงมือทำ บท BEFAST ระบุทางเลือกการแตะตัวอักษรด้วย ต้องเผื่อ safe area, ย่อเป็นแนวนอนบนจอเตี้ย/แนวนอน และหยุดการขยับเมื่อเปิด `prefers-reduced-motion`.
 
 **ฉากบทที่ 6 (pin6):** ใช้ `StoryStage` ตามเลย์เอาต์ของบท 1–2 (phone และ tablet คอลัมน์เดียว ภาพอยู่บนข้อความ, desktop และ landscape ภาพซ้าย ข้อความขวา) ภาพ SVG viewBox 400×320 ขนาดคุมด้วย `.story-svg` (สูง `clamp(180px, 40svh, 320px)` บนมือถือ) จับชีพจรเป็นส่วนไม่ pin ต่อท้ายบท: phone ซ้อนแนวตั้ง (ข้อความ → การ์ดวงนับ), tablet และ desktop ข้อความซ้าย การ์ดขวา, landscape การ์ดย่อ วงนับ 112px
 

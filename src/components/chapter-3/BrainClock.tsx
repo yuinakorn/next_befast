@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ScrollCue } from "@/components/ui/ScrollCue";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -129,7 +130,7 @@ export function BrainClock() {
     // wrapper keeps ScrollTrigger's pin-spacer out of React-managed siblings
     <div>
       <section className="pin" id="pin3" ref={pinRef}>
-        <div className="stage stage3" id="stage3">
+        <div className="stage stage--with-scroll-cue stage3" id="stage3">
           <div className="hg-wrap">
             <Hourglass />
             <p className="legend">
@@ -188,6 +189,7 @@ export function BrainClock() {
             </div>
           </div>
         </div>
+        <ScrollCue />
       </section>
     </div>
   );

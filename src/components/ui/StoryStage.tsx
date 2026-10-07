@@ -5,6 +5,7 @@ import type { Step } from "@/content/types";
 import { usePinnedSteps, type PinnedScene } from "@/hooks/usePinnedSteps";
 import { formatStepCounter } from "@/lib/steps";
 import { Phrases } from "./Phrases";
+import { ScrollCue } from "./ScrollCue";
 
 type Props = {
   /** Pin id, e.g. "pin1". Also the hook for CSS scene states: #pin1[data-step="3"]. */
@@ -41,7 +42,7 @@ export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showS
     // wrapper keeps ScrollTrigger's pin-spacer out of React-managed siblings
     <div>
       <section className="pin" id={id} ref={pinRef} data-step="0">
-        <div className="stage story-stage">
+        <div className="stage stage--with-scroll-cue story-stage">
           <div className="story-scene">{scene}</div>
           <div className="steps">
             <ol className="sr-only">
@@ -75,6 +76,7 @@ export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showS
             })}
           </div>
         </div>
+        <ScrollCue />
       </section>
     </div>
   );

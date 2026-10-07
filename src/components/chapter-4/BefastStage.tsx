@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ScrollCue } from "@/components/ui/ScrollCue";
 import { SAY, SymptomScenes } from "./SymptomScenes";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -212,7 +213,7 @@ export function BefastStage() {
     // wrapper keeps ScrollTrigger's pin-spacer out of React-managed siblings
     <div>
       <section className="pin" id="pin4" ref={pinRef}>
-        <div className="stage stage4" id="stage4" data-fx="">
+        <div className="stage stage--with-scroll-cue stage4" id="stage4" data-fx="">
           <nav className="letters" aria-label="สัญญาณเตือน BEFAST">
             {KEYS.map((k, i) => (
               <button key={k} type="button" data-i={i} aria-label={LETTER_LABELS[k]}>
@@ -235,8 +236,8 @@ export function BefastStage() {
               </article>
             ))}
           </div>
-          <p className="hint">เลื่อนต่อเพื่อดูสัญญาณถัดไป หรือแตะตัวอักษรด้านบน</p>
         </div>
+        <ScrollCue>เลื่อนลง หรือแตะตัวอักษรด้านบน</ScrollCue>
       </section>
     </div>
   );

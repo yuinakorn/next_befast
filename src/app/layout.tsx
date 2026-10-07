@@ -10,6 +10,7 @@ import "@/styles/chapter-4.css";
 import "@/styles/royal-prelude.css";
 import "@/styles/opening.css";
 import "@/styles/story.css";
+import "@/styles/scroll-cue.css";
 import "@/styles/chapter-1.css";
 import "@/styles/chapter-2.css";
 import "@/styles/chapter-5.css";
