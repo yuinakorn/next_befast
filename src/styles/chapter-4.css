@@ -43,6 +43,8 @@
 .say { font-family: var(--font); font-weight: 600; font-size: 23px; fill: var(--ink); }
 .phone-num { font-family: var(--num); font-weight: 700; font-size: 21px; fill: var(--red); }
 .phone-t { font-family: var(--font); font-size: 12px; fill: var(--ink-2); }
+.clock-win { fill: var(--red); opacity: .16; }
+.clock-win-t { font-family: var(--num); font-weight: 700; font-size: 15px; fill: var(--red); }
 .sway-fig, .stars, .eye-ghost { transform-box: view-box; }
 .sway-fig { transform-origin: 160px 284px; }
 .stars { transform-origin: 160px 34px; }

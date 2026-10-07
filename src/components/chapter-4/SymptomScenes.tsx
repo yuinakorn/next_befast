@@ -122,6 +122,9 @@ export function SymptomScenes({ sayText }: { sayText: string }) {
       {/* T : time */}
       <g className="scene" data-k="T">
         <circle cx="122" cy="150" r="94" className="surf" style={{ stroke: "var(--ink)" }} strokeWidth="8" />
+        {/* 270-minute treatment window: 12 to 4:30 (135 degrees) */}
+        <path d="M122,150 L122,64 A86,86 0 0 1 182.81,210.81 Z" className="clock-win" />
+        <text x="164" y="132" textAnchor="middle" className="clock-win-t">270 นาที</text>
         <g id="ticks">
           {TICKS.map((t, k) => (
             <line key={k} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} strokeWidth={t.w} strokeLinecap="round" style={{ stroke: "var(--ink)" }} />
