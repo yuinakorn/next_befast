@@ -178,7 +178,17 @@ button { font: inherit; color: inherit; }
 }
 .campaign-band-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
 .campaign-logo { width: 96px; height: auto; flex: none; display: block; }
-.campaign-band p { min-width: 0; flex: 1; font-size: .9rem; line-height: 1.5; color: var(--on-brand); }
+.campaign-copy { min-width: 0; flex: 1; }
+.campaign-band p { font-size: .9rem; line-height: 1.55; color: var(--on-brand); }
+.campaign-band .visitor-count {
+  max-width: 22rem; margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--on-brand) 24%, transparent);
+  color: var(--on-brand-muted);
+}
+.visitor-count-num {
+  font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 700;
+  font-size: 1.15rem; color: var(--on-brand);
+}
 /* partner seals carry dark navy text, so they sit on a white plate inside the navy band */
 .campaign-partners {
   max-width: 860px; margin: 24px auto 0; padding: 12px;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { OPENING } from "@/content/opening";
+import { VisitorCount } from "./VisitorCount";
 
 /** Sources and disclaimer, then the navy Walk Run Bike 12 band (as on the campaign posters). */
 export function CampaignFooter() {
@@ -24,13 +25,16 @@ export function CampaignFooter() {
             height={441}
             className="campaign-logo"
           />
-          <p>
-            แสงนำใจไทยทั้งชาติ
-            <br />
-            เดิน วิ่ง ปั่น ป้องกันอัมพาต
-            <br />
-            ครั้งที่ 12 เฉลิมพระเกียรติ
-          </p>
+          <div className="campaign-copy">
+            <p>
+              แสงนำใจไทยทั้งชาติ
+              <br />
+              เดิน วิ่ง ปั่น ป้องกันอัมพาต
+              <br />
+              ครั้งที่ 12 เฉลิมพระเกียรติ
+            </p>
+            <VisitorCount />
+          </div>
         </div>
         <div className="campaign-partners">
           <Image
