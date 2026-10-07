@@ -11,3 +11,5 @@ docs
 index.html
 *.tsbuildinfo
 .DS_Store
+.env*
+!.env.example
