@@ -197,6 +197,16 @@ button { font: inherit; color: inherit; }
 }
 .campaign-partners-logo { width: 100%; height: auto; display: block; }
 
+/* survey QR before it opens (SurveyQr): blurred so it can't be scanned, with the opening date on top */
+.survey-qr-lock { position: relative; overflow: hidden; }
+.survey-qr-note .nowrap { white-space: nowrap; }
+.survey-qr-lock img { filter: blur(6px); }
+.survey-qr-note {
+  position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%);
+  margin: 0; padding: 12px 14px; text-align: center; font-weight: 700; line-height: 1.55;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--ink);
+}
+
 /* ---------- larger screens ---------- */
 @media (min-width: 761px) {
   .chapter-visual--treatment { width: calc(100% - clamp(40px, 12vw, 128px)); margin: 8vh auto 16vh; border-radius: 0; }

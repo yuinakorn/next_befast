@@ -148,6 +148,7 @@
 }
 .royal-activity-link svg { width: 20px; height: 20px; flex: 0 0 auto; }
 .royal-activity-link:focus-visible { outline-color: var(--royal-gold); outline-offset: 6px; }
+.royal-activity-link .survey-qr-note { background: var(--royal-paper); color: var(--royal-ink); border-color: var(--royal-gold); }
 
 @media (hover: hover) and (pointer: fine) {
   .royal-activity-link > span { transition: background-color 160ms ease, color 160ms ease; }

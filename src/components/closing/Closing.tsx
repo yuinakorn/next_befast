@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { CLOSING } from "@/content/closing";
 import { Phrases } from "@/components/ui/Phrases";
+import { SurveyQr } from "@/components/ui/SurveyQr";
 import { ClosingPlate } from "./ClosingPlate";
 import { ClosingQuiz } from "./ClosingQuiz";
 
@@ -37,34 +37,13 @@ export function Closing() {
             หรือแตะที่ภาพเพื่อตอบแบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง
             “ออกกําลังเป็นนิสัยห่างไกลสโตรค”
           </p>
-          <a
+          <SurveyQr
             className="closing-survey-link"
             href="https://limesurvey.tpak.or.th/index.php?r=survey/index&sid=821358&lang=th"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="เปิดแบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค ในแท็บใหม่"
-          >
-            <Image
-              src="/qr/stroke-learning-survey.jpg"
-              alt="คิวอาร์โค้ดสำหรับแบบประเมินกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค"
-              width={1148}
-              height={1148}
-              sizes="(max-width: 699px) 68vw, 280px"
-            />
-            <span>
-              เปิดลิงก์กิจกรรม
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M14 5h5v5M19 5l-8 8M19 13v6H5V5h6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </a>
+            label="เปิดแบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค ในแท็บใหม่"
+            src="/qr/stroke-learning-survey.jpg"
+            alt="คิวอาร์โค้ดสำหรับแบบประเมินกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค"
+          />
         </div>
       </section>
     </section>
