@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anuphan, Chakra_Petch } from "next/font/google";
 import Script from "next/script";
-import { UMAMI_WEBSITE_ID } from "@/lib/analytics";
+import { UMAMI_DOMAIN, UMAMI_WEBSITE_ID } from "@/lib/analytics";
 import { KeepWords } from "@/components/ui/KeepWords";
 import "./globals.css";
 import "@/styles/chapter-3.css";
@@ -54,7 +54,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <KeepWords />
         {UMAMI_WEBSITE_ID && (
-          <Script src="/stats/script.js" data-website-id={UMAMI_WEBSITE_ID} strategy="afterInteractive" />
+          <Script
+            src="/stats/script.js"
+            data-website-id={UMAMI_WEBSITE_ID}
+            data-domains={UMAMI_DOMAIN}
+            strategy="afterInteractive"
+          />
         )}
       </body>
     </html>
