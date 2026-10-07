@@ -1,17 +1,21 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { formatCount, readVisitors } from "./visitor-count.ts";
+import { formatCount, readStats } from "./visitor-count.ts";
 
-test("readVisitors reads both Umami response shapes", () => {
-  assert.equal(readVisitors({ visitors: { value: 42, prev: 0 } }), 42);
-  assert.equal(readVisitors({ visitors: 7 }), 7);
+test("readStats reads both Umami response shapes", () => {
+  assert.deepEqual(readStats({ visitors: { value: 42, prev: 0 }, visits: { value: 50, prev: 0 } }), { visitors: 42, visits: 50 });
+  assert.deepEqual(readStats({ pageviews: 9, visitors: 3, visits: 5 }), { visitors: 3, visits: 5 });
 });
 
-test("readVisitors rejects anything that is not a count", () => {
-  assert.equal(readVisitors(null), null);
-  assert.equal(readVisitors({}), null);
-  assert.equal(readVisitors({ visitors: "12" }), null);
-  assert.equal(readVisitors({ visitors: -1 }), null);
+test("readStats keeps visitors when visits is missing", () => {
+  assert.deepEqual(readStats({ visitors: 7 }), { visitors: 7, visits: null });
+});
+
+test("readStats rejects anything without a visitor count", () => {
+  assert.equal(readStats(null), null);
+  assert.equal(readStats({}), null);
+  assert.equal(readStats({ visitors: "12", visits: 3 }), null);
+  assert.equal(readStats({ visitors: -1 }), null);
 });
 
 test("formatCount groups thousands with latin digits", () => {

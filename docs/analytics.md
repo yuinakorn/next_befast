@@ -74,8 +74,8 @@ ENV_FILE=.env.local scripts/umami-reports.sh
 
 ## ตัวนับผู้เข้าชมใน footer
 
-- `VisitorCount` เรียก `/api/visitors` หลังหน้าโหลด และแสดง "ร่วมเรียนรู้แล้ว N คน" ในแถบกรมท่า ถ้าไม่ได้ตัวเลขหรือยอดเป็น 0 จะไม่แสดงอะไร หน้าเว็บยังเป็นหน้า static
-- `/api/visitors` login เข้า Umami ด้วย `UMAMI_USERNAME` / `UMAMI_PASSWORD` แล้วอ่าน `visitors` ตั้งแต่เริ่มเก็บข้อมูล เก็บผลไว้ในหน่วยความจำ 5 นาที และส่ง `Cache-Control: max-age=60`
+- `VisitorCount` เรียก `/api/visitors` หลังหน้าโหลด และแสดง "ร่วมเรียนรู้แล้ว N คน · เข้าชม M ครั้ง" ในแถบกรมท่า (N = visitors คือจำนวนคน, M = visits คือจำนวนครั้งที่เข้ามา คนเดิมเว้นเกิน 30 นาทีนับใหม่) ไม่แสดง views เพราะเว็บมีหน้าเดียว views จึงขึ้นจากการ refresh เป็นหลัก ถ้าไม่ได้ตัวเลขหรือยอดเป็น 0 จะไม่แสดงอะไร หน้าเว็บยังเป็นหน้า static
+- `/api/visitors` login เข้า Umami ด้วย `UMAMI_USERNAME` / `UMAMI_PASSWORD` แล้วอ่าน `visitors` และ `visits` ตั้งแต่เริ่มเก็บข้อมูล เก็บผลไว้ในหน่วยความจำ 5 นาที และส่ง `Cache-Control: max-age=60`
 - ถ้าเปลี่ยนรหัส admin ใน Umami ต้องแก้ `UMAMI_PASSWORD` ใน `.env` บน server ให้ตรง แล้วรัน `docker compose up -d next-befast` ไม่อย่างนั้นตัวนับจะหายไป
 
 ## ค่าตั้ง (environment)

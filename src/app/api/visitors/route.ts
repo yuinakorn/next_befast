@@ -1,10 +1,10 @@
-import { readVisitors } from "@/lib/visitor-count";
+import { readStats, type VisitStats } from "@/lib/visitor-count";
 
-// Read Umami at request time; the count is cached in memory below.
+// Read Umami at request time; the counts are cached in memory below.
 export const dynamic = "force-dynamic";
 
 const TTL_MS = 5 * 60 * 1000;
-let cached: { visitors: number; at: number } | null = null;
+let cached: { stats: VisitStats; at: number } | null = null;
 let token: string | null = null;
 
 async function login(base: string): Promise<string | null> {
@@ -19,7 +19,7 @@ async function login(base: string): Promise<string | null> {
   return ((await res.json()) as { token?: string }).token ?? null;
 }
 
-async function fetchVisitors(): Promise<number | null> {
+async function fetchStats(): Promise<VisitStats | null> {
   const base = process.env.UMAMI_URL;
   const id = process.env.UMAMI_WEBSITE_ID || process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
   if (!base || !id || !process.env.UMAMI_PASSWORD) return null;
@@ -36,18 +36,18 @@ async function fetchVisitors(): Promise<number | null> {
       token = null; // expired: log in once more
       continue;
     }
-    return res.ok ? readVisitors(await res.json()) : null;
+    return res.ok ? readStats(await res.json()) : null;
   }
   return null;
 }
 
 export async function GET() {
   if (!cached || Date.now() - cached.at > TTL_MS) {
-    const visitors = await fetchVisitors().catch(() => null);
-    if (visitors !== null) cached = { visitors, at: Date.now() };
+    const stats = await fetchStats().catch(() => null);
+    if (stats) cached = { stats, at: Date.now() };
   }
   return Response.json(
-    { visitors: cached?.visitors ?? null },
+    { visitors: cached?.stats.visitors ?? null, visits: cached?.stats.visits ?? null },
     { headers: { "Cache-Control": "public, max-age=60" } },
   );
 }
