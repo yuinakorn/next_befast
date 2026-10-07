@@ -1,7 +1,8 @@
-import Image from "next/image";
+"use client";
 
-/** Both surveys open on 26 Oct 2569. Until then the QR codes are blurred and not linked; set to true on that day. */
-export const SURVEYS_OPEN = false;
+import Image from "next/image";
+import { useSyncExternalStore } from "react";
+import { msUntilOpen, surveysOpen } from "@/lib/survey";
 
 type Props = {
   /** link class from the section stylesheet, e.g. `closing-survey-link` */
@@ -12,9 +13,20 @@ type Props = {
   alt: string;
 };
 
+/** Re-renders once when the surveys open during this visit. */
+function subscribeOpening(onChange: () => void) {
+  const ms = msUntilOpen(Date.now());
+  if (ms === null) return () => {};
+  const t = window.setTimeout(onChange, ms);
+  return () => window.clearTimeout(t);
+}
+
 /** Survey QR code with an "open link" button, or a blurred placeholder before the survey opens. */
 export function SurveyQr({ className, href, label, src, alt }: Props) {
-  if (!SURVEYS_OPEN) {
+  // the static HTML is locked; on the client it opens once SURVEYS_OPEN_AT has passed
+  const open = useSyncExternalStore(subscribeOpening, () => surveysOpen(Date.now()), () => false);
+
+  if (!open) {
     return (
       <div className={className}>
         <div className="survey-qr-lock">
