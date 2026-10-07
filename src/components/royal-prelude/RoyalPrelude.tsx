@@ -36,9 +36,23 @@ export function RoyalPrelude() {
             />
           </figure>
         </div>
+
+        <a className="royal-scroll-cue" href="#royal-intro">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 4v15M5 12l7 7 7-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span>เลื่อนลงเพื่อเริ่ม</span>
+        </a>
       </header>
 
-      <div className="royal-intro">
+      <div id="royal-intro" className="royal-intro">
         <p className="royal-section-label">พระราชกรณียกิจด้านสุขภาพและกีฬา</p>
         <h2>{ROYAL_PRELUDE.intro.title}</h2>
         <span className="royal-rule" aria-hidden="true" />

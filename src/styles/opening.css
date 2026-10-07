@@ -22,7 +22,26 @@
   color: var(--on-brand-alert); font-variant-numeric: tabular-nums;
 }
 .counter-unit { margin-inline-start: .4em; }
-.opening .cue { color: var(--on-brand); }
+.opening .cue {
+  width: fit-content;
+  min-height: 48px;
+  padding-block: 4px;
+  color: var(--on-brand);
+  font-size: clamp(17px, 1rem + .25vw, 20px);
+  line-height: 1.55;
+  text-decoration: none;
+}
+.opening-cue-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--brand-navy);
+  background: var(--on-brand-alert);
+  border-radius: 50%;
+}
+.opening-cue-icon svg { width: 21px; height: 21px; }
 .opening :focus-visible { outline-color: var(--on-brand); }
 
 .dot-brain { position: relative; width: 100%; height: 100%; }
@@ -41,6 +60,8 @@
   .opening h2 { font-size: 2rem; }
   .opening-lead { font-size: 1em; }
   .counter { font-size: .9rem; }
+  .opening .cue { min-height: 44px; }
+  .opening-cue-icon { width: 32px; height: 32px; }
 }
 @media (min-width: 861px) {
   .opening-inner {
@@ -65,4 +86,15 @@
   .opening-lead { font-size: .9em; line-height: 1.45; }
   .counter { font-size: .85rem; line-height: 1.4; }
   .counter-num { font-size: 1.5rem; }
+  .opening .cue { min-height: 44px; padding-block: 2px; font-size: .85rem; }
+  .opening-cue-icon { width: 30px; height: 30px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opening-cue-icon svg {
+    animation: opening-cue-drop 1.6s ease-in-out infinite;
+  }
+}
+@keyframes opening-cue-drop {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(4px); }
 }

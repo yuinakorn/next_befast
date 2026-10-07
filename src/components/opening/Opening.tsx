@@ -61,12 +61,14 @@ export function Opening() {
           </svg>
           <p className="opening-lead">{OPENING.lead}</p>
           <LiveCounter />
-          <p className="cue">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 4v15M5 12l7 7 7-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {OPENING.cue}
-          </p>
+          <a className="cue opening-cue" href="#ch1">
+            <span className="opening-cue-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 4v15M5 12l7 7 7-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span>{OPENING.cue}</span>
+          </a>
         </div>
       </div>
     </header>
