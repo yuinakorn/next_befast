@@ -1,0 +1,7 @@
+services:
+  next-befast:
+    image: ghcr.io/yuinakorn/next_befast:${TAG:-latest}
+    container_name: next-befast
+    restart: unless-stopped
+    ports:
+      - "3000:3000"

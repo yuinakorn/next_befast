@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.shots
+.serena
+.superpowers
+.impeccable
+.claude
+assets
+docs
+index.html
+*.tsbuildinfo
+.DS_Store

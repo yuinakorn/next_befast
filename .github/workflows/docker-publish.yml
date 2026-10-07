@@ -1,0 +1,88 @@
+name: Build and Push to GHCR
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*.*.*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=sha,prefix=sha-,format=short
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            BUILD_TIME=${{ github.event.head_commit.timestamp || github.event.pull_request.updated_at }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  ## Remove this job entirely if the server has a public IP reachable via SSH —
+  ## use appleboy/ssh-action instead. Keep it if the server has NO public IP
+  ## (self-hosted runner makes an outbound-only connection to GitHub).
+  #deploy:
+  #  needs: build
+  #  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #  runs-on: [self-hosted, next-befast]
+  #  permissions:
+  #    packages: read
+  #
+  #  steps:
+  #    - name: Log in to GHCR
+  #      uses: docker/login-action@v3
+  #      with:
+  #        registry: ${{ env.REGISTRY }}
+  #        username: ${{ github.actor }}
+  #        password: ${{ secrets.GITHUB_TOKEN }}
+  #
+  #    - name: Deploy
+  #      run: |
+  #        cd "$DEPLOY_PATH"
+  #        docker compose pull
+  #        docker rm -f next-befast || true
+  #        docker compose up -d
+  #        docker image prune -f
+  #      env:
+  #        DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/opt/next-befast' }}
