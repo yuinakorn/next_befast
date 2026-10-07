@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Nightly dump of the production Umami database, keeping the last 14 days.
-# Install on the server with cron:
+# Details: docs/analytics.md (Backup). Install on the server with cron:
 #   30 2 * * * /var/Docker/js/next_befast/umami-backup.sh >> /home/cmpho/backups/next-befast-umami/backup.log 2>&1
 # Restore: docker exec -i next-befast-umami-db pg_restore -U umami -d umami --clean --if-exists < FILE.dump
 set -euo pipefail

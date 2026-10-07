@@ -18,15 +18,4 @@
 QR เป็น PNG 1024×1024 ระดับแก้ผิด M พิมพ์ได้ถึงขนาดประมาณ 8 ซม. ถ้าจะพิมพ์ใหญ่กว่านั้นหรือแยกตามโรงพยาบาล ให้สร้างลิงก์ใหม่ตามรูปแบบเดียวกัน
 เช่น `utm_source=poster&utm_medium=print&utm_campaign=wrb12&utm_content=rp-sanpatong` (ใช้ตัวอักษรอังกฤษพิมพ์เล็กและ `-` เท่านั้น)
 
-## Event ที่เว็บส่งเข้า Umami
-
-| Event | ข้อมูลแนบ | เกิดเมื่อ |
-|---|---|---|
-| `reach-ch1` … `reach-ch8`, `reach-closing` | – | หัวบทเลื่อนถึงกลางจอ (ครั้งเดียวต่อการเข้าชม) |
-| `befast-answer` | `signal` (S/A/F), `firstTry`, `wrong` (ตัวอักษรที่ตอบผิดก่อน) | ตอบข้อในแบบทดสอบบทที่ 4 ถูก |
-| `befast-quiz-complete` | `firstTry`, `total` | ตอบแบบทดสอบบทที่ 4 ครบ |
-| `quiz-start` | – | เริ่มตอบแบบทดสอบบทปิด |
-| `quiz-complete` | `firstTry`, `total` | ตอบแบบทดสอบบทปิดครบ |
-| `share` | `outcome` (shared / copied / dismissed / failed) | กดปุ่มแชร์ในบทที่ 8 |
-
-ไม่มี event ใดเก็บข้อมูลที่ระบุตัวบุคคล และ Umami ไม่ใช้ cookie
+รายการ event ทั้งหมด การตั้งค่า และ dashboard ดูที่ [analytics.md](analytics.md)

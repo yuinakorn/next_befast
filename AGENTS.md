@@ -22,6 +22,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 |---|---|
 | [PRODUCT.md](PRODUCT.md) | ผู้ใช้ เป้าหมาย หลักการ แหล่งอ้างอิงทางการแพทย์ |
 | [DESIGN.md](DESIGN.md) | design tokens (สี ตัวอักษร ระยะ มุมโค้ง) คอมโพเนนต์ และกฎการออกแบบ |
+| [docs/analytics.md](docs/analytics.md) | สถิติผู้เข้าชม Umami: event, dashboard, ตัวนับ, backup |
 | `docs/` | ต้นฉบับเนื้อหา (.md / .html) ถ้าข้อความในหน้าไม่ตรงกับต้นฉบับ ให้ถามก่อนแก้ |
 
 ## สถานะปัจจุบันและแผน
