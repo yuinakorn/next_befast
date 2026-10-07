@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { CLOSING } from "../content/closing.ts";
-import { choiceStatus, choose, freshQuiz, solvedCount } from "./closing-quiz.ts";
+import { choiceStatus, choose, firstTryCount, freshQuiz, solvedCount } from "./closing-quiz.ts";
 
 test("a wrong choice is remembered, the question stays open", () => {
   const s = choose(freshQuiz(1)[0], 0, 1);
@@ -51,4 +51,14 @@ test("every closing question can be solved by choosing its answer", () => {
   for (const q of CLOSING.quiz) {
     assert.equal(choose(freshQuiz(1)[0], q.answer, q.answer).solved, true, q.question);
   }
+});
+
+test("firstTryCount counts only questions solved without a wrong choice", () => {
+  const states = [
+    { wrong: [], solved: true },
+    { wrong: [1], solved: true },
+    { wrong: [], solved: false },
+    { wrong: [2], solved: false },
+  ];
+  assert.equal(firstTryCount(states), 1);
 });

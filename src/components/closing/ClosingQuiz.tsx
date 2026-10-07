@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CLOSING } from "@/content/closing";
-import { choiceStatus, choose, freshQuiz, solvedCount, type ChoiceStatus } from "@/lib/closing-quiz";
+import { choiceStatus, choose, firstTryCount, freshQuiz, solvedCount, type ChoiceStatus } from "@/lib/closing-quiz";
+import { track } from "@/lib/track";
 
 /** Shown under a question after a wrong choice, after the choice itself (the page copy has no wording for it). */
 const TRY_AGAIN = "ยังไม่ใช่ ลองเลือกใหม่อีกครั้ง";
@@ -26,11 +27,25 @@ function Mark({ status }: { status: ChoiceStatus }) {
 /**
  * Five-question review. A wrong choice is marked and the reader tries again; the right one is marked and
  * explained. Choices stay focusable (aria-disabled, not disabled) so keyboard focus never drops.
- * No judgement, nothing stored or sent: the state lives in this component only.
+ * No judgement and nothing stored; on finishing, only the anonymous score is sent to Umami.
  */
 export function ClosingQuiz() {
   const [state, setState] = useState(() => freshQuiz(CLOSING.quiz.length));
   const solved = solvedCount(state);
+  const started = useRef(false);
+  const finished = useRef(false);
+
+  useEffect(() => {
+    const touched = state.some((s) => s.solved || s.wrong.length > 0);
+    if (touched && !started.current) {
+      started.current = true;
+      track("quiz-start");
+    }
+    if (solved === state.length && !finished.current) {
+      finished.current = true;
+      track("quiz-complete", { firstTry: firstTryCount(state), total: state.length });
+    }
+  }, [state, solved]);
 
   function pick(qi: number, ci: number) {
     setState((prev) => prev.map((s, i) => (i === qi ? choose(s, ci, CLOSING.quiz[qi].answer) : s)));

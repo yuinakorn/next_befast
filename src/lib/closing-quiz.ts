@@ -1,4 +1,4 @@
-/** State of the closing review quiz. Nothing is stored or sent: it lives in the component only. */
+/** State of the closing review quiz. It lives in the component only; only anonymous results are sent to Umami. */
 
 export type QuestionState = {
   /** Choices tried and wrong, in order. */
@@ -16,6 +16,10 @@ export function choose(state: QuestionState, choice: number, answer: number): Qu
   if (state.solved || state.wrong.includes(choice)) return state;
   return choice === answer ? { ...state, solved: true } : { ...state, wrong: [...state.wrong, choice] };
 }
+
+/** Questions solved without a wrong choice first. */
+export const firstTryCount = (states: readonly QuestionState[]): number =>
+  states.filter((s) => s.solved && s.wrong.length === 0).length;
 
 export const solvedCount = (states: readonly QuestionState[]): number => states.filter((s) => s.solved).length;
 

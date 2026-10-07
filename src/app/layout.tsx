@@ -3,6 +3,7 @@ import { Anuphan, Chakra_Petch } from "next/font/google";
 import Script from "next/script";
 import { UMAMI_DOMAIN, UMAMI_WEBSITE_ID } from "@/lib/analytics";
 import { KeepWords } from "@/components/ui/KeepWords";
+import { ReachTracker } from "@/components/ReachTracker";
 import "./globals.css";
 import "@/styles/chapter-3.css";
 import "@/styles/chapter-4.css";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <KeepWords />
+        <ReachTracker />
         {UMAMI_WEBSITE_ID && (
           <Script
             src="/stats/script.js"

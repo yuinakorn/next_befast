@@ -95,6 +95,44 @@ export function RoyalPrelude() {
           </article>
         ))}
       </RoyalGallery>
+
+      <aside className="royal-activity" aria-labelledby="royal-activity-title">
+        <p className="royal-section-label">กิจกรรมเฉลิมพระเกียรติ</p>
+        <h2 id="royal-activity-title">ร่วมเป็นส่วนหนึ่งของกิจกรรม</h2>
+        <p className="royal-activity-copy">
+          สแกนคิวอาร์โค้ด
+          หรือแตะที่ภาพเพื่อตอบแบบประเมินการเข้าร่วมกิจกรรมโครงการแสงนําใจไทยทั้งชาติ
+          เดิน วิ่ง ปั่น ป้องกันอัมพาต ครั้งที่ 12 เฉลิมพระเกียรติ
+        </p>
+        <a
+          className="royal-activity-link"
+          href="https://limesurvey.tpak.or.th/index.php?r=survey/index&sid=972571&lang=th"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="เปิดลิงก์กิจกรรมเฉลิมพระเกียรติในแท็บใหม่"
+        >
+          <Image
+            src="/royal/royal-activity-qr.jpg"
+            alt="คิวอาร์โค้ดสำหรับกิจกรรมเฉลิมพระเกียรติ"
+            width={1148}
+            height={1148}
+            sizes="(max-width: 699px) 68vw, 280px"
+          />
+          <span>
+            เปิดลิงก์กิจกรรม
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14 5h5v5M19 5l-8 8M19 13v6H5V5h6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </a>
+      </aside>
     </section>
   );
 }
