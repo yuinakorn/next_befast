@@ -205,6 +205,7 @@
   gap: 12px;
   margin-bottom: 10px;
 }
+#pin1 .story-stage .steps { padding-top: 10px; }
 #pin1 .story-step-count {
   flex: none;
   color: var(--ink);
@@ -315,6 +316,7 @@
   .city-stats p { gap: 12px; padding: 12px 20px; font-size: .85rem; }
   .city-legend { grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 12px 20px; }
   .city-legend li { font-size: .85rem; }
+  #pin1 .story-stage .steps { padding-top: 0; }
   #pin1 .story-step-progress { gap: 18px; margin-bottom: 16px; }
   #pin1 .story-step-count { font-size: 1.1rem; }
   #pin1 .story-step-dots { gap: 8px; }
@@ -332,6 +334,7 @@
   .city-legend { grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px 18px; }
   .city-legend li { font-size: .85rem; }
   #pin1 .story-stage .steps {
+    padding-top: 0;
     padding-left: clamp(24px, 4vw, 56px);
     border-left: 1px solid var(--line);
   }
