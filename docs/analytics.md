@@ -21,7 +21,7 @@
 | ส่งต่อ tracker ผ่านโดเมนเว็บ | `next.config.ts` (เปิดเฉพาะ `script.js` กับ `api/send` ไม่เปิด API อื่นของ Umami) |
 | website id และโดเมนที่นับ | `src/lib/analytics.ts` |
 | ใส่ tracker ในหน้า | `src/app/layout.tsx` (`next/script` แบบ `afterInteractive`) |
-| ส่ง event | `src/lib/track.ts`, `src/components/ReachTracker.tsx`, `Quiz.tsx` (บท 4), `ClosingQuiz.tsx`, `ShareButton.tsx` |
+| ส่ง event | `src/lib/track.ts`, `src/components/ReachTracker.tsx`, `Quiz.tsx` (บท 4), `ClosingQuiz.tsx`, `ShareButton.tsx`, `RecapSave.tsx` |
 | ตัวนับใน footer | `src/app/api/visitors/route.ts`, `src/components/VisitorCount.tsx` |
 | สร้างรายงานใน Umami | `scripts/umami-reports.sh` |
 | backup ฐานข้อมูล | `scripts/umami-backup.sh` |
@@ -65,6 +65,7 @@ ENV_FILE=.env.local scripts/umami-reports.sh
 | `quiz-start` | – | เริ่มตอบแบบทดสอบบทปิด |
 | `quiz-complete` | `firstTry`, `total` | ตอบแบบทดสอบบทปิดครบ |
 | `share` | `outcome` (`shared` / `copied` / `dismissed` / `failed`) | กดปุ่มแชร์ในบทที่ 8 |
+| `recap-image` | `outcome` (`shared` / `downloaded` / `dismissed` / `failed`) | กดปุ่ม "บันทึกภาพสรุป" ในฉากสรุปของบทปิด |
 
 - ลิงก์ที่ผู้อ่านแชร์ต่อจะเป็น `?utm_source=share` เสมอ (ตัด UTM เดิมและ `#hash` ออก) จึงแยกยอดจากการบอกต่อได้
 - ถ้า tracker โหลดไม่ได้ (adblock, เน็ตหลุด) `track()` จะลองใหม่ 10 วินาทีแล้วทิ้ง event เงียบๆ หน้าเว็บไม่ได้รับผลกระทบ

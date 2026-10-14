@@ -1,24 +1,68 @@
-/* Closing: summary cards, review quiz and the navy plate where the dot brain lights up again.
-   Not pinned. Mobile-first; tiers as DESIGN.md › Layout. The plate uses brand tokens (same in both themes). */
+/* Closing: pinned summary recap, review quiz and the navy plate where the dot brain lights up again.
+   Only the recap is pinned. Mobile-first; tiers as DESIGN.md › Layout. The plate uses brand tokens (same in both themes). */
 
 .closing { padding-top: 12vh; }
 .closing-block { max-width: 860px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 40px); }
-.closing h3 { font-size: clamp(1.7rem, 4.4vw, 2.6rem); margin-bottom: .4em; }
+.closing-block h3, h3.closing-block { font-size: clamp(1.7rem, 4.4vw, 2.6rem); margin-bottom: .4em; }
 /* sized so the phrase "เริ่มดูแลหลอดเลือดของเรา" fits one line from 320px up (Phrases keeps phrases whole) */
 .closing-head h2 { font-size: clamp(1.6rem, 7.4vw, 3.8rem); }
 .closing-summary, .closing-quiz { margin-top: 9vh; }
 
-/* ---------- summary: three numbered cards ---------- */
-.closing-cards { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; counter-reset: summary; }
-.closing-cards li {
-  counter-increment: summary; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 16px;
-  padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+/* ---------- summary: pinned recap scene (RecapStage). Pictures move by `transform` on .recap-item (script);
+   the rest is classes. Scene states: #pinRecap[data-step]. Without the script the board shows finished. ---------- */
+.closing-summary > h3 { margin-bottom: 0; }
+.recap-item { opacity: 0; transition: opacity .3s; }
+.recap-item.shown { opacity: 1; }
+.recap-num { font-family: var(--num); font-variant-numeric: tabular-nums; }
+
+/* tray: one slot per picture along the bottom, dashed until its sentence has been read */
+.recap-slot { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 5 5; transition: opacity .4s, stroke .3s; }
+.recap-slot.filled { stroke: var(--ink-2); stroke-dasharray: none; }
+.anim #pinRecap[data-step="3"] .recap-slot, html:not(.anim) .recap-slot { opacity: 0; }
+
+/* picture 1: BEFAST tiles, arrow, clock, 1669 */
+.recap-pop { transform-box: fill-box; transform-origin: center; transform: scale(.3); opacity: 0; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1), opacity .25s; }
+.in > .recap-pop { transform: none; opacity: 1; }
+.recap-tile rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s, stroke .3s; }
+.recap-tile text { font-family: var(--num); font-weight: 700; font-size: 20px; fill: var(--ink); transition: fill .3s; }
+.recap-tile.hit rect { fill: var(--red); stroke: var(--red); }
+.recap-tile.hit text { fill: var(--surface); }
+.recap-arrow { fill: none; stroke: var(--ink-2); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.recap-clock circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+.recap-clock path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.recap-call rect { fill: var(--red); }
+.recap-call text { font-family: var(--num); font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums; fill: var(--surface); }
+
+/* picture 2: the 270-minute treatment window (go = the window, as in chapter 3) */
+.recap-ring-track { fill: none; stroke: var(--line); stroke-width: 12; }
+.recap-ring-arc { fill: none; stroke: var(--go); stroke-width: 12; stroke-dasharray: 100; }
+.recap-ring-tick { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; }
+.recap-ring-num { font-family: var(--num); font-weight: 700; font-size: 30px; font-variant-numeric: tabular-nums; fill: var(--ink); }
+.recap-ring-unit { font-size: 13px; font-weight: 500; fill: var(--ink-2); }
+
+/* picture 3: the shield (shield.css) and the figure under it */
+.recap-pct { font-family: var(--num); font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; fill: var(--ink); }
+
+/* board labels: only once the three pictures sit side by side */
+.recap-label { font-size: 15px; font-weight: 600; fill: var(--ink); transition: opacity .4s .15s; }
+.anim #pinRecap:not([data-step="3"]) .recap-label { opacity: 0; transition-delay: 0s; }
+
+/* save button (last step) */
+.recap-save { margin-top: 14px; display: grid; justify-items: start; gap: 6px; }
+.recap-save-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 10px 20px;
+  border: 2px solid var(--ink); border-radius: 12px; background: var(--ink); color: var(--paper);
+  font-weight: 700; line-height: 1.4; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
-.closing-cards li::before {
-  content: counter(summary); min-width: 1ch; font-family: var(--num); font-weight: 700; font-size: 2.2rem; line-height: 1.1;
-  font-variant-numeric: tabular-nums; color: var(--ink);
+.recap-save-btn[aria-busy="true"] { cursor: progress; opacity: .7; }
+.recap-save-btn svg { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.step .recap-save-msg { min-height: 1.55em; font-size: .9rem; color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .recap-save-btn:hover { background: var(--surface); color: var(--ink); }
 }
-.closing-cards p { color: var(--ink); font-weight: 600; line-height: 1.6; max-width: 30em; }
+@media (prefers-reduced-motion: reduce) {
+  .recap-item, .recap-slot, .recap-pop, .recap-tile rect, .recap-tile text, .recap-label { transition: none; }
+}
 
 /* ---------- quiz ---------- */
 .cq-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 2px solid var(--ink); counter-reset: question; }
@@ -119,19 +163,11 @@
 }
 
 @media (min-width: 700px) and (min-height: 900px) {
-  .closing-cards { gap: 16px; }
-  .closing-cards li { gap: 22px; padding: 24px 26px; }
-  .closing-cards li::before { font-size: 2.8rem; }
-  .closing-cards p { font-size: 1.1em; }
   .cq-choice { min-height: 58px; padding: 12px 18px; }
   .closing-plate-art { height: clamp(260px, 32svh, 400px); }
   .closing-final { font-size: clamp(2rem, 5vw, 3rem); }
 }
 @media (min-width: 861px) {
-  .closing-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .closing-cards li { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 22px; }
-  .closing-cards li::before { font-size: 2.8rem; }
-  .closing-cards p { font-size: 1em; }
   .cq-choice { min-height: 56px; padding: 12px 18px; }
   .closing-plate-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; column-gap: clamp(32px, 5vw, 80px); }
   .closing-plate-art { height: min(56vh, 440px); }

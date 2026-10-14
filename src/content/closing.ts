@@ -1,3 +1,5 @@
+import type { Step } from "./types.ts";
+
 /** Closing copy (script › บทปิด: เริ่มดูแลหลอดเลือดของเรา ตั้งแต่วันนี้). */
 export const CLOSING = {
   title: "เริ่มดูแลหลอดเลือดของเรา ตั้งแต่วันนี้",
@@ -41,4 +43,31 @@ export const CLOSING = {
     },
   ],
   final: "เริ่มดูแลหลอดเลือดของเรา ตั้งแต่วันนี้ เพื่อชีวิตที่มีคุณภาพ และอนาคตที่คุณเลือกเองได้",
+} as const;
+
+/** The summary as a pinned scene: one sentence per step, then the three pictures side by side. */
+const RECAP_STEPS: Step[] = [
+  { at: 0, title: CLOSING.summary[0] },
+  { at: 0.26, title: CLOSING.summary[1] },
+  { at: 0.52, title: CLOSING.summary[2] },
+  { at: 0.78, title: "จำ 3 ข้อนี้ไว้ แล้วส่งต่อ", body: "บันทึกภาพสรุปเก็บไว้ในโทรศัพท์ หรือส่งให้คนที่คุณรักทางแชต" },
+];
+
+/** Copy for the recap scene (closing › สรุปสามประโยค) and the image it saves. */
+export const RECAP = {
+  steps: RECAP_STEPS,
+  /** Under each picture once the three sit side by side (short: one 130-unit column of the scene). */
+  labels: ["เห็นอาการ รีบโทร", "ภายใน 4.5 ชม.", "4 โรค + 6 พฤติกรรม"],
+  /** Under the count inside the ring of the second picture. */
+  minutes: "นาที",
+  save: "บันทึกภาพสรุป",
+  saving: "กำลังสร้างภาพ…",
+  saved: "บันทึกภาพแล้ว ดูได้ในโฟลเดอร์ดาวน์โหลดหรือคลังภาพ",
+  failed: "สร้างภาพไม่สำเร็จ ลองใหม่อีกครั้ง หรือแคปหน้าจอไว้แทน",
+  /** Title of the saved image (the page title) and the text sent with it to the share sheet. */
+  imageTitle: ["ทุกนาทีที่ช้า", "คือสมองที่สูญเสีย"],
+  shareText: "จำ 3 ข้อนี้ไว้ เห็นอาการ BEFAST โทร 1669 ทันที",
+  fileName: "stroke-befast-1669.png",
+  /** Bottom of the saved image. Same wording as the page footer. */
+  disclaimer: "เนื้อหานี้เพื่อการเรียนรู้ ไม่ใช้แทนคำแนะนำของแพทย์",
 } as const;

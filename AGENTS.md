@@ -31,7 +31,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **แผน:** ให้แพทย์ตรวจข้อความ ★ (`docs/medical-review.md`) และงานใน `docs/superpowers/followups/`
 - หน้าเว็บเป็น Next.js 16 (App Router, TypeScript, `src/`, ESLint, ไม่ใช้ Tailwind) มีบทเปิด บทที่ 1–8 บทปิด และ footer แบรนด์แคมเปญ Walk Run Bike 12
   - เนื้อหาบทเปิด บท 1–2 บท 5–8 และบทปิดอยู่ใน `src/content/` (ข้อความ ★ มีฟิลด์ `review`) บทที่ 3–4 ยังเขียนในคอมโพเนนต์
-  - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2 และ 5–8 ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
+  - ตรรกะที่ทดสอบได้อยู่ใน `src/lib/` (มี `*.test.ts`) ฉากที่ pin ของบท 1–2, 5–8 และฉากสรุปของบทปิด ใช้ `StoryStage` + `usePinnedSteps` สถานะฉากควบคุมด้วย `data-step` บน `.pin`
   - `src/components/`: `opening/`, `chapter-1/` ถึง `chapter-8/`, `closing/`, `ui/` (`StoryStage`, `ChapterHead`, `ChapterVisual`, `ProgressBar`, `Shield`, `Phrases`), `CampaignFooter`
   - `src/hooks/`: `usePinnedSteps` (ฮุกคุมฉากที่ pin ของบท 1–2 และ 5–8)
   - `scripts/`: `shots.mjs` (ถ่ายภาพทุกฉากที่ pin + ตรวจเนื้อหาล้น), `review-report.ts` (สร้าง `docs/medical-review.md`)

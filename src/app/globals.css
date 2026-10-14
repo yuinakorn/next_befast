@@ -18,6 +18,8 @@
   /* brand plate (Walk Run Bike 12): identical in light and dark themes, so no dark override */
   --brand-navy: #202D5D; --brand-red: #D72828;
   --on-brand: #FFFFFF; --on-brand-muted: #A8B3D4; --on-brand-alert: #FF5560;
+  /* data colours on the navy plate (the saved recap image): same hues as the dark-theme go / shield */
+  --on-brand-go: #2BC28A; --on-brand-shield: #4FC3D0;
   --royal-paper: #EEF3FB; --royal-ink: #173465; --royal-gold: #8A641D; --royal-blue: #1674B8;
   --font: var(--font-anuphan), "Anuphan", "Noto Sans Thai", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
   --num: var(--font-chakra), "Chakra Petch", var(--font-anuphan), "Noto Sans Thai", system-ui, sans-serif;

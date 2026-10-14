@@ -3,8 +3,9 @@ import { Phrases } from "@/components/ui/Phrases";
 import { SurveyQr } from "@/components/ui/SurveyQr";
 import { ClosingPlate } from "./ClosingPlate";
 import { ClosingQuiz } from "./ClosingQuiz";
+import { RecapStage } from "./RecapStage";
 
-/** Not pinned: summary, review quiz, navy closing plate, then the post-lesson survey. */
+/** Summary as a pinned recap scene, then (not pinned) review quiz, navy closing plate and the post-lesson survey. */
 export function Closing() {
   return (
     <section className="closing" id="closing" aria-labelledby="closing-title">
@@ -14,15 +15,9 @@ export function Closing() {
           <Phrases text={CLOSING.title} />
         </h2>
       </header>
-      <section className="closing-block closing-summary" aria-labelledby="summary-title">
-        <h3 id="summary-title">{CLOSING.summaryTitle}</h3>
-        <ol className="closing-cards">
-          {CLOSING.summary.map((line) => (
-            <li key={line}>
-              <p>{line}</p>
-            </li>
-          ))}
-        </ol>
+      <section className="closing-summary" aria-labelledby="summary-title">
+        <h3 id="summary-title" className="closing-block">{CLOSING.summaryTitle}</h3>
+        <RecapStage />
       </section>
       <ClosingQuiz />
       <ClosingPlate />
