@@ -3,7 +3,7 @@ import type { ChapterContent, ReviewNote } from "./types";
 /** Chapter 6 copy (script › บทที่ 6). Steps 3–6 = DISEASES order. */
 export const CHAPTER_6: ChapterContent = {
   number: 6,
-  title: "สโตรกป้องกันได้ถึง\u00a090% ด้วยการคุม\u00a04\u00a0โรค และปรับ\u00a06\u00a0พฤติกรรม",
+  title: "สโตรกป้องกันได้ถึง\u00a090% ด้วยการคุม\u00a04\u00a0โรค",
   longTitle: true,
   lead: "สโตรกส่วนใหญ่ป้องกันได้ เริ่มจาก 4 โรคที่ต้องรู้และควบคุม",
   leadReview: "คำโปรยร่างใหม่ ไม่มีในสคริปต์",
