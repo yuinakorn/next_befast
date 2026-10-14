@@ -1,9 +1,10 @@
 import type { ChapterContent, ReviewNote } from "./types";
 
-/** Chapter 6 copy (script › บทที่ 6: ป้องกันได้ 90% — 4 โรคที่ต้องคุม). Steps 3–6 = DISEASES order. */
+/** Chapter 6 copy (script › บทที่ 6). Steps 3–6 = DISEASES order. */
 export const CHAPTER_6: ChapterContent = {
   number: 6,
-  title: "ป้องกันได้ 90% — 4 โรคที่ต้องคุม",
+  title: "สโตรกป้องกันได้ถึง\u00a090% ด้วยการคุม\u00a04\u00a0โรค และปรับ\u00a06\u00a0พฤติกรรม",
+  longTitle: true,
   lead: "สโตรกส่วนใหญ่ป้องกันได้ เริ่มจาก 4 โรคที่ต้องรู้และควบคุม",
   leadReview: "คำโปรยร่างใหม่ ไม่มีในสคริปต์",
   image: "/illustrations/chapter-6-prevent-90.webp",

@@ -13,6 +13,8 @@ export type Step = {
 export type ChapterContent = {
   number: number;
   title: string;
+  /** The title is a whole sentence: shown smaller, broken only at its spaces (non-breaking spaces stay together). */
+  longTitle?: boolean;
   lead: string;
   /** Set when the lead is newly drafted rather than taken from the script. */
   leadReview?: string;

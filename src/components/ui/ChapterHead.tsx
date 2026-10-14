@@ -1,5 +1,6 @@
 import type { ChapterContent } from "@/content/types";
 import { ChapterVisual } from "./ChapterVisual";
+import { Phrases } from "./Phrases";
 
 type Props = {
   chapter: ChapterContent;
@@ -14,7 +15,9 @@ export function ChapterHead({ chapter, titleId, reverse = false }: Props) {
     <header className={`ch-head ch-head--visual${reverse ? " ch-head--reverse" : ""}`}>
       <div className="ch-copy">
         <p className="ch-num">บทที่ {chapter.number}</p>
-        <h2 id={titleId}>{chapter.title}</h2>
+        <h2 id={titleId} className={chapter.longTitle ? "ch-title--long" : undefined}>
+          {chapter.longTitle ? <Phrases text={chapter.title} /> : chapter.title}
+        </h2>
         <p className="lead">{chapter.lead}</p>
       </div>
       <ChapterVisual
