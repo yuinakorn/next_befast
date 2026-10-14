@@ -1,6 +1,9 @@
 /* Chapter 2: risk stage + self check. Scene states follow data-step (0-based) on #pin2. */
 .person circle, .person path { fill: var(--ash); transition: fill .4s; }
 .person.chosen circle, .person.chosen path { fill: var(--red); }
+/* step 0 zooms out from the four to a crowd of 40, 10 of them red (opacity is set by the scroll script) */
+.crowd circle, .crowd path { fill: var(--ash); }
+.crowd.red circle, .crowd.red path { fill: var(--red); }
 .pulse { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 .risk-big { font-family: var(--font); font-weight: 700; font-size: 26px; fill: var(--ink); }
 .risk-big-num { font-family: var(--num); font-size: 46px; }

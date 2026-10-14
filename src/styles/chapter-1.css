@@ -267,6 +267,21 @@
 .anim #pin1[data-step="6"] .affected-zone[data-side="right"] { animation: tia-flicker 2.4s steps(1) infinite; }
 @keyframes tia-flicker { 0%, 60%, 100% { opacity: 0; } 30% { opacity: .46; } }
 
+/* Steps 3–4: ten people, the 8 (ตีบ/ตัน) or the 2 (แตก) filled; they pop in one by one when the step comes on. */
+.stroke-ratio { display: flex; align-items: flex-end; gap: 4px; margin-top: 12px; }
+.ratio-person { width: 22px; height: 34px; flex: none; overflow: visible; }
+.ratio-person[data-gap] { margin-left: 14px; }
+.ratio-person circle, .ratio-person path { fill: none; stroke: var(--ink-2); stroke-width: 1.8; }
+.ratio-person.on circle, .ratio-person.on path { fill: var(--ink); stroke: var(--ink); }
+.anim .step .ratio-person.on { opacity: 0; transform: translateY(8px); }
+.anim .step.on .ratio-person.on {
+  opacity: 1; transform: none;
+  transition: opacity .3s ease, transform .3s ease; transition-delay: calc(.25s + var(--i) * 70ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim .step .ratio-person.on, .anim .step.on .ratio-person.on { opacity: 1; transform: none; transition: none; }
+}
+
 .type-toggle { width: min(100%, 32rem); margin-top: 14px; }
 .type-toggle-buttons {
   display: grid;

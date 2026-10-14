@@ -8,6 +8,7 @@ import type { PinnedScene } from "@/hooks/usePinnedSteps";
 import { BLEED_AT, CITY_BRAIN_PATH, CLOT_T, LABELS, QUEUE_AT, ROADS, pointOnRoad, roadD } from "@/lib/brain-city";
 import { stepProgress } from "@/lib/steps";
 import { TypeToggle, type StrokeType } from "./TypeToggle";
+import { StrokeRatio } from "./StrokeRatio";
 
 const STARTS = CHAPTER_1.steps.map((s) => s.at);
 const CLOT_STEP = 3, BLEED_STEP = 4, TOGGLE_STEP = 5;
@@ -137,7 +138,15 @@ export function BrainCity() {
       scene={scene}
       setup={setup}
       showStepProgress
-      stepExtra={(i) => (i === TOGGLE_STEP ? <TypeToggle value={focus} onChange={setFocus} captions={CAPTIONS} /> : null)}
+      stepExtra={(i) =>
+        i === TOGGLE_STEP ? (
+          <TypeToggle value={focus} onChange={setFocus} captions={CAPTIONS} />
+        ) : i === CLOT_STEP ? (
+          <StrokeRatio type="clot" />
+        ) : i === BLEED_STEP ? (
+          <StrokeRatio type="bleed" />
+        ) : null
+      }
     />
   );
 }
