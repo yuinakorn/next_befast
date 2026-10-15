@@ -11,6 +11,7 @@ type Props = {
   label: string;
   src: string;
   alt: string;
+  showLockedAction?: boolean;
 };
 
 /** Re-renders once when the surveys open during this visit. */
@@ -22,7 +23,7 @@ function subscribeOpening(onChange: () => void) {
 }
 
 /** Survey QR code with an "open link" button, or a blurred placeholder before the survey opens. */
-export function SurveyQr({ className, href, label, src, alt }: Props) {
+export function SurveyQr({ className, href, label, src, alt, showLockedAction = false }: Props) {
   // the static HTML is locked; on the client it opens once SURVEYS_OPEN_AT has passed
   const open = useSyncExternalStore(subscribeOpening, () => surveysOpen(Date.now()), () => false);
 
@@ -31,8 +32,16 @@ export function SurveyQr({ className, href, label, src, alt }: Props) {
       <div className={className}>
         <div className="survey-qr-lock">
           <Image src={src} alt="" aria-hidden="true" width={1148} height={1148} sizes="(max-width: 699px) 80vw, 340px" />
-          <p className="survey-qr-note">เริ่มประเมินได้ตั้งแต่ <span className="nowrap">26 ตุลาคม 2569</span></p>
+          <p className="survey-qr-note">
+            <span>เริ่มประเมินได้ตั้งแต่</span>
+            <span className="nowrap survey-qr-note-date">26 ตุลาคม 2569</span>
+          </p>
         </div>
+        {showLockedAction ? (
+          <span className="survey-qr-disabled" aria-hidden="true">
+            เปิดลิงก์กิจกรรม
+          </span>
+        ) : null}
       </div>
     );
   }

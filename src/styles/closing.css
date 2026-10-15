@@ -3,7 +3,7 @@
 
 .closing { padding-top: 12vh; }
 .closing-block { max-width: 860px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 40px); }
-.closing-block h3, h3.closing-block { font-size: clamp(1.7rem, 4.4vw, 2.6rem); margin-bottom: .4em; }
+.closing-block h3, h3.closing-block { font-size: clamp(1.55rem, 3.1vw, 2.45rem); margin-bottom: .4em; }
 /* sized so the phrase "เริ่มดูแลหลอดเลือดของเรา" fits one line from 320px up (Phrases keeps phrases whole) */
 .closing-head h2 { font-size: clamp(1.6rem, 7.4vw, 3.8rem); }
 .closing-summary, .closing-quiz { margin-top: 9vh; }
@@ -21,7 +21,7 @@
 .anim #pinRecap[data-step="3"] .recap-slot, html:not(.anim) .recap-slot { opacity: 0; }
 
 /* picture 1: BEFAST tiles, arrow, clock, 1669 */
-.recap-pop { transform-box: fill-box; transform-origin: center; transform: scale(.3); opacity: 0; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1), opacity .25s; }
+.recap-pop { transform-box: fill-box; transform-origin: center; transform: scale(.3); opacity: 0; transition: transform .35s cubic-bezier(.16, 1, .3, 1), opacity .25s; }
 .in > .recap-pop { transform: none; opacity: 1; }
 .recap-tile rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s, stroke .3s; }
 .recap-tile text { font-family: var(--num); font-weight: 700; font-size: 20px; fill: var(--ink); transition: fill .3s; }
@@ -31,20 +31,20 @@
 .recap-clock circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
 .recap-clock path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
 .recap-call rect { fill: var(--red); }
-.recap-call text { font-family: var(--num); font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums; fill: var(--surface); }
+.recap-call text { font-family: var(--num); font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; fill: var(--surface); }
 
 /* picture 2: the 270-minute treatment window (go = the window, as in chapter 3) */
 .recap-ring-track { fill: none; stroke: var(--line); stroke-width: 12; }
 .recap-ring-arc { fill: none; stroke: var(--go); stroke-width: 12; stroke-dasharray: 100; }
 .recap-ring-tick { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; }
 .recap-ring-num { font-family: var(--num); font-weight: 700; font-size: 30px; font-variant-numeric: tabular-nums; fill: var(--ink); }
-.recap-ring-unit { font-size: 13px; font-weight: 500; fill: var(--ink-2); }
+.recap-ring-unit { font-size: .85rem; font-weight: 500; fill: var(--ink-2); }
 
 /* picture 3: the shield (shield.css) and the figure under it */
-.recap-pct { font-family: var(--num); font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; fill: var(--ink); }
+.recap-pct { font-family: var(--num); font-weight: 700; font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-variant-numeric: tabular-nums; fill: var(--ink); }
 
 /* board labels: only once the three pictures sit side by side */
-.recap-label { font-size: 15px; font-weight: 600; fill: var(--ink); transition: opacity .4s .15s; }
+.recap-label { font-size: .85rem; font-weight: 600; fill: var(--ink); transition: opacity .4s .15s; }
 .anim #pinRecap:not([data-step="3"]) .recap-label { opacity: 0; transition-delay: 0s; }
 
 /* save button (last step) */
@@ -109,28 +109,76 @@
 .closing-final { font-size: clamp(1.5rem, 6.2vw, 3rem); font-weight: 700; line-height: 1.4; text-align: center; text-wrap: balance; color: var(--on-brand); }
 
 /* ---------- post-lesson survey ---------- */
-.closing-survey { background: var(--paper); color: var(--ink); }
+.closing-survey {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--visual-bg) 48%, var(--paper));
+  color: var(--ink);
+}
+.closing-survey::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/royal/activity-watercolor-backdrop.webp") center / cover no-repeat;
+  opacity: .38;
+  pointer-events: none;
+}
 .closing-survey-inner {
   width: calc(100% - 40px);
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
   padding: clamp(64px, 11svh, 108px) 0 clamp(76px, 13svh, 128px);
+  position: relative;
+  z-index: 1;
   text-align: center;
 }
+.closing-survey-story { min-width: 0; }
+.closing-survey-journey { margin: 0 auto clamp(22px, 5svh, 42px); }
+.closing-survey-journey figure { margin: 0; }
+.closing-survey-journey-image {
+  display: block;
+  width: min(calc(100% + 48px), 720px);
+  height: auto;
+  margin-inline: max(-24px, calc((100% - 720px) / 2));
+}
+.closing-survey-milestones {
+  margin: -8px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  color: var(--ink);
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
 .closing-survey h3 {
-  margin-bottom: .6rem;
+  max-width: 9em;
+  margin: 0 auto .45rem;
+  color: var(--ink);
+  font-size: clamp(2.3rem, 6.4vw, 4.4rem);
+  line-height: 1.28;
+  text-wrap: balance;
+}
+.closing-survey h3 span { display: block; }
+.closing-survey h3 .closing-survey-title-accent { color: var(--red); }
+.closing-survey .closing-survey-prompt {
+  margin: 0 auto .75rem;
   color: var(--ink);
   font-size: clamp(1.55rem, 3.1vw, 2.45rem);
+  font-weight: 700;
   line-height: 1.28;
+  text-wrap: balance;
 }
-.closing-survey p {
+.closing-survey .closing-survey-name {
   max-width: 34em;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.75rem;
   color: var(--ink-2);
+  font-size: clamp(17px, 1rem + .25vw, 20px);
   line-height: 1.65;
 }
+.closing-survey-name span { display: block; }
 .closing-survey-link {
-  width: min(68vw, 280px);
+  width: min(80vw, 340px);
   margin: 0 auto;
   display: grid;
   gap: 12px;
@@ -146,16 +194,43 @@
   border: 1px solid var(--line);
 }
 .closing-survey-link > span {
-  min-height: 48px;
+  min-height: 56px;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: clamp(17px, 1rem + .25vw, 20px);
 }
 .closing-survey-link svg { width: 20px; height: 20px; flex: 0 0 auto; }
 .closing-survey-link:focus-visible { outline-offset: 6px; }
+.closing-survey-link .survey-qr-note {
+  top: auto;
+  bottom: 10px;
+  transform: none;
+  padding: 12px 16px;
+  display: grid;
+  gap: 2px;
+  border-color: var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: clamp(17px, 1rem + .25vw, 20px);
+}
+.closing-survey-link .survey-qr-note-date {
+  color: var(--red);
+  font-family: var(--num);
+  font-size: clamp(1.55rem, 3.1vw, 2.45rem);
+  font-variant-numeric: tabular-nums;
+}
+.closing-survey-link .survey-qr-disabled {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--ink) 18%, var(--paper));
+  color: color-mix(in srgb, var(--ink) 48%, var(--paper));
+  cursor: not-allowed;
+}
 
 @media (hover: hover) and (pointer: fine) {
   .closing-survey-link > span { transition: background-color 160ms ease, color 160ms ease; }
@@ -165,16 +240,42 @@
 @media (min-width: 700px) and (min-height: 900px) {
   .cq-choice { min-height: 58px; padding: 12px 18px; }
   .closing-plate-art { height: clamp(260px, 32svh, 400px); }
-  .closing-final { font-size: clamp(2rem, 5vw, 3rem); }
+  .closing-survey-inner { width: calc(100% - 64px); }
+  .closing-survey-journey-image { width: min(100%, 720px); margin-inline: auto; }
+  .closing-survey-milestones { max-width: 640px; }
 }
 @media (min-width: 861px) {
   .cq-choice { min-height: 56px; padding: 12px 18px; }
   .closing-plate-inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; column-gap: clamp(32px, 5vw, 80px); }
   .closing-plate-art { height: min(56vh, 440px); }
-  .closing-final { font-size: clamp(2rem, 3.6vw, 3.2rem); text-align: start; }
+  .closing-final { text-align: start; }
+  .closing-survey-inner {
+    width: calc(100% - 80px);
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
+    gap: clamp(48px, 6vw, 88px);
+    align-items: center;
+    text-align: left;
+  }
+  .closing-survey-journey { margin-bottom: 30px; }
+  .closing-survey-journey-image { width: min(100%, 620px); margin-inline: 0; }
+  .closing-survey-milestones { max-width: 580px; margin-inline: 0; text-align: center; }
+  .closing-survey h3,
+  .closing-survey .closing-survey-prompt,
+  .closing-survey .closing-survey-name { margin-inline: 0; }
+  .closing-survey-link { width: 100%; margin: 0; }
 }
 @media (orientation: landscape) and (max-height: 500px) {
   .closing-plate-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center; column-gap: 28px; padding-top: 28px; padding-bottom: 28px; }
   .closing-plate-art { height: 64svh; }
-  .closing-final { font-size: clamp(1.2rem, 3.4vw, 1.9rem); text-align: start; }
+  .closing-final { font-size: clamp(1.55rem, 3.1vw, 2.45rem); text-align: start; }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .closing-survey { background: var(--paper); }
+  :root:not([data-theme="light"]) .closing-survey::before { opacity: .13; }
+}
+
+[data-theme="dark"] .closing-survey { background: var(--paper); }
+[data-theme="dark"] .closing-survey::before { opacity: .13; }

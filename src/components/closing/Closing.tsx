@@ -3,6 +3,7 @@ import { Phrases } from "@/components/ui/Phrases";
 import { SurveyQr } from "@/components/ui/SurveyQr";
 import { ClosingPlate } from "./ClosingPlate";
 import { ClosingQuiz } from "./ClosingQuiz";
+import { ClosingSurveyJourney } from "./ClosingSurveyJourney";
 import { RecapStage } from "./RecapStage";
 
 /** Summary as a pinned recap scene, then (not pinned) review quiz, navy closing plate and the post-lesson survey. */
@@ -23,21 +24,25 @@ export function Closing() {
       <ClosingPlate />
       <section className="closing-survey" aria-labelledby="closing-survey-title">
         <div className="closing-survey-inner">
-          <h3 id="closing-survey-title">
-            แบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง
-            “ออกกําลังเป็นนิสัยห่างไกลสโตรค”
-          </h3>
-          <p>
-            สแกนคิวอาร์โค้ด
-            หรือแตะที่ภาพเพื่อตอบแบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง
-            “ออกกําลังเป็นนิสัยห่างไกลสโตรค”
-          </p>
+          <div className="closing-survey-story">
+            <ClosingSurveyJourney />
+            <h3 id="closing-survey-title">
+              <span>เรียนรู้แล้ว</span>
+              <span className="closing-survey-title-accent">ก้าวต่ออีกนิด</span>
+            </h3>
+            <p className="closing-survey-prompt">ช่วยบอกเราว่า กิจกรรมนี้เป็นอย่างไร</p>
+            <p className="closing-survey-name">
+              แบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง
+              <span>“ออกกําลังเป็นนิสัยห่างไกลสโตรค”</span>
+            </p>
+          </div>
           <SurveyQr
             className="closing-survey-link"
             href="https://limesurvey.tpak.or.th/index.php?r=survey/index&sid=821358&lang=th"
             label="เปิดแบบประเมินการเข้าร่วมกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค ในแท็บใหม่"
             src="/qr/stroke-learning-survey.jpg"
             alt="คิวอาร์โค้ดสำหรับแบบประเมินกิจกรรมให้ความรู้เกี่ยวกับโรคหลอดเลือดสมอง ออกกําลังเป็นนิสัยห่างไกลสโตรค"
+            showLockedAction
           />
         </div>
       </section>

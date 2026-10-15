@@ -49,6 +49,7 @@ async function capture(opts) {
   const vps = String(opts.vp ?? DEFAULT_VPS)
     .split(",")
     .map((s) => s.split("x").map(Number));
+  const only = opts.only ? String(opts.only).split(",") : null;
   fs.mkdirSync(outDir, { recursive: true });
   const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
   let problems = 0;
@@ -80,6 +81,7 @@ async function capture(opts) {
     }
 
     for (const target of ROYAL_SHOT_TARGETS) {
+      if (only && !only.some((id) => target.id.includes(id))) continue;
       const found = await page.evaluate((selector) => {
         const el = document.querySelector(selector);
         if (!el) return false;
@@ -97,6 +99,10 @@ async function capture(opts) {
       await page.waitForNetworkIdle({ idleTime: 200, timeout: 5000 });
       await wait(500);
       await page.screenshot({ path: path.join(outDir, `${tag}-${target.id}.png`) });
+      if (target.full) {
+        const element = await page.$(target.selector);
+        if (element) await element.screenshot({ path: path.join(outDir, `${tag}-${target.id}-full.png`) });
+      }
 
       const width = await horizontalOverflow(page);
       if (width.width - width.viewport > 1) {
@@ -105,6 +111,7 @@ async function capture(opts) {
     }
 
     for (const id of pins) {
+      if (only && !only.some((target) => id.includes(target))) continue;
       for (const p of PROGRESS) {
         await page.evaluate(
           (id, p) => {
