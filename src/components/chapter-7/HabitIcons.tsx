@@ -5,7 +5,7 @@
  */
 export type HabitKind = "weight" | "smoke" | "alcohol" | "calm" | "veg" | "move";
 
-export const HABIT_KINDS: readonly HabitKind[] = ["weight", "smoke", "alcohol", "calm", "veg", "move"];
+export const HABIT_KINDS: readonly HabitKind[] = ["move", "veg", "weight", "calm", "smoke", "alcohol"];
 
 export function HabitIcon({ kind }: { kind: HabitKind }) {
   switch (kind) {
