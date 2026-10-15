@@ -97,13 +97,38 @@ export function RoyalPrelude() {
         ))}
       </RoyalGallery>
 
-      <aside className="royal-activity" aria-labelledby="royal-activity-title">
+      <aside id="royal-activity" className="royal-activity" aria-labelledby="royal-activity-title">
+        <span className="royal-activity-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M8 8h3v3H8zM13 13h3v3h-3zM13 8h3M8 16h3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
         <p className="royal-section-label">กิจกรรมเฉลิมพระเกียรติ</p>
         <h2 id="royal-activity-title">ร่วมเป็นส่วนหนึ่งของกิจกรรม</h2>
         <p className="royal-activity-copy">
           สแกนคิวอาร์โค้ด
-          หรือแตะที่ภาพเพื่อตอบแบบประเมินการเข้าร่วมกิจกรรมโครงการแสงนําใจไทยทั้งชาติ
-          เดิน วิ่ง ปั่น ป้องกันอัมพาต ครั้งที่ 12 เฉลิมพระเกียรติ
+          หรือแตะที่ภาพเพื่อตอบแบบประเมินการเข้าร่วมกิจกรรมโครงการ<span className="nowrap">แสงนําใจไทย</span>ทั้งชาติ
+          เดิน วิ่ง ปั่น ป้องกันอัมพาต <span className="nowrap">ครั้งที่ 12</span> เฉลิมพระเกียรติ
+        </p>
+        <p className="royal-activity-cue" aria-hidden="true">
+          สแกนหรือแตะที่นี่
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 4v15M5 12l7 7 7-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </p>
         <SurveyQr
           className="royal-activity-link"

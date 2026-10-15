@@ -30,7 +30,7 @@ export function SurveyQr({ className, href, label, src, alt }: Props) {
     return (
       <div className={className}>
         <div className="survey-qr-lock">
-          <Image src={src} alt="" aria-hidden="true" width={1148} height={1148} sizes="(max-width: 699px) 68vw, 280px" />
+          <Image src={src} alt="" aria-hidden="true" width={1148} height={1148} sizes="(max-width: 699px) 80vw, 340px" />
           <p className="survey-qr-note">เริ่มประเมินได้ตั้งแต่ <span className="nowrap">26 ตุลาคม 2569</span></p>
         </div>
       </div>
@@ -39,7 +39,7 @@ export function SurveyQr({ className, href, label, src, alt }: Props) {
 
   return (
     <a className={className} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
-      <Image src={src} alt={alt} width={1148} height={1148} sizes="(max-width: 699px) 68vw, 280px" />
+      <Image src={src} alt={alt} width={1148} height={1148} sizes="(max-width: 699px) 80vw, 340px" />
       <span>
         เปิดลิงก์กิจกรรม
         <svg viewBox="0 0 24 24" aria-hidden="true">
