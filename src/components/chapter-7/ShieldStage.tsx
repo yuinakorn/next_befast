@@ -8,6 +8,7 @@ import { SHIELD_DISEASE_COUNT, SHIELD_PIECE_COUNT, setShieldLit } from "@/lib/sh
 import { DOCKED_SCALE, SHIELD_AT, iconPose, litPieces, slotInScene } from "@/lib/shield-assembly";
 import { stepProgress } from "@/lib/steps";
 import { HABIT_KINDS, HabitIcon } from "./HabitIcons";
+import { HabitIllustration } from "./HabitIllustration";
 
 const STARTS = CHAPTER_7.steps.map((s) => s.at);
 
@@ -69,5 +70,13 @@ export function ShieldStage() {
     </svg>
   );
 
-  return <StoryStage id="pin7" steps={CHAPTER_7.steps} scene={scene} setup={setup} />;
+  return (
+    <StoryStage
+      id="pin7"
+      steps={CHAPTER_7.steps}
+      scene={scene}
+      setup={setup}
+      stepVisual={(index) => <HabitIllustration kind={HABIT_KINDS[index]} />}
+    />
+  );
 }

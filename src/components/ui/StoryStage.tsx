@@ -13,6 +13,8 @@ type Props = {
   steps: readonly Step[];
   scene?: ReactNode;
   setup?: (pin: HTMLElement, reduce: boolean) => PinnedScene;
+  /** Decorative content rendered before the visual step title (e.g. a contextual illustration). */
+  stepVisual?: (index: number) => ReactNode;
   /** Extra content rendered inside step `index` (e.g. a toggle). */
   stepExtra?: (index: number) => ReactNode;
   showStepProgress?: boolean;
@@ -34,7 +36,7 @@ const noScene = (): PinnedScene => ({});
  * nothing left to expose, so its whole article is `aria-hidden`. The visual layout is untouched: the list
  * is clipped to 1px, and it is not a `.step`, so the pin hook never toggles it.
  */
-export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showStepProgress = false, end = "+=600%" }: Props) {
+export function StoryStage({ id, steps, scene, setup = noScene, stepVisual, stepExtra, showStepProgress = false, end = "+=600%" }: Props) {
   const pinRef = useRef<HTMLElement>(null);
   usePinnedSteps(pinRef, { starts: steps.map((s) => s.at), end, setup });
 
@@ -55,6 +57,7 @@ export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showS
               ))}
             </ol>
             {steps.map((s, i) => {
+              const visual = stepVisual?.(i);
               const extra = stepExtra?.(i);
               return (
                 <article key={s.at} className={i === 0 ? "step on" : "step"} aria-hidden={extra ? undefined : true}>
@@ -68,6 +71,7 @@ export function StoryStage({ id, steps, scene, setup = noScene, stepExtra, showS
                       </span>
                     </div>
                   )}
+                  {visual}
                   <h3 aria-hidden="true">{s.keepPhrases ? <Phrases text={s.title} /> : s.title}</h3>
                   {s.body && <p aria-hidden="true">{s.body}</p>}
                   {extra}
